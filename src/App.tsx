@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Provider, AnyIfEmpty } from 'react-redux';
+import { Store } from 'redux';
+import configureStoreFunction from './utils/configureStore';
+import Test from './layouts/Test';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  store: Store;
+
+  constructor(props: any) {
+    super(props);
+
+    // let data = dataFile;
+
+    this.store = configureStoreFunction('aurora',
+      {
+        home: {
+          layouts: {
+            lg: [], md: [], sm: [], xs: [], xxs: [],
+          },
+          elements: [],
+        },
+
+      },
+      false);
+  }
+
+  render() {
+    return (
+      <Provider store={this.store}>
+        <Test backgroundColor="red" />
+      </Provider>
+    );
+  }
 }
 
 export default App;
