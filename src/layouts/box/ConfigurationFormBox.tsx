@@ -100,24 +100,24 @@ class ConfigurationFormBox extends React.Component<Props> {
           </p>
         </CardHeader>
         <CardBody>
-          {(!isFetching)
-            ? (configuration)
-              ? (
-                {/*<Table*/}
-                  // className={classes.tableSize}
-                  // tableHeaderColor={color}
-                  //           // tableHead={["ID", "Name", "Salary", "Country"]}
-                  // tableData={[
-                  //   [this.props.intl.formatMessage(messagesIntl.alarmState), data.alarmState, <Status status={(data.alarmStateParam === 0) ? 'ok' : (data.alarmStateParam === 1) ? 'warning' : 'no'} />],
-                  //   [this.props.intl.formatMessage(messagesIntl.channel1State), data.channel1State, <Status status={(data.channel1StateParam === 2) ? 'ok' : (data.channel1StateParam < 10) ? 'warning' : 'no'} />],
-                  //   [this.props.intl.formatMessage(messagesIntl.channel2State), data.channel2State, <Status status={(data.channel2StateParam === 2) ? 'ok' : (data.channel2StateParam < 10) ? 'warning' : 'no'} />],
-                  //   [this.props.intl.formatMessage(messagesIntl.inverterState), data.inverterState, <Status status={(data.inverterStateParam === 2) ? 'ok' : (data.inverterStateParam < 3) ? 'warning' : 'no'} />]
-                  // ]}
-                // />
-              )
-              : <div className={classes.progress}><FormattedMessage id="chart.no_data" /></div>
-            : <div className={classes.progress}><CircularProgress style={{ color: colorMod[`${color}Color`] }} size={50} /></div>
-                }
+          {/*{(!isFetching)*/}
+            {/*? (configuration)*/}
+              {/*? (*/}
+                {/*/!*<Table*!/*/}
+                  {/*// className={classes.tableSize}*/}
+                  {/*// tableHeaderColor={color}*/}
+                  {/*//           // tableHead={["ID", "Name", "Salary", "Country"]}*/}
+                  {/*// tableData={[*/}
+                  {/*//   [this.props.intl.formatMessage(messagesIntl.alarmState), data.alarmState, <Status status={(data.alarmStateParam === 0) ? 'ok' : (data.alarmStateParam === 1) ? 'warning' : 'no'} />],*/}
+                  {/*//   [this.props.intl.formatMessage(messagesIntl.channel1State), data.channel1State, <Status status={(data.channel1StateParam === 2) ? 'ok' : (data.channel1StateParam < 10) ? 'warning' : 'no'} />],*/}
+                  {/*//   [this.props.intl.formatMessage(messagesIntl.channel2State), data.channel2State, <Status status={(data.channel2StateParam === 2) ? 'ok' : (data.channel2StateParam < 10) ? 'warning' : 'no'} />],*/}
+                  {/*//   [this.props.intl.formatMessage(messagesIntl.inverterState), data.inverterState, <Status status={(data.inverterStateParam === 2) ? 'ok' : (data.inverterStateParam < 3) ? 'warning' : 'no'} />]*/}
+                  {/*// ]}*/}
+                {/*// />*/}
+              {/*)*/}
+              {/*: <div className={classes.progress}><FormattedMessage id="chart.no_data" /></div>*/}
+            {/*: <div className={classes.progress}><CircularProgress style={{ color: colorMod[`${color}Color`] }} size={50} /></div>*/}
+                {/*}*/}
 
         </CardBody>
       </Card>

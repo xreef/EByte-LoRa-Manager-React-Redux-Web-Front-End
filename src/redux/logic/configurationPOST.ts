@@ -8,7 +8,7 @@ import {configurationFieldInvalid,
 // import {
 //   addNotification
 // } from '../actions/notifications';
-import { selectors as configurationSel } from '../reducers/configuration';
+import { configurationSelectors } from '../reducers/configuration';
 import { CONFIGURATION_ENDPOINT, MICROCONTROLLER_ADRESS } from '../config';
 import {IConfiguration} from "../types/configuration";
 // import {RootState} from "../reducers";
@@ -94,7 +94,7 @@ export const configurationAddLogic = createLogic({
   // if it passed the validation hook then this will be executed
   process({ httpClient, getState }, dispatch, done) {
     const state = getState();
-    const dataToUpdate = configurationSel.configuration(state);
+    const dataToUpdate = configurationSelectors.configuration(state);
     httpClient.post(`http://${MICROCONTROLLER_ADRESS}/${CONFIGURATION_ENDPOINT}`, dataToUpdate)
       .then(resp => resp.data) // new user created is returned
       .then((respData) => {

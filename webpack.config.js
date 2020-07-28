@@ -35,7 +35,8 @@ module.exports = function (env) {
             warnings: true,
             publicPath: true
         },
-        devtool: 'source-map',
+        // devtool: 'source-map',
+        devtool: 'inline-source-map',
         output: {
             filename: '[name].js',
             chunkFilename: '[id].chunk.js',

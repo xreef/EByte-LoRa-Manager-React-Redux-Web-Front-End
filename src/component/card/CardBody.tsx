@@ -12,20 +12,26 @@ import cardBodyStyle from "./style/cardBodyStyle";
 
 interface Props {
     classes: any,
-    className: string,
-    plain: boolean,
-    profile: boolean
+    className?: string,
+    plain?: boolean,
+    profile?: boolean,
+    children: JSX.Element | JSX.Element[]
 
 }
 
-function CardBody({ ...props }) {
+function CardBody({ ...props }: Props) {
   const { classes, className, children, plain, profile, ...rest } = props;
-  const cardBodyClasses = classNames({
-    [classes.cardBody]: true,
-    [classes.cardBodyPlain]: plain,
-    [classes.cardBodyProfile]: profile,
-    [className]: className !== undefined
-  });
+  let cbc: {[key: string]: any} =
+    {
+        [classes.cardBody]: true,
+        [classes.cardBodyPlain]: plain,
+        [classes.cardBodyProfile]: profile,
+    };
+  if (className) {
+      cbc[className] = className;
+  }
+
+  const cardBodyClasses = classNames(cbc);
   return (
     <div className={cardBodyClasses} {...rest}>
       {children}

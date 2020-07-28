@@ -21,7 +21,7 @@ import {
 import {ConfigurationActions, IConfiguration} from "../types/configuration";
 import {RootState} from "./index";
 
-export const selectors = {
+export const configurationSelectors = {
   configuration: (state: RootState | any): IConfiguration => state[key].configuration,
   lastUpdate: (state: RootState): Date | undefined => state.configuration.lastUpdate,
   fetchStatus: (state: RootState): string | undefined => state[key].fetchStatus

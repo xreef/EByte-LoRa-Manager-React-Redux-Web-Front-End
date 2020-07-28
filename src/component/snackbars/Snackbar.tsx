@@ -54,8 +54,8 @@ function Snackbar({ ...props }: Props) {
   }
   return (
     <Snack
-      // onClose={onClose}
-      ClickAwayListenerProps={ClickAwayListenerProps}
+      onClose={onClose}
+      // ClickAwayListenerProps={ClickAwayListenerProps}
       autoHideDuration={autoHideDuration}
       anchorOrigin={{
         vertical: place.indexOf('t') === -1 ? 'bottom' : 'top',
@@ -95,10 +95,10 @@ function Snackbar({ ...props }: Props) {
 //   ClickAwayListenerProps: PropTypes.object
 // };
 
-// Snackbar.defaultProps = {
-//   place: 'br',
-//   close: true,
-//   ClickAwayListenerProps: { mouseEvent: null }
-// };
+Snackbar.defaultProps = {
+  place: 'br',
+  close: true,
+  // ClickAwayListenerProps: { mouseEvent: null }
+};
 
 export default withStyles(snackbarContentStyle)(Snackbar);

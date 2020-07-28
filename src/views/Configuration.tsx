@@ -25,7 +25,7 @@ class Configuration extends React.Component<Props, ComponentState> {
     super(props);
     this.state = {
       elements: [
-        {i: guid(), ...{...boxes['configurationBoxContainer']}},
+        // {i: guid(), ...{...boxes['configurationBoxContainer']}},
         {i: guid(), ...{...boxes['configurationFormBoxContainer']}},
         // {i: guid(), ...{...boxes['tableBoxInverterInformationContainer']}},
         // { i: 'chartBoxMonthlyId', ...{ ...boxes.chartBoxMonthly } },

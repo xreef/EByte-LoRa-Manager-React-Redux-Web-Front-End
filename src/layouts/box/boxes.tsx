@@ -1,7 +1,8 @@
 import React from 'react';
 import {ILayoutElement} from "../../redux/types/home";
 import ConfigurationBox from "./ConfigurationBox";
-import ConfigurationFormBox from "./ConfigurationFormBox";
+
+import ConfigurationFormBoxContainer from "./../../containers/layouts/box/ConfigurationFormBoxContainer"
 
 interface IBoxes {
     [propName: string]: ILayoutElement;
@@ -27,7 +28,7 @@ const boxes: IBoxes = {
     },
     configurationFormBoxContainer: {
       additionalInfo: {
-        classObj: (id: string, props: any) => (<ConfigurationFormBox key={id} id={id} {...props} />),
+        classObj: (id: string, props: any) => (<ConfigurationFormBoxContainer key={id} id={id} {...props} />),
         defaultProps: {
           color: 'danger',
         },
