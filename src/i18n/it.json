@@ -27,6 +27,24 @@
 
   "configuration.save.failed": "Errore salvataggio configurazione",
 
+  "configuration.uart_bps_type.uart_bps_1200": "1200bps",
+  "configuration.uart_bps_type.uart_bps_2400": "2400bps",
+  "configuration.uart_bps_type.uart_bps_4800": "4800bps",
+  "configuration.uart_bps_type.uart_bps_9600": "9600bps",
+  "configuration.uart_bps_type.uart_bps_19200": "19200bps",
+  "configuration.uart_bps_type.uart_bps_38400": "38400bps",
+  "configuration.uart_bps_type.uart_bps_57600": "57600bps",
+  "configuration.uart_bps_type.uart_bps_115200": "115200bps",
+
+  "configuration.air_data_rate.air_data_rate_000_03": "0300Kbps",
+  "configuration.air_data_rate.air_data_rate_001_12": "1200Kbps",
+  "configuration.air_data_rate.air_data_rate_010_24": "2400Kbps",
+  "configuration.air_data_rate.air_data_rate_011_48": "4800Kbps",
+  "configuration.air_data_rate.air_data_rate_100_96": "9600Kbps",
+  "configuration.air_data_rate.air_data_rate_101_192": "19200Kbps",
+  "configuration.air_data_rate.air_data_rate_110_192": "19200Kbps",
+  "configuration.air_data_rate.air_data_rate_111_192": "19200Kbps",
+
   "home.fab.tooltip": "Salva localmente i layouts di questa pagina",
 
   "page.intro": "<div><h2>Introduzione</h2><div>Per installare questa WebApp è necessario abilitare questa features di Chrome <b> Desktop PWAs</b></div><div>Copia incolla questo link sul browser </div><div>chrome://flags/#enable-desktop-pwas</div></div>",

@@ -189,7 +189,9 @@ class ConfigurationFetchRejected implements Action {
     readonly type = CONFIGURATION_FETCH_REJECTED;
     isFetching: boolean = false;
     fetchStatus: string = ''; //`errored: ${action.payload};
-    err: object = {};
+    // err: any = {};
+    constructor(public err: any) {}
+
     // constructor(public configuration: IConfiguration) {}
 }
 // class ConfigurationFieldUpdated {

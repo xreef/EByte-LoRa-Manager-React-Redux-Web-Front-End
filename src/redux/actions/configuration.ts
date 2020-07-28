@@ -33,12 +33,14 @@ export const configurationFetchFulfilled = (configuration: IConfiguration, lastU
     fetchStatus: `Results from ${(new Date()).toLocaleString()}`
 });
 
-export const configurationFetchRejected = (err: any): ConfigurationActions => ({
-  type: CONFIGURATION_FETCH_REJECTED,
-  err,
-  isFetching: false,
-  fetchStatus: `errored: ${err.message}`
-});
+export const configurationFetchRejected = (err: any): ConfigurationActions => {
+    return {
+        type: CONFIGURATION_FETCH_REJECTED,
+        err: err,
+        isFetching: false,
+        fetchStatus: `errored: ${err.message}`
+    }
+};
 
 // action creators
 export const configurationFieldUpdated = (configuration: IConfiguration, lastUpdate: Date): ConfigurationActions => ({

@@ -7,6 +7,7 @@ import {
     NotificationsActions, INotificationsState, INotification
 } from "../types/notifications";
 import {HOME_ADD_ELEMENT, HOME_REMOVE_ELEMENT, HOME_SET_LAYOUTS, HomeActions} from "../types/home";
+import {CONFIGURATION_FETCH_REJECTED, ConfigurationActions} from "../types/configuration";
 // import { DAILY_SET_LAYOUTS } from '../actions/daily';
 // import { HISTORICAL_SET_LAYOUTS } from '../actions/historical';
 // import { INVERTER_INFO_STATE_SET_LAYOUTS } from '../actions/inverterInfoState';
@@ -17,7 +18,7 @@ const initialState: INotificationsState = {
     queue: []
 }
 
-export default function notificationsReducer(state = initialState, action: NotificationsActions | HomeActions): INotificationsState {
+export default function notificationsReducer(state = initialState, action: NotificationsActions | HomeActions | ConfigurationActions): INotificationsState {
     let notification = null;
     switch (action.type) {
         case HOME_SET_LAYOUTS:
@@ -75,6 +76,20 @@ export default function notificationsReducer(state = initialState, action: Notif
                 ...state,
                 current: notificaHome
             };
+        case CONFIGURATION_FETCH_REJECTED:
+            const msg: string = action.err.message;
+            const notificaCFR = {...{autoHide: 0}, message: msg,  variant: 'error'};
+            if (state.current) {
+                return {
+                    ...state,
+                    queue: [...state.queue, notificaCFR]
+                };
+            }
+            return {
+                ...state,
+                current: notificaCFR
+            };
+
         case ADD_NOTIFICATION:
             const notifica = {...{autoHide: 2200}, ...action.notification};
             if (state.current) {

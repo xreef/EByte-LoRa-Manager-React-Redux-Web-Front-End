@@ -13,7 +13,7 @@ const style =(theme: Theme) => createStyles({
 
 interface Props {
     classes: any,
-    children: React.ReactChildren
+    children: React.ReactChildren | React.ReactChildren[]
 }
 
 function GridContainer(props: Props) {

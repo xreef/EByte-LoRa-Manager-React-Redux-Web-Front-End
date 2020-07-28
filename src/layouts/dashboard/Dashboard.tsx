@@ -279,7 +279,7 @@ class App extends React.Component<Props, IDashboardState> {
                     color={notifications.current.variant}
                     autoHideDuration={(notifications.current.autoHide)?notifications.current.autoHide:undefined}
                     onClose={this.handleCloseNotification}
-                    // ClickAwayListenerProps={{mouseEvent: null}}
+
 
                     close={!(this.state.notificationOpen && notifications.current!==null)}
 

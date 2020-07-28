@@ -21,7 +21,7 @@ interface Props {
     open: boolean,
     onClose: any,
     autoHideDuration?: number,
-    ClickAwayListenerProps: JSX.Element | any,
+    // ClickAwayListenerProps: JSX.Element | any,
 
     icon: any
 
@@ -29,7 +29,7 @@ interface Props {
 
 function Snackbar({ ...props }: Props) {
   const {
-    classes, message, close, icon, place, open, onClose, ClickAwayListenerProps, autoHideDuration
+    classes, message, close, icon, place, open, onClose, /*ClickAwayListenerProps,*/ autoHideDuration
   } = props;
   let { color } = props;
   if (color === 'error') {

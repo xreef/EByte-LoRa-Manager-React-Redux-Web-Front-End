@@ -1,5 +1,9 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+
+import enummap from '../../utils/custom_function/enummap'
 
 import { withStyles } from '@material-ui/core';
 
@@ -21,9 +25,11 @@ import boxStyle from './style/boxStyle';
 import {colorMod} from './../../component/style/material-dashboard-react';
 
 // import Status from './../../component/status/Status';
-import {IConfiguration} from "../../redux/types/configuration";
+import {AIR_DATA_RATE, IConfiguration, UART_BPS_TYPE, UART_PARITY} from "../../redux/types/configuration";
 import {IBox} from "./Types";
 import {ThemeColors} from "../GenericTypes";
+import GridContainer from "../../component/grid/GridContainer";
+import GridItem from "../../component/grid/GridItem";
 
 interface OwnProps {
     configurationFetch: () => void,
@@ -64,7 +70,199 @@ class ConfigurationFormBox extends React.Component<Props> {
     }
   };
 
-  render() {
+    handleChange = (container: string, event: any) => {
+        // const target = event.target;
+        // if (!this.props.moduleParams) {
+        //     return;
+        // }
+        //
+        // const newParams: IModuleParams = {
+        //     ...this.props.moduleParams,
+        //     [target.name]: target.value
+        // };
+        //
+        // newParams.newBytes = EbyteClass.generateNewParams(newParams);
+        //
+        // this.props.onParamsChanged(newParams);
+    }
+
+    gridContainer = (configuration: IConfiguration) => {
+        const mapBps:any = enummap(UART_BPS_TYPE);
+        const mapParity:any = enummap(UART_PARITY);
+        const mapAirDataRate: any = enummap(AIR_DATA_RATE);
+
+
+
+        return <GridContainer>
+                <GridItem xs={4} sm={4}>
+                    <TextField
+                        name='baudRate'
+                        select
+                        label='Baud Rate'
+                        value={configuration.SPED.uartBaudRate}
+                        onChange={(element) => this.handleChange("SPED", element)}
+                        fullWidth={true}
+                        margin='normal'
+                        helperText='Uart BaudRate'
+                    >
+                        {
+                            Object.keys(mapBps).map(key => (<MenuItem value={key}><FormattedMessage id={"configuration.uart_bps_type."+mapBps[key].toLowerCase()}/></MenuItem>))
+                        }
+                    </TextField>
+                </GridItem>
+
+                <GridItem item xs={4} sm={4}>
+                    <TextField
+                        name='parityBit'
+                        select
+                        label='Parity Bit'
+                        value={configuration.SPED.uartParity}
+                        onChange={(element) => this.handleChange("SPED", element)}
+                        fullWidth={true}
+                        margin='normal'
+                        helperText='Note Parity'
+                    >
+                        {
+                            Object.keys(mapParity).map(key => (<MenuItem value={key}>{mapParity[key].substr(8, mapParity[key].lenght)}</MenuItem>))
+                        }
+                    </TextField>
+                </GridItem>
+
+                <GridItem item xs={4} sm={4}>
+                    <TextField
+                        name='airDataRate'
+                        select
+                        label='Air Data Rate'
+                        value={configuration.SPED.airDataRate}
+                        onChange={(element) => this.handleChange("SPED", element)}
+                        fullWidth={true}
+                        margin='normal'
+                        helperText='Data rate in the air'
+                    >
+                        {
+                            Object.keys(mapAirDataRate).map(key => (<MenuItem value={key}><FormattedMessage id={"configuration.air_data_rate."+mapAirDataRate[key].toLowerCase()}/></MenuItem>))
+                        }
+                    </TextField>
+                </GridItem>
+            {/*</GridContainer>*/}
+            {/*<GridContainer>*/}
+                {/*<GridItem item xs={4} sm={4}>*/}
+                    {/*<TextField*/}
+                        {/*name='transmissionPower'*/}
+                        {/*select*/}
+                        {/*label='Transmission Power'*/}
+                        {/*value={moduleParams ? moduleParams.transmissionPower : ''}*/}
+                        {/*onChange={this.handleChange}*/}
+                        {/*fullWidth={true}*/}
+                        {/*margin='normal'*/}
+                        {/*helperText='RF output power'*/}
+                    {/*>*/}
+                        {/*<MenuItem value={0}>20dBm</MenuItem>*/}
+                        {/*<MenuItem value={1}>17dBm</MenuItem>*/}
+                        {/*<MenuItem value={2}>14dBm</MenuItem>*/}
+                        {/*<MenuItem value={3}>10dBm</MenuItem>*/}
+                    {/*</TextField>*/}
+                {/*</GridItem>*/}
+
+                {/*<GridItem item xs={4} sm={4}>*/}
+                    {/*<TextField*/}
+                        {/*name='fecSwitch'*/}
+                        {/*select*/}
+                        {/*label='FEC'*/}
+                        {/*value={moduleParams ? moduleParams.fecSwitch : ''}*/}
+                        {/*onChange={this.handleChange}*/}
+                        {/*fullWidth={true}*/}
+                        {/*margin='normal'*/}
+                        {/*helperText='Forward error correction'*/}
+                    {/*>*/}
+                        {/*<MenuItem value={0}>Disable</MenuItem>*/}
+                        {/*<MenuItem value={1}>Enable</MenuItem>*/}
+                    {/*</TextField>*/}
+                {/*</GridItem>*/}
+
+                {/*<GridItem item xs={4} sm={4}>*/}
+                    {/*<TextField*/}
+                        {/*name='txMode'*/}
+                        {/*select*/}
+                        {/*label='Fixed Mode'*/}
+                        {/*value={moduleParams ? moduleParams.txMode : ''}*/}
+                        {/*onChange={this.handleChange}*/}
+                        {/*fullWidth={true}*/}
+                        {/*margin='normal'*/}
+                        {/*helperText='Open fixed mode or not '*/}
+                    {/*>*/}
+                        {/*<MenuItem value={0}>Transparent</MenuItem>*/}
+                        {/*<MenuItem value={1}>Fixed</MenuItem>*/}
+                    {/*</TextField>*/}
+                {/*</GridItem>*/}
+
+                {/*<GridItem item xs={4} sm={4}>*/}
+                    {/*<TextField*/}
+                        {/*name='wirelessWakeUp'*/}
+                        {/*select*/}
+                        {/*label='Wireless WakeUp'*/}
+                        {/*value={moduleParams ? moduleParams.wirelessWakeUp : ''}*/}
+                        {/*onChange={this.handleChange}*/}
+                        {/*fullWidth={true}*/}
+                        {/*margin='normal'*/}
+                        {/*helperText='Work on radio timing'*/}
+                    {/*>*/}
+                        {/*<MenuItem value={0}>250ms</MenuItem>*/}
+                        {/*<MenuItem value={1}>500ms</MenuItem>*/}
+                        {/*<MenuItem value={2}>750ms</MenuItem>*/}
+                        {/*<MenuItem value={3}>1000ms</MenuItem>*/}
+                        {/*<MenuItem value={4}>1250ms</MenuItem>*/}
+                        {/*<MenuItem value={5}>1500ms</MenuItem>*/}
+                        {/*<MenuItem value={6}>1750ms</MenuItem>*/}
+                        {/*<MenuItem value={7}>2000ms</MenuItem>*/}
+                    {/*</TextField>*/}
+                {/*</GridItem>*/}
+
+                {/*<GridItem item xs={4} sm={4}>*/}
+                    {/*<TextField*/}
+                        {/*name='ioMode'*/}
+                        {/*select*/}
+                        {/*label='IO Mode'*/}
+                        {/*value={moduleParams ? moduleParams.ioMode : ''}*/}
+                        {/*onChange={this.handleChange}*/}
+                        {/*fullWidth={true}*/}
+                        {/*margin='normal'*/}
+                        {/*helperText='PushPull, PullUp'*/}
+                    {/*>*/}
+                        {/*<MenuItem value={0}>Open</MenuItem>*/}
+                        {/*<MenuItem value={1}>PushPull</MenuItem>*/}
+                    {/*</TextField>*/}
+                {/*</GridItem>*/}
+
+                {/*<GridItem item xs={4} sm={4}>*/}
+                    {/*<TextField*/}
+                        {/*name='address'*/}
+                        {/*label='Address'*/}
+                        {/*value={moduleParams ? moduleParams.address : ''}*/}
+                        {/*onChange={this.handleChange}*/}
+                        {/*fullWidth={true}*/}
+                        {/*margin='normal'*/}
+                        {/*helperText='Number from 1 to 65535'*/}
+                    {/*/>*/}
+                {/*</GridItem>*/}
+
+                {/*<GridItem item xs={4} sm={4}>*/}
+                    {/*<TextField*/}
+                        {/*name='channel'*/}
+                        {/*label='Channel'*/}
+                        {/*value={moduleParams ? moduleParams.channel : ''}*/}
+                        {/*onChange={this.handleChange}*/}
+                        {/*fullWidth={true}*/}
+                        {/*margin='normal'*/}
+                        {/*helperText='Frequency from 410 to 441'*/}
+                    {/*/>*/}
+                {/*</GridItem>*/}
+
+            </GridContainer>
+        ;
+    }
+
+    render() {
     const { classes, id } = this.props;
     const { configuration, isFetching, isInHome } = this.props;
     const { color } = this.props;
@@ -100,24 +298,14 @@ class ConfigurationFormBox extends React.Component<Props> {
           </p>
         </CardHeader>
         <CardBody>
-          {/*{(!isFetching)*/}
-            {/*? (configuration)*/}
-              {/*? (*/}
-                {/*/!*<Table*!/*/}
-                  {/*// className={classes.tableSize}*/}
-                  {/*// tableHeaderColor={color}*/}
-                  {/*//           // tableHead={["ID", "Name", "Salary", "Country"]}*/}
-                  {/*// tableData={[*/}
-                  {/*//   [this.props.intl.formatMessage(messagesIntl.alarmState), data.alarmState, <Status status={(data.alarmStateParam === 0) ? 'ok' : (data.alarmStateParam === 1) ? 'warning' : 'no'} />],*/}
-                  {/*//   [this.props.intl.formatMessage(messagesIntl.channel1State), data.channel1State, <Status status={(data.channel1StateParam === 2) ? 'ok' : (data.channel1StateParam < 10) ? 'warning' : 'no'} />],*/}
-                  {/*//   [this.props.intl.formatMessage(messagesIntl.channel2State), data.channel2State, <Status status={(data.channel2StateParam === 2) ? 'ok' : (data.channel2StateParam < 10) ? 'warning' : 'no'} />],*/}
-                  {/*//   [this.props.intl.formatMessage(messagesIntl.inverterState), data.inverterState, <Status status={(data.inverterStateParam === 2) ? 'ok' : (data.inverterStateParam < 3) ? 'warning' : 'no'} />]*/}
-                  {/*// ]}*/}
-                {/*// />*/}
-              {/*)*/}
-              {/*: <div className={classes.progress}><FormattedMessage id="chart.no_data" /></div>*/}
-            {/*: <div className={classes.progress}><CircularProgress style={{ color: colorMod[`${color}Color`] }} size={50} /></div>*/}
-                {/*}*/}
+          {(!isFetching)
+            ? (configuration)
+              ? (
+                    this.gridContainer(configuration)
+              )
+              : <div className={classes.progress}><FormattedMessage id="chart.no_data" /></div>
+            : <div className={classes.progress}><CircularProgress style={{ color: colorMod[`${color}Color`] }} size={50} /></div>
+                }
 
         </CardBody>
       </Card>

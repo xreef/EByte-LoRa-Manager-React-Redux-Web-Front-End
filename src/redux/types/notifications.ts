@@ -3,9 +3,9 @@ import {Action} from "redux";
 
 export interface INotification {
     title?: string,
-    message: JSX.Element,
+    message: JSX.Element | string,
     variant: string,
-    autoHide?: number 
+    autoHide?: number
 }
 
 // unique key namespace used by combineReducers.

@@ -9,7 +9,7 @@ import {
     CONFIGURATION_FETCH, CONFIGURATION_FETCH_CANCEL,
     CONFIGURATION_FETCH_REJECTED //, CONFIGURATION_FETCH_FULFILLED
 } from "../types/configuration";
-import {configurationFetchFulfilled} from "../actions";
+import {configurationFetchFulfilled, configurationFetchRejected} from "../actions";
 
 
 // const delay = 10; // 4s delay for interactive use of cancel/take latest
@@ -22,7 +22,7 @@ const configurationFetchLogic = createLogic({
   processOptions: {
     dispatchReturn: true,
     // successType: CONFIGURATION_FETCH_FULFILLED, //configurationFetchFulfilled, // CONFIGURATION_FETCH_FULFILLED, //
-    failType: CONFIGURATION_FETCH_REJECTED, //configurationFetchRejected // CONFIGURATION_FETCH_REJECTED //configurationFetchRejecte
+    // failType: CONFIGURATION_FETCH_REJECTED, //configurationFetchRejected // CONFIGURATION_FETCH_REJECTED //configurationFetchRejecte
   },
 
   process({ httpClient, getState, action }, dispatch, done) {
@@ -36,7 +36,9 @@ const configurationFetchLogic = createLogic({
         .then((payload: any) =>{
             dispatch(configurationFetchFulfilled(payload.configuration, payload.lastUpdate));
             }
-        )
+        ).catch(reason => {
+            dispatch(configurationFetchRejected(reason))
+        })
         .then(() => done());
   }
 });

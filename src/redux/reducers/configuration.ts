@@ -78,10 +78,12 @@ export default function configurationReducer(state = initialState, action: Confi
         valid: true
       };
     case CONFIGURATION_FETCH_REJECTED:
+        debugger
       return {
         ...state,
         isFetching: false,
-        fetchStatus: `errored: ${action.err}`
+        fetchStatus: `errored: ${action.err.message}`,
+          errors: [action.err.message]
       };
     case CONFIGURATION_FETCH_CANCEL:
       return {
