@@ -27,7 +27,13 @@
     <title>React App</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+  <script id="settings" src="settings.json"></script>
+  <script language="javascript" type="text/javascript">
+      var d = new Date();
+      document.getElementById("settings").src = "settings.json?v=" +d.getTime();
+  </script>
+
+  <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
       This HTML file is a template.

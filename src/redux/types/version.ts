@@ -1,3 +1,5 @@
+import {Action} from "redux";
+
 export interface IVersion {
     version: string;
     date: string;
@@ -12,7 +14,7 @@ export const actionTypes = {
   SET_VERSION,
 };
 
-class SetVersion {
+class SetVersion implements Action{
     readonly type = SET_VERSION
 
     constructor(public payload: IVersion) {}

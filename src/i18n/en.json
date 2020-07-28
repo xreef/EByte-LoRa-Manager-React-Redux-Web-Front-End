@@ -1,0 +1,46 @@
+{
+  "layouts.set": "Layouts of the page are saved on device",
+  "layouts.home.add": "Element added to home page",
+  "layouts.home.remove": "Element removed from home page",
+
+  "menu.sidebar.home": "Home",
+  "menu.navbar.home": "Home",
+
+  "menu.sidebar.daily": "Daily chart",
+  "menu.navbar.daily": "Daily chart",
+
+  "menu.sidebar.monthly": "Monthly chart",
+  "menu.navbar.monthly": "Monthly chart",
+
+  "menu.sidebar.information_state": "Information & state",
+  "menu.navbar.information_state": "Inverter infromation & state",
+
+  "menu.sidebar.configuration": "Configuration",
+  "menu.navbar.configuration": "Configuration",
+
+  "menu.sidebar.introduction": "Introduction",
+  "menu.navbar.introduction": "Introduction",
+
+  "date.label": "Date",
+
+  "last.update": "Last update",
+
+  "configuration.preferences.title": "Settings",
+  "configuration.preferences.subtitle": "Generic settings",
+  "configuration.preferences.GTM.label": "GTM offset",
+  "configuration.preferences.DST.label": "Daylight saving time (Override GTM)",
+  "configuration.preferences.update": "Update preferences",
+
+  "configuration.save.failed": "Configuration saving error",
+
+  "home.fab.tooltip": "Locally save current layouts of this page",
+
+  "page.intro": "<div><h2>Introduction</h2><div>To install this Web App activate the chrome features <b> Desktop PWAs</b></div><div>Copy this link and paste in your browser</div><div>chrome://flags/#enable-desktop-pwas</div></div>",
+
+  "websocket.open": "Realtime push notification active",
+  "websocket.close": "Realtime push notification stopped",
+  "websocket.error": "Error on realtime push notification <br>Not connected!",
+
+  "websocket.inverter.message.error": "Inverter change starteS <br>Data: {hStr} <br>Alarm: {alarm} - Channel 1: {ch1state} - Channel 2: {ch2state} - Stato: {state}. ",
+  "websocket.centraline.message.error": "Centraline error <br>Data: {hStr} <br>Time settings: {fixedTime} - SD: {sdStarted}</br>WIFI: {wifiConnected} - File saved: {isFileSaveOK} </br>SD wrong read/write number: {sdWrongReadNumber}. "
+}
