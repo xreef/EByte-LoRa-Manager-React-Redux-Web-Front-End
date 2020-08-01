@@ -26,7 +26,9 @@ interface Props {
     children?: any,
     href?: string,
     buttonRef?: any,
-    onClick?: (evt: any) => void
+    onClick?: (evt: any) => void,
+    startIcon?: React.ReactNode,
+    type?: "button" | "reset" | "submit" | undefined
 }
 
 function RegularButton({ ...props }: Props) {
@@ -65,7 +67,7 @@ function RegularButton({ ...props }: Props) {
   }
   const btnClasses = classNames(cn);
   return (
-    <Button {...rest} classes={muiClasses} className={btnClasses}>
+    <Button  {...rest} classes={muiClasses} className={btnClasses}>
       {children}
     </Button>
   );

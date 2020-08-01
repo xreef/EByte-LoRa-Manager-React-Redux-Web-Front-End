@@ -19,10 +19,10 @@ const boxes: IBoxes = {
       },
       resize: true,
       close: true,
-      minW: 1,
+      minW: 2,
       maxW: 4,
-      minH: 1,
-      maxH: 2,
+      minH: 3,
+      maxH: 3,
       w: 1,
       h: 2,
     },
@@ -30,7 +30,7 @@ const boxes: IBoxes = {
       additionalInfo: {
         classObj: (id: string, props: any) => (<ConfigurationFormBoxContainer key={id} id={id} {...props} />),
         defaultProps: {
-          color: 'danger',
+          color: 'warning',
         },
         boxType: 'configurationFormBoxContainer',
       },
@@ -38,10 +38,10 @@ const boxes: IBoxes = {
       close: true,
       minW: 2,
       maxW: 4,
-      minH: 1,
-      maxH: 2,
+      minH: 4,
+      maxH: 4,
       w: 3,
-      h: 2,
+      h: 4,
     },
 
     // tableBoxInverterAlarmsContainer: {

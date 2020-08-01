@@ -3,14 +3,18 @@ import { createLogic } from 'redux-logic';
 import {
     CONFIGURATION_FIELD_UPDATED, CONFIGURATION_ADD, //key, ConfigurationActions
 } from "../types/configuration";
-import {configurationFieldInvalid,
-    configurationAddSuccess, configurationAddFailed, /*configurationFieldUpdated*/} from "../actions";
+import {
+    configurationFieldInvalid,
+    configurationAddSuccess, configurationAddFailed, configurationFetch, addNotification, /*configurationFieldUpdated*/
+} from "../actions";
 // import {
 //   addNotification
 // } from '../actions/notifications';
 import { configurationSelectors } from '../reducers/configuration';
 import { CONFIGURATION_ENDPOINT, MICROCONTROLLER_ADRESS } from '../config';
 import {IConfiguration} from "../types/configuration";
+import {FormattedMessage} from "react-intl";
+import React from "react";
 // import {RootState} from "../reducers";
 
 
@@ -39,6 +43,7 @@ export function validateFields(configuration: IConfiguration) {
 export const configurationUpdateValidationLogic = createLogic({
   type: CONFIGURATION_FIELD_UPDATED,
   validate({  httpClient, getState, action }, allow, reject) {
+    debugger
     // const state = getState();
     // const dataToUpdate = configurationSel.configuration(state); // use selector to find dataToUpdate
     //
@@ -77,9 +82,11 @@ export const configurationUpdateValidationLogic = createLogic({
  */
 export const configurationAddLogic = createLogic({
   type: CONFIGURATION_ADD,
-  validate({ httpClient,getState, action }, allow, reject) {
-    const state: any = getState();
-    const dataToUpdate = state.configuration.configuration; //configurationSel.configuration(state);
+  validate({ httpClient, action }, allow, reject) {
+    debugger
+    // const state: any = getState();
+    // const dataToUpdate = state.configuration.configuration; //configurationSel.configuration(state);
+      const dataToUpdate = action.configuration;
     const errors = validateFields(dataToUpdate);
     if (!errors.length) {
       allow(action); // no errors, let CONFIGURATION_ADD go through
@@ -92,20 +99,18 @@ export const configurationAddLogic = createLogic({
   },
 
   // if it passed the validation hook then this will be executed
-  process({ httpClient, getState }, dispatch, done) {
-    const state = getState();
-    const dataToUpdate = configurationSelectors.configuration(state);
+  process({ httpClient, getState, action}, dispatch, done) {
+      const dataToUpdate = action.configuration;
     httpClient.post(`http://${MICROCONTROLLER_ADRESS}/${CONFIGURATION_ENDPOINT}`, dataToUpdate)
       .then(resp => resp.data) // new user created is returned
       .then((respData) => {
-        // dispatch(addNotification({
-        //   message: <FormattedMessage id="configuration.save.success" />,
-        //   variant: 'success'
-        // }));
-        dispatch(configurationAddSuccess(respData));
+          dispatch(addNotification({ message: <FormattedMessage id="configuration.save.success" />, variant: 'success' }));
+
+          dispatch(configurationAddSuccess(respData.configuration));
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err); // might be a render err
+          debugger
         dispatch(configurationAddFailed(err));
         // dispatch(addNotification({ message: <FormattedMessage id="configuration.save.failed" values={{ err: err.toLocaleString(), br: <br /> }} />, variant: 'error', autoHide: false }));
       })

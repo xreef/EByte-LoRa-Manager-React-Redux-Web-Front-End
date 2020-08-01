@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ReactChildren} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // nodejs library to set properties for components
@@ -15,7 +15,7 @@ interface Props {
     className?: string,
     plain?: boolean,
     profile?: boolean,
-    children: JSX.Element | JSX.Element[]
+    children: React.ReactNode[] | React.ReactNode
 
 }
 

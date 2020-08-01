@@ -1,16 +1,17 @@
-import React from 'react';
+import React, {ReactChildren} from 'react';
 // import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import enummap from '../../utils/custom_function/enummap'
 
-import { withStyles } from '@material-ui/core';
+import {GridSpacing, withStyles} from '@material-ui/core';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 import FavoriteIconSelected from '@material-ui/icons/Favorite';
 import FavoriteIcon from '@material-ui/icons/FavoriteBorder';
+import Divider from '@material-ui/core/Divider';
 
 import Refresh from '@material-ui/icons/Refresh';
 
@@ -24,36 +25,70 @@ import boxStyle from './style/boxStyle';
 
 import {colorMod} from './../../component/style/material-dashboard-react';
 
+import isEqual from 'lodash.isequal';
+import SaveIcon from '@material-ui/icons/Save';
+
 // import Status from './../../component/status/Status';
-import {AIR_DATA_RATE, IConfiguration, UART_BPS_TYPE, UART_PARITY} from "../../redux/types/configuration";
+import {
+    AIR_DATA_RATE, FIDEX_TRANSMISSION, FORWARD_ERROR_CORRECTION_SWITCH,
+    IConfiguration, IO_DRIVE_MODE,
+    TRANSMISSION_POWER_100,
+    UART_BPS_TYPE,
+    UART_PARITY, WIRELESS_WAKE_UP_TIME
+} from "../../redux/types/configuration";
 import {IBox} from "./Types";
 import {ThemeColors} from "../GenericTypes";
 import GridContainer from "../../component/grid/GridContainer";
 import GridItem from "../../component/grid/GridItem";
+import CardFooter from "../../component/card/CardFooter";
 
 interface OwnProps {
     configurationFetch: () => void,
+    configurationFieldUpdated: (configuration: IConfiguration, lastUpdate: Date) => void,
+    configurationAdd: (configuration: IConfiguration, lastUpdate: Date) => void,
     classes: any;
     configuration?: IConfiguration | null,
     lastUpdate: Date | null,
     isFetching: boolean
 }
 
+interface CFBState {
+    configuration?: IConfiguration | null,
+}
+
 type Props = IBox & OwnProps;
 
-class ConfigurationFormBox extends React.Component<Props> {
+class ConfigurationFormBox extends React.Component<Props, CFBState> {
   static defaultProps = {
       color: 'warning' as ThemeColors,
       isFetching: false,
       configuration: null,
       lastUpdate: null,
 
-      configurationFetch: () => console.log("CONFIG FETCH")
+      configurationFetch: () => console.log("CONFIG FETCH"),
+      configurationFieldUpdated: (configuration: IConfiguration, lastUpdate: Date) => console.log("CONFIGURATION UPDATE"),
+      configurationAdd: (configuration: IConfiguration, lastUpdate: Date) => console.log("CONFIGURATION ADD")
   };
   constructor(props: Props) {
     super(props);
     props.configurationFetch();
+
+    this.state = {
+        configuration: props.configuration
+    }
   }
+
+  // static getDerivedStateFromProps(props: Props, state: CFBState) {
+  //     if (props.configuration && state.configuration && props.configuration != state.configuration){
+  //         return {...state, ...{configuration: props.configuration}}
+  //     }
+  // }
+    componentWillReceiveProps(nextProps: Props) {
+        // if (this.props.configuration != nextProps.configuration){
+        if (!isEqual(this.props.configuration, nextProps.configuration)){
+            this.setState({configuration: nextProps.configuration});
+        }
+    }
 
   refreshData = () => {
     this.props.configurationFetch();
@@ -70,212 +105,288 @@ class ConfigurationFormBox extends React.Component<Props> {
     }
   };
 
-    handleChange = (container: string, event: any) => {
-        // const target = event.target;
-        // if (!this.props.moduleParams) {
-        //     return;
-        // }
-        //
-        // const newParams: IModuleParams = {
-        //     ...this.props.moduleParams,
-        //     [target.name]: target.value
-        // };
-        //
-        // newParams.newBytes = EbyteClass.generateNewParams(newParams);
-        //
-        // this.props.onParamsChanged(newParams);
+    handleChange = (event: any, container?: "ADDL" | "ADDH" | "CHAN" | "OPTION" | "SPED") => {
+
+        let conf: IConfiguration;
+        if (this.state.configuration) {
+            conf = {...this.state.configuration};
+
+            if (container) {
+                const keyContainer  = container;
+
+                if (keyContainer === "SPED") {
+                    const keyToAdd: "airDataRate" | "uartBaudRate" | "uartParity" = event.target.name;
+                    // const containerContent = conf[keyContainer]; //[keyToAdd] = event.value;
+                    // containerContent[keyToAdd] = event.value;
+                    conf[keyContainer][keyToAdd] = parseInt(event.target.value);
+
+                } else  if (keyContainer === "OPTION") {
+                    const keyToAdd: "fec" | "fixedTransmission" | "ioDriveMode" | "transmissionPower" | "wirelessWakeupTime" = event.target.name;
+                    // const containerContent = conf[keyContainer]; //[keyToAdd] = event.value;
+                    // containerContent[keyToAdd] = event.value;
+                    conf[keyContainer][keyToAdd] = parseInt(event.target.value);
+                }
+
+            }else{
+                const keyToAdd: "CHAN" | "ADDL" | "ADDH" = event.target.name;
+                conf[keyToAdd] = parseInt(event.target.value);
+            }
+            this.setState({
+                configuration: conf
+            })
+            this.props.configurationFieldUpdated(conf, new Date());
+        }
     }
 
+    getFrequences = (operatingFrequency: number): JSX.Element[] => {
+        let freq: JSX.Element[] = [];
+        for (var key=0; key<31; key++){
+            freq.push(<MenuItem key={key} value={key+""}>{(key+operatingFrequency)+"MHz"}</MenuItem>);
+        }
+        // return (Array.from({length: 31}) .forEach((key) => {
+        //     freq.push(<MenuItem value={key}>{(key+operatingFrequency)+"MHz"}</MenuItem>);
+        // }))
+        return freq;
+    }
+    getADD = (): JSX.Element[] => {
+        let freq: JSX.Element[] = [];
+        for (var key=0; key<255; key++){
+            freq.push(<MenuItem key={key} value={key}>{key}</MenuItem>);
+        }
+        // return (Array.from({length: 31}) .forEach((key) => {
+        //     freq.push(<MenuItem value={key}>{(key+operatingFrequency)+"MHz"}</MenuItem>);
+        // }))
+        return freq;
+    }
+    postConfiguration = () => {
+        const { configuration } = this.state;
+        const { configurationAdd } = this.props;
+        configuration && configurationAdd(configuration, new Date());
+    }
     gridContainer = (configuration: IConfiguration) => {
+    // OPERATING_FREQUENCY 410
+    // defined(FREQUENCY_170)
+    // OPERATING_FREQUENCY 130
+    // defined(FREQUENCY_470)
+    // OPERATING_FREQUENCY 370
+    // defined(FREQUENCY_868)
+    // OPERATING_FREQUENCY 862
+    // defined(FREQUENCY_915)
+    // OPERATING_FREQUENCY 900
+
+        const operatingFrequency = 410;
+
+        const { classes } = this.props;
         const mapBps:any = enummap(UART_BPS_TYPE);
         const mapParity:any = enummap(UART_PARITY);
         const mapAirDataRate: any = enummap(AIR_DATA_RATE);
 
+        const mapTransmissionPower: any = enummap(TRANSMISSION_POWER_100);
+        const mapFEC: any = enummap(FORWARD_ERROR_CORRECTION_SWITCH);
+        const mapFT: any = enummap(FIDEX_TRANSMISSION);
+        const mapWakeUpTime: any = enummap(WIRELESS_WAKE_UP_TIME);
+        const mapIODriveMode: any = enummap(IO_DRIVE_MODE);
 
+        return [<GridContainer key={0} spacing={1 as GridSpacing}>
+            <GridItem item  xs={12} sm={4} md={3}>
+                <TextField
+                    name='CHAN'
+                    label='CHAN'
+                    select
+                    value={configuration.CHAN}
+                    onChange={(element) => this.handleChange(element)}
+                    fullWidth={true}
+                    margin='normal'
+                    required
+                    helperText={<FormattedMessage id="configuration.chan.label"/>}
+                >
+                    {this.getFrequences(operatingFrequency)}
+                </TextField>
+            </GridItem>
+            <GridItem item xs={12} sm={4} md={3}>
+                <TextField
+                    name='ADDH'
+                    label='ADDH'
+                    select
+                    value={configuration.ADDH}
+                    onChange={(element) => this.handleChange(element)}
+                    fullWidth={true}
+                    margin='normal'
+                    required
+                    helperText={<FormattedMessage id="configuration.addh.label"/>}
+                >
+                    {this.getADD()}
+                </TextField>
+            </GridItem>
+            <GridItem item xs={12} sm={4} md={3}>
+                <TextField
+                    name='ADDL'
+                    label='ADDL'
+                    select
+                    value={configuration.ADDL}
+                    onChange={(element) => this.handleChange(element)}
+                    fullWidth={true}
+                    margin='normal'
+                    required
+                    helperText={<FormattedMessage id="configuration.addl.label"/>}
+                >
+                    {this.getADD()}
+                </TextField>
 
-        return <GridContainer>
-                <GridItem xs={4} sm={4}>
+            </GridItem>
+
+        </GridContainer>,
+            <Divider className={classes.divider} />,
+
+            <GridContainer  key={1} spacing={1 as GridSpacing}>
+                <GridItem xs={12} sm={4} md={3}>
                     <TextField
-                        name='baudRate'
+                        name='uartBaudRate'
                         select
-                        label='Baud Rate'
+                        label={<FormattedMessage id="configuration.uart_baud_rate.label" />}
                         value={configuration.SPED.uartBaudRate}
-                        onChange={(element) => this.handleChange("SPED", element)}
+                        onChange={(element) => this.handleChange(element, "SPED")}
                         fullWidth={true}
                         margin='normal'
-                        helperText='Uart BaudRate'
+                        helperText={<FormattedMessage id="configuration.uart_baud_rate.helper_text"/>}
                     >
                         {
-                            Object.keys(mapBps).map(key => (<MenuItem value={key}><FormattedMessage id={"configuration.uart_bps_type."+mapBps[key].toLowerCase()}/></MenuItem>))
+                            Object.keys(mapBps).map(key => (<MenuItem key={key} value={key}><FormattedMessage id={"configuration.uart_bps_type."+mapBps[key].toLowerCase()}/></MenuItem>))
                         }
                     </TextField>
                 </GridItem>
 
-                <GridItem item xs={4} sm={4}>
+                <GridItem item xs={12} sm={4} md={3}>
                     <TextField
-                        name='parityBit'
+                        name='uartParity'
                         select
-                        label='Parity Bit'
+                        label={<FormattedMessage id="configuration.uart_parity.label" />}
                         value={configuration.SPED.uartParity}
-                        onChange={(element) => this.handleChange("SPED", element)}
+                        onChange={(element) => this.handleChange(element, "SPED")}
                         fullWidth={true}
                         margin='normal'
-                        helperText='Note Parity'
+                        helperText={<FormattedMessage id="configuration.uart_parity.helper_text" />}
                     >
                         {
-                            Object.keys(mapParity).map(key => (<MenuItem value={key}>{mapParity[key].substr(8, mapParity[key].lenght)}</MenuItem>))
+                            Object.keys(mapParity).map(key => (<MenuItem key={key} value={key}>{mapParity[key].substr(8, mapParity[key].lenght)}</MenuItem>))
                         }
                     </TextField>
                 </GridItem>
 
-                <GridItem item xs={4} sm={4}>
+                <GridItem item xs={12} sm={4} md={3}>
                     <TextField
                         name='airDataRate'
                         select
-                        label='Air Data Rate'
+                        label={<FormattedMessage id="configuration.air_data_rate.label" />}
                         value={configuration.SPED.airDataRate}
-                        onChange={(element) => this.handleChange("SPED", element)}
+                        onChange={(element) => this.handleChange(element, "SPED")}
                         fullWidth={true}
                         margin='normal'
-                        helperText='Data rate in the air'
+                        helperText={<FormattedMessage id="configuration.air_data_rate.helper_text" />}
                     >
                         {
-                            Object.keys(mapAirDataRate).map(key => (<MenuItem value={key}><FormattedMessage id={"configuration.air_data_rate."+mapAirDataRate[key].toLowerCase()}/></MenuItem>))
+                            Object.keys(mapAirDataRate).map(key => (<MenuItem key={key} value={key}><FormattedMessage id={"configuration.air_data_rate."+mapAirDataRate[key].toLowerCase()}/></MenuItem>))
                         }
                     </TextField>
                 </GridItem>
-            {/*</GridContainer>*/}
-            {/*<GridContainer>*/}
-                {/*<GridItem item xs={4} sm={4}>*/}
-                    {/*<TextField*/}
-                        {/*name='transmissionPower'*/}
-                        {/*select*/}
-                        {/*label='Transmission Power'*/}
-                        {/*value={moduleParams ? moduleParams.transmissionPower : ''}*/}
-                        {/*onChange={this.handleChange}*/}
-                        {/*fullWidth={true}*/}
-                        {/*margin='normal'*/}
-                        {/*helperText='RF output power'*/}
-                    {/*>*/}
-                        {/*<MenuItem value={0}>20dBm</MenuItem>*/}
-                        {/*<MenuItem value={1}>17dBm</MenuItem>*/}
-                        {/*<MenuItem value={2}>14dBm</MenuItem>*/}
-                        {/*<MenuItem value={3}>10dBm</MenuItem>*/}
-                    {/*</TextField>*/}
-                {/*</GridItem>*/}
+            </GridContainer>,
+            <Divider key="D" className={classes.divider} />,
+            <GridContainer  key={3}  spacing={1 as GridSpacing}>
+                <GridItem item xs={12} sm={4} md={3}>
+                    <TextField
+                        name='transmissionPower'
+                        select
+                        label={<FormattedMessage id="configuration.transmission_power.label" />}
+                        value={configuration.OPTION.transmissionPower}
+                        onChange={(element) => this.handleChange(element, "OPTION")}
+                        fullWidth={true}
+                        margin='normal'
+                        helperText={<FormattedMessage id="configuration.transmission_power.helper_text" />}
+                    >
+                            {
+                                Object.keys(mapTransmissionPower).map(key => (<MenuItem key={key} value={key}>{mapTransmissionPower[key].substr(6, mapTransmissionPower[key].lenght)+"dBm"}</MenuItem>))
+                             }
+                    </TextField>
+                </GridItem>
 
-                {/*<GridItem item xs={4} sm={4}>*/}
-                    {/*<TextField*/}
-                        {/*name='fecSwitch'*/}
-                        {/*select*/}
-                        {/*label='FEC'*/}
-                        {/*value={moduleParams ? moduleParams.fecSwitch : ''}*/}
-                        {/*onChange={this.handleChange}*/}
-                        {/*fullWidth={true}*/}
-                        {/*margin='normal'*/}
-                        {/*helperText='Forward error correction'*/}
-                    {/*>*/}
-                        {/*<MenuItem value={0}>Disable</MenuItem>*/}
-                        {/*<MenuItem value={1}>Enable</MenuItem>*/}
-                    {/*</TextField>*/}
-                {/*</GridItem>*/}
+                <GridItem item xs={12} sm={4} md={3}>
+                    <TextField
+                        name='fec'
+                        select
+                        label={<FormattedMessage id="configuration.fec.label" />}
+                        value={configuration.OPTION.fec}
+                        onChange={(element) => this.handleChange(element, "OPTION")}
+                        fullWidth={true}
+                        margin='normal'
+                        helperText={<FormattedMessage id="configuration.fec.helper_text" />}
+                    >
+                        {
+                            Object.keys(mapFEC).map(key => (<MenuItem key={key} value={key}><FormattedMessage id={"configuration.fec."+mapFEC[key].toLowerCase()}/></MenuItem>))
+                        }
+                    </TextField>
+                </GridItem>
 
-                {/*<GridItem item xs={4} sm={4}>*/}
-                    {/*<TextField*/}
-                        {/*name='txMode'*/}
-                        {/*select*/}
-                        {/*label='Fixed Mode'*/}
-                        {/*value={moduleParams ? moduleParams.txMode : ''}*/}
-                        {/*onChange={this.handleChange}*/}
-                        {/*fullWidth={true}*/}
-                        {/*margin='normal'*/}
-                        {/*helperText='Open fixed mode or not '*/}
-                    {/*>*/}
-                        {/*<MenuItem value={0}>Transparent</MenuItem>*/}
-                        {/*<MenuItem value={1}>Fixed</MenuItem>*/}
-                    {/*</TextField>*/}
-                {/*</GridItem>*/}
+                <GridItem item xs={12} sm={4} md={3}>
+                    <TextField
+                        name='fixedTransmission'
+                        select
+                        label={<FormattedMessage id="configuration.fixed_transmission.label" />}
+                        value={configuration.OPTION.fixedTransmission}
+                        onChange={(element) => this.handleChange(element, "OPTION")}
+                        fullWidth={true}
+                        margin='normal'
+                        helperText={<FormattedMessage id="configuration.fixed_transmission.helper_text" />}
+                    >
+                        {
+                            Object.keys(mapFT).map(key => (<MenuItem key={key} value={key}><FormattedMessage id={"configuration.fixed_transmission."+mapFT[key].toLowerCase()}/></MenuItem>))
+                        }
+                    </TextField>
+                </GridItem>
 
-                {/*<GridItem item xs={4} sm={4}>*/}
-                    {/*<TextField*/}
-                        {/*name='wirelessWakeUp'*/}
-                        {/*select*/}
-                        {/*label='Wireless WakeUp'*/}
-                        {/*value={moduleParams ? moduleParams.wirelessWakeUp : ''}*/}
-                        {/*onChange={this.handleChange}*/}
-                        {/*fullWidth={true}*/}
-                        {/*margin='normal'*/}
-                        {/*helperText='Work on radio timing'*/}
-                    {/*>*/}
-                        {/*<MenuItem value={0}>250ms</MenuItem>*/}
-                        {/*<MenuItem value={1}>500ms</MenuItem>*/}
-                        {/*<MenuItem value={2}>750ms</MenuItem>*/}
-                        {/*<MenuItem value={3}>1000ms</MenuItem>*/}
-                        {/*<MenuItem value={4}>1250ms</MenuItem>*/}
-                        {/*<MenuItem value={5}>1500ms</MenuItem>*/}
-                        {/*<MenuItem value={6}>1750ms</MenuItem>*/}
-                        {/*<MenuItem value={7}>2000ms</MenuItem>*/}
-                    {/*</TextField>*/}
-                {/*</GridItem>*/}
+                <GridItem item xs={12} sm={4} md={3}>
+                    <TextField
+                        name='wirelessWakeupTime'
+                        select
+                        label={<FormattedMessage id="configuration.wireless_wakeup_time.label" />}
+                        value={configuration.OPTION.wirelessWakeupTime}
+                        onChange={(element) => this.handleChange(element, "OPTION")}
+                        fullWidth={true}
+                        margin='normal'
+                        helperText={<FormattedMessage id="configuration.wireless_wakeup_time.helper_text" />}
+                    >
+                        {
+                            Object.keys(mapWakeUpTime).map(key => (<MenuItem key={key} value={key}>{mapWakeUpTime[key].substr(8, mapWakeUpTime[key].lenght)+"ms"}</MenuItem>))
+                        }
+                    </TextField>
+                </GridItem>
 
-                {/*<GridItem item xs={4} sm={4}>*/}
-                    {/*<TextField*/}
-                        {/*name='ioMode'*/}
-                        {/*select*/}
-                        {/*label='IO Mode'*/}
-                        {/*value={moduleParams ? moduleParams.ioMode : ''}*/}
-                        {/*onChange={this.handleChange}*/}
-                        {/*fullWidth={true}*/}
-                        {/*margin='normal'*/}
-                        {/*helperText='PushPull, PullUp'*/}
-                    {/*>*/}
-                        {/*<MenuItem value={0}>Open</MenuItem>*/}
-                        {/*<MenuItem value={1}>PushPull</MenuItem>*/}
-                    {/*</TextField>*/}
-                {/*</GridItem>*/}
-
-                {/*<GridItem item xs={4} sm={4}>*/}
-                    {/*<TextField*/}
-                        {/*name='address'*/}
-                        {/*label='Address'*/}
-                        {/*value={moduleParams ? moduleParams.address : ''}*/}
-                        {/*onChange={this.handleChange}*/}
-                        {/*fullWidth={true}*/}
-                        {/*margin='normal'*/}
-                        {/*helperText='Number from 1 to 65535'*/}
-                    {/*/>*/}
-                {/*</GridItem>*/}
-
-                {/*<GridItem item xs={4} sm={4}>*/}
-                    {/*<TextField*/}
-                        {/*name='channel'*/}
-                        {/*label='Channel'*/}
-                        {/*value={moduleParams ? moduleParams.channel : ''}*/}
-                        {/*onChange={this.handleChange}*/}
-                        {/*fullWidth={true}*/}
-                        {/*margin='normal'*/}
-                        {/*helperText='Frequency from 410 to 441'*/}
-                    {/*/>*/}
-                {/*</GridItem>*/}
-
-            </GridContainer>
+                <GridItem item xs={12} sm={4} md={3}>
+                    <TextField
+                        name='ioDriveMode'
+                        select
+                        label={<FormattedMessage id="configuration.io_drive_mode.label" />}
+                        value={configuration.OPTION.ioDriveMode}
+                        onChange={(element) => this.handleChange(element, "OPTION")}
+                        fullWidth={true}
+                        margin='normal'
+                        helperText={<FormattedMessage id="configuration.io_drive_mode.helper_text" />}
+                    >
+                        {
+                            Object.keys(mapIODriveMode).map(key => (<MenuItem key={key} value={key}><FormattedMessage id={"configuration.io_drive_mode."+mapIODriveMode[key].toLowerCase()}/></MenuItem>))
+                        }
+                        </TextField>
+                </GridItem>
+            </GridContainer>]
         ;
     }
 
     render() {
     const { classes, id } = this.props;
-    const { configuration, isFetching, isInHome } = this.props;
+    const { isFetching, isInHome } = this.props;
+
     const { color } = this.props;
 
-    const messagesIntl = defineMessages(
-      {
-        alarmState: { id: 'table.inverter.alarm.state' },
-        channel1State: { id: 'table.inverter.channel1.state' },
-        channel2State: { id: 'table.inverter.channel2.state' },
-        inverterState: { id: 'table.inverter.inverter.state' }
-      }
-    );
-
+    const { configuration } = this.state;
 
     return (
       <Card id={id} key={id}>
@@ -297,46 +408,35 @@ class ConfigurationFormBox extends React.Component<Props> {
             />
           </p>
         </CardHeader>
-        <CardBody>
+          <form  className={classes.formBox}>
+
+          <CardBody className={classes.cardBody}>
           {(!isFetching)
             ? (configuration)
               ? (
-                    this.gridContainer(configuration)
+                      this.gridContainer(configuration)
               )
               : <div className={classes.progress}><FormattedMessage id="chart.no_data" /></div>
-            : <div className={classes.progress}><CircularProgress style={{ color: colorMod[`${color}Color`] }} size={50} /></div>
+            : <div className={classes.progress}><CircularProgress style={{ color: colorMod[`${color}Color`], height: '100%' }} size={50} /></div>
                 }
-
         </CardBody>
+      <CardFooter className={classes.cartFooterButton}>
+          <Button color={color}
+                  type="button"
+                  disabled={isFetching}
+                  onClick={this.postConfiguration}
+                  startIcon={<SaveIcon />} >
+              <FormattedMessage
+                  id="configuration.save"
+              />
+          </Button>
+      </CardFooter>
+
+          </form>
+
       </Card>
     );
   }
 }
-
-// ConfigurationFormBox.propTypes = {
-//   classes: PropTypes.object.isRequired,
-//   data: PropTypes.object,
-//   id: PropTypes.string.isRequired,
-//   color: PropTypes.oneOf([
-//     'warning',
-//     'success',
-//     'danger',
-//     'info',
-//     'primary',
-//     'rose'
-//   ]),
-//   isFetching: PropTypes.bool,
-//   inverterAlarmsFetch: PropTypes.func.isRequired,
-//   addElementToHome: PropTypes.func.isRequired,
-//   removeElementFromHome: PropTypes.func.isRequired,
-//   boxType: PropTypes.string.isRequired,
-//   isInHome: PropTypes.bool.isRequired
-//
-// };
-// ConfigurationFormBox.defaultProps = {
-//   color: 'warning',
-//   isFetching: false,
-//   data: null
-// };
 
 export default withStyles(boxStyle)(ConfigurationFormBox);

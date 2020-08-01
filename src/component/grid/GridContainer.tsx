@@ -1,7 +1,7 @@
 import React from 'react';
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
-import Grid from '@material-ui/core/Grid';
+import Grid, {GridSpacing} from '@material-ui/core/Grid';
 import {createStyles, Theme} from "@material-ui/core";
 
 const style =(theme: Theme) => createStyles({
@@ -13,7 +13,8 @@ const style =(theme: Theme) => createStyles({
 
 interface Props {
     classes: any,
-    children: React.ReactChildren | React.ReactChildren[]
+    spacing?: GridSpacing,
+    children: React.ReactElement | React.ReactElement[]
 }
 
 function GridContainer(props: Props) {

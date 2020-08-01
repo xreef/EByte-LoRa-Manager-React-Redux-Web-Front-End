@@ -59,19 +59,23 @@ export const configurationFieldInvalid = (errors: string[], configuration: IConf
 
 });
 
-export const configurationAdd = (evt: Event): ConfigurationActions => {
-  evt.preventDefault();
-  return { type: CONFIGURATION_ADD };
-};
-
+export const configurationAdd = (configuration: IConfiguration, lastUpdate: Date): ConfigurationActions => ({
+    type: CONFIGURATION_ADD,
+    configuration: configuration,
+    lastUpdate: lastUpdate,
+    isFetching: true
+});
 export const configurationAddSuccess = (configuration: IConfiguration): ConfigurationActions => ({
   type: CONFIGURATION_ADD_SUCCESS,
+    isFetching: false,
     configuration: configuration
 });
 
 export const configurationAddFailed = (err: Error): ConfigurationActions => ({
   type: CONFIGURATION_ADD_FAILED,
-  err
+    err: err,
+    isFetching: false,
+    fetchStatus: `errored: ${err.message}`
 });
 
 export const actions = {

@@ -6,11 +6,12 @@ import ResponsiveGrid from '../component/responsiveGrid/ResponsiveGrid';
 import {
   setHomeLayout
 } from "../redux/actions";
-import { selectors as homeSelector } from '../redux/reducers/home';
+import { homeSelectors } from '../redux/reducers/home';
 import boxes from '../layouts/box/boxes';
 // import {ILayoutConfigured, ILayoutElement} from "../redux/types/home";
 // import {AppActions} from "../redux/types";
 import {RootState} from "../redux/reducers";
+import {ILayoutElement} from "../redux/types/home";
 // import {versionSelectors} from "../redux/reducers/version";
 // import {configurationFetch, setVersion} from "../redux/actions";
 
@@ -28,8 +29,8 @@ interface OwnProps {
 // type Props = StateProps & DispatchProps & OwnProps
 
 const mapStateToProps = (state: RootState/*, ownProps*/) => ({
-    layouts: homeSelector.layouts(state),
-    elements: homeSelector.elements(state).map((elementHS) => {
+    layouts: homeSelectors.layouts(state),
+    elements: homeSelectors.elements(state).map((elementHS: ILayoutElement) => {
         const eHS = { ...elementHS };
         eHS.additionalInfo.classObj = boxes[eHS.additionalInfo.boxType].additionalInfo.classObj;
         eHS.additionalInfo.defaultProps = boxes[eHS.additionalInfo.boxType].additionalInfo.defaultProps;

@@ -12,7 +12,7 @@ import boxes from '../../layouts/box/boxes';
 import guid from '../../utils/math/guid';
 import {RootState} from "./index";
 
-export const selectors = {
+export const homeSelectors = {
   layouts: (state: RootState): ILayoutConfigured => state[key].layouts,
   elements: (state: RootState): ILayoutElement[] => state[key].elements
 };

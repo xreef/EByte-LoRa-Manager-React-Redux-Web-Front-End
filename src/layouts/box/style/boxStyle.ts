@@ -51,6 +51,10 @@ const boxStyle = (theme: Theme) => createStyles({
       lineHeight: '1',
     },
   },
+    cartFooterButton:{
+        'text-align': 'right',
+        'display': 'block'
+    },
   tableSize: {
     // maxHeight: "224px",
     overflowY: 'auto',
@@ -99,7 +103,16 @@ const boxStyle = (theme: Theme) => createStyles({
     position: 'absolute',
     right: '60px',
     top: '10px'
-  }
+  },
+    divider: {
+        margin: theme.spacing(2, 0),
+    },
+  formBox: {
+      height: '100%'
+  },
+    cardBody: {
+        height: 'calc(100% - 110px)'
+    }
 });
 
 export default boxStyle;

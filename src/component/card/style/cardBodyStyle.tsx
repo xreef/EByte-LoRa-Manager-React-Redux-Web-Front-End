@@ -6,7 +6,8 @@ const cardBodyStyle  = (theme: Theme) => createStyles({
       // marginBottom: "1.875rem",
     flex: "1 1 auto",
     WebkitBoxFlex: 1,
-    position: "relative"
+    position: "relative",
+      height: "100%"
       // height: "calc(100% - (0.9375rem + 30px))"
   },
   cardBodyPlain: {

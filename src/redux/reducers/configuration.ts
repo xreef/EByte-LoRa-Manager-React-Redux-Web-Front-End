@@ -16,7 +16,7 @@ import {
     WIRELESS_WAKE_UP_TIME,
     AIR_DATA_RATE,
     UART_BPS_TYPE,
-    UART_PARITY
+    UART_PARITY, CONFIGURATION_ADD
 } from "../types/configuration";
 import {ConfigurationActions, IConfiguration} from "../types/configuration";
 import {RootState} from "./index";
@@ -96,7 +96,18 @@ export default function configurationReducer(state = initialState, action: Confi
     { // updates dataToUpdate and clears errors
       return {
         ...state,
-        configuration: action.configuration,
+        // configuration: action.configuration,
+        errors: [],
+        valid: true,
+        message: ''
+      };
+    }
+    case CONFIGURATION_ADD:
+    { // updates dataToUpdate and clears errors
+      return {
+        ...state,
+        // configuration: action.configuration,
+        isFetching: action.isFetching,
         errors: [],
         valid: true,
         message: ''
@@ -109,7 +120,9 @@ export default function configurationReducer(state = initialState, action: Confi
         configuration: action.configuration,
         errors: action.errors,
         valid: false,
-        message: ''
+        message: '',
+        isFetching: action.isFetching
+
       };
     }
     case CONFIGURATION_ADD_SUCCESS:
@@ -119,20 +132,18 @@ export default function configurationReducer(state = initialState, action: Confi
         configuration: action.configuration,
         errors: [],
         valid: true,
-        message: 'Update succesfully'
+        message: 'Update succesfully',
+        isFetching: action.isFetching
       };
     }
     case CONFIGURATION_ADD_FAILED:
     { // failed to add to server, display error
-      const err = action.err;
-
-      let errorsList: string[] = (state.errors)? [...state.errors]:[];
-      errorsList.push(err);
-      return {
-        ...state,
-        errors: errorsList,
-        message: ''
-      };
+        return {
+            ...state,
+            isFetching: action.isFetching,
+            fetchStatus: `errored: ${action.err.message}`,
+            errors: [action.err.message]
+        };
     }
 
     default:

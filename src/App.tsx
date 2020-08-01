@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { Store } from 'redux';
 import configureStoreFunction from './utils/configureStore';
 import Test from './layouts/Test';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import {HashRouter, Switch, Route, BrowserRouter} from 'react-router-dom';
 
 import './style/app.less';
 
@@ -90,7 +90,7 @@ class App extends React.Component {
                   <Switch>
                       {indexRoutes.map((prop, key) => <Route path={prop.path} component={prop.component} key={key.toString()} />)}
                   </Switch>
-              </HashRouter>
+              </HashRouter >
 
             {/*<Test backgroundColor="red" />*/}
           </IntlProvider>

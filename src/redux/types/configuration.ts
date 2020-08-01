@@ -234,14 +234,23 @@ class ConfigurationFieldInvalid implements Action {
 }
 class ConfigurationAdd implements Action {
     readonly type = CONFIGURATION_ADD;
+    isFetching: boolean = true;
+    fetchStatus?: string = '';//`Results from ${(new Date()).toLocaleString()}`;
+    lastUpdate?: Date = new Date();
+    // configuration?: IConfiguration | undefined;
+    constructor(public configuration: IConfiguration) {}
 }
 class ConfigurationAddSuccess implements Action {
     readonly type = CONFIGURATION_ADD_SUCCESS;
+    isFetching: boolean = false;
     constructor(public configuration: IConfiguration) {}
 }
 class ConfigurationAddFailed implements Action {
     readonly type = CONFIGURATION_ADD_FAILED;
-    err?: any;
+    isFetching: boolean = false;
+    fetchStatus: string = ''; //`errored: ${action.payload};
+    // err: any = {};
+    constructor(public err: any) {}
 }
 
 

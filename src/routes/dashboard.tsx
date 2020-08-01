@@ -47,7 +47,7 @@ const dashboardRoutes: Array<IDashboardRouteRedirect | IDashboardRoute> = [
     component: Home
   },
   {
-    path: '/configuration',
+    path: '/conf',
     sidebarName: <FormattedMessage id="menu.sidebar.configuration" />,
     navbarName: <FormattedMessage id="menu.navbar.configuration" />,
     icon: Settings, // "content_paste",
