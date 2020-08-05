@@ -6,12 +6,6 @@
   "menu.sidebar.home": "Home",
   "menu.navbar.home": "Home",
 
-  "menu.sidebar.daily": "Daily chart",
-  "menu.navbar.daily": "Daily chart",
-
-  "menu.sidebar.monthly": "Monthly chart",
-  "menu.navbar.monthly": "Monthly chart",
-
   "menu.sidebar.information_state": "Information & state",
   "menu.navbar.information_state": "Inverter infromation & state",
 
@@ -25,13 +19,75 @@
 
   "last.update": "Last update",
 
-  "configuration.preferences.title": "Settings",
-  "configuration.preferences.subtitle": "Generic settings",
-  "configuration.preferences.GTM.label": "GTM offset",
-  "configuration.preferences.DST.label": "Daylight saving time (Override GTM)",
-  "configuration.preferences.update": "Update preferences",
+  "configuration.preferences.title": "Configuration",
+  "configuration.preferences.subtitle": "Device configuration",
 
+  "configuration.save.success": "Configuration saved",
   "configuration.save.failed": "Configuration saving error",
+  "configuration.load.failed": "Configuration params are not correc, please restart microcontroller or reset device",
+
+  "configuration.uart_bps_type.uart_bps_1200": "1200bps",
+  "configuration.uart_bps_type.uart_bps_2400": "2400bps",
+  "configuration.uart_bps_type.uart_bps_4800": "4800bps",
+  "configuration.uart_bps_type.uart_bps_9600": "9600bps",
+  "configuration.uart_bps_type.uart_bps_19200": "19200bps",
+  "configuration.uart_bps_type.uart_bps_38400": "38400bps",
+  "configuration.uart_bps_type.uart_bps_57600": "57600bps",
+  "configuration.uart_bps_type.uart_bps_115200": "115200bps",
+
+  "configuration.air_data_rate.air_data_rate_000_03": "0300Kbps",
+  "configuration.air_data_rate.air_data_rate_001_12": "1200Kbps",
+  "configuration.air_data_rate.air_data_rate_010_24": "2400Kbps",
+  "configuration.air_data_rate.air_data_rate_011_48": "4800Kbps",
+  "configuration.air_data_rate.air_data_rate_100_96": "9600Kbps",
+  "configuration.air_data_rate.air_data_rate_101_192": "19200Kbps",
+  "configuration.air_data_rate.air_data_rate_110_192": "19200Kbps",
+  "configuration.air_data_rate.air_data_rate_111_192": "19200Kbps",
+
+  "configuration.fec.fec_0_off": "Disabled",
+  "configuration.fec.fec_1_on": "Enabled",
+
+  "configuration.fixed_transmission.ft_transparent_transmission": "Transparent",
+  "configuration.fixed_transmission.ft_fixed_transmission": "Fixed",
+
+  "configuration.io_drive_mode.io_d_mode_open_collector": "Open",
+  "configuration.io_drive_mode.io_d_mode_push_pulls_pull_ups": "PushPull",
+
+  "configuration.chan.label": "Operating frequency",
+  "configuration.addh.label": "High address",
+  "configuration.addl.label": "Low address",
+
+  "configuration.uart_baud_rate.label": "Baud Rate",
+  "configuration.uart_baud_rate.helper_text": "Uart BaudRate",
+
+  "configuration.uart_parity.label": "Parity Bit",
+  "configuration.uart_parity.helper_text": "Note Parity",
+
+  "configuration.air_data_rate.label": "Air Data Rate",
+  "configuration.air_data_rate.helper_text": "Data rate in the air",
+
+  "configuration.transmission_power.label": "Transmission Power",
+  "configuration.transmission_power.helper_text": "RF output power",
+
+  "configuration.fec.label": "FEC",
+  "configuration.fec.helper_text": "Forward error correction",
+
+  "configuration.fixed_transmission.label": "Fixed Mode",
+  "configuration.fixed_transmission.helper_text": "Open fixed mode or not",
+
+  "configuration.wireless_wakeup_time.label": "Wireless WakeUp",
+  "configuration.wireless_wakeup_time.helper_text": "Work on radio timing",
+
+  "configuration.io_drive_mode.label": "IO Mode",
+  "configuration.io_drive_mode.helper_text": "PushPull, PullUp",
+
+  "configuration.button.save": "Save configuration",
+  "configuration.button.default": "Load default values",
+
+  "module_info.label.frequency": "Frequency",
+  "module_info.label.version": "Version",
+  "module_info.label.power": "Power",
+
 
   "home.fab.tooltip": "Locally save current layouts of this page",
 

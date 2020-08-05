@@ -14,7 +14,7 @@ interface ComponentState {
   elements: ILayoutElement[]
 }
 
-class Configuration extends React.Component<Props, ComponentState> {
+class SendReceiveData extends React.Component<Props, ComponentState> {
   static defaultProps = {
       layouts: {
           lg: [], md: [], sm: [], xs: [], xxs: [],
@@ -26,8 +26,8 @@ class Configuration extends React.Component<Props, ComponentState> {
     this.state = {
       elements: [
         // {i: guid(), ...{...boxes['configurationBoxContainer']}},
-        {i: "moduleInfoBoxContainer", ...{...boxes['moduleInfoBoxContainer']}},
-        {i: "configurationFormBoxContainer", ...{...boxes['configurationFormBoxContainer']}},
+        // {i: "moduleInfoBoxContainer", ...{...boxes['moduleInfoBoxContainer']}},
+        // {i: "configurationFormBoxContainer", ...{...boxes['configurationFormBoxContainer']}},
         // {i: guid(), ...{...boxes['tableBoxInverterInformationContainer']}},
         // { i: 'chartBoxMonthlyId', ...{ ...boxes.chartBoxMonthly } },
         // { i: 'informativeBoxLifetimeProductionContainerId', ...{ ...boxes.informativeBoxLifetimeProductionContainer } },
@@ -90,4 +90,4 @@ class Configuration extends React.Component<Props, ComponentState> {
 //
 // export default connect(mapStateToProps, mapDispatchToProps)(SendReceiveData);
 
-export default Configuration;
+export default SendReceiveData;

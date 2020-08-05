@@ -2,6 +2,8 @@ import { combineReducers } from '@reduxjs/toolkit';
 
 import versionReducer from './version';
 import configurationReducer from './configuration';
+import moduleInfoReducer from './moduleInfo';
+
 import notificationsReducer from './notifications';
 import subscriptionsServiceWorkerReducer from "./subscriptionsServiceWorker";
 import homeReducer from "./home";
@@ -11,6 +13,7 @@ import webSocketReducer from "./webSocket";
 const rootReducer = combineReducers({
   version: versionReducer,
   configuration: configurationReducer,
+  moduleInfo: moduleInfoReducer,
   notifications: notificationsReducer,
   subscriptionServiceWorker: subscriptionsServiceWorkerReducer,
   home: homeReducer,

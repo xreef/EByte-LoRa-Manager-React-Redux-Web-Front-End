@@ -12,6 +12,9 @@
   "menu.sidebar.configuration": "Configurazione",
   "menu.navbar.configuration": "Configurazione",
 
+  "menu.sidebar.sendreceive": "Send/Receive",
+  "menu.navbar.sendreceive": "Send/Receive",
+
   "menu.sidebar.introduction": "Introduzione",
   "menu.navbar.introduction": "Introduzione",
 
@@ -19,16 +22,13 @@
 
   "last.update": "Ultimo agg.",
 
-  "configuration.preferences.title": "Preferenze",
-  "configuration.preferences.subtitle": "Preferenze generiche",
-  "configuration.preferences.GTM.label": "GMT offset",
-  "configuration.preferences.DST.label": "Ora legale (sovrascrive GTM)",
-  "configuration.preferences.update": "Aggiorna preferenze",
+  "configuration.preferences.title": "Configurazione",
+  "configuration.preferences.subtitle": "Configurazione dispositivo",
 
   "configuration.save.success": "Configurazione salvata con successo",
-
   "configuration.save.failed": "Errore salvataggio configurazione",
   "configuration.load.failed": "La configurazione ha riportato dei parametri non corretti, riavviare il microcontrollore o resettare il dispositivo",
+
   "configuration.uart_bps_type.uart_bps_1200": "1200bps",
   "configuration.uart_bps_type.uart_bps_2400": "2400bps",
   "configuration.uart_bps_type.uart_bps_4800": "4800bps",
@@ -38,7 +38,7 @@
   "configuration.uart_bps_type.uart_bps_57600": "57600bps",
   "configuration.uart_bps_type.uart_bps_115200": "115200bps",
 
-  "configuration.air_data_rate.air_data_rate_000_03": "0300Kbps",
+  "configuration.air_data_rate.air_data_rate_000_03": "300Kbps",
   "configuration.air_data_rate.air_data_rate_001_12": "1200Kbps",
   "configuration.air_data_rate.air_data_rate_010_24": "2400Kbps",
   "configuration.air_data_rate.air_data_rate_011_48": "4800Kbps",
@@ -47,44 +47,50 @@
   "configuration.air_data_rate.air_data_rate_110_192": "19200Kbps",
   "configuration.air_data_rate.air_data_rate_111_192": "19200Kbps",
 
-  "configuration.fec.fec_0_off": "Disabled",
-  "configuration.fec.fec_1_on": "Enabled",
+  "configuration.fec.fec_0_off": "Disabilitato",
+  "configuration.fec.fec_1_on": "Abilitato",
 
-  "configuration.fixed_transmission.ft_transparent_transmission": "Transparent",
-  "configuration.fixed_transmission.ft_fixed_transmission": "Fixed",
+  "configuration.fixed_transmission.ft_transparent_transmission": "Trasparente",
+  "configuration.fixed_transmission.ft_fixed_transmission": "Fissa",
 
   "configuration.io_drive_mode.io_d_mode_open_collector": "Open",
   "configuration.io_drive_mode.io_d_mode_push_pulls_pull_ups": "PushPull",
 
-  "configuration.chan.label": "Operating frequency",
-  "configuration.addh.label": "High address",
-  "configuration.addl.label": "Low address",
+  "configuration.chan.label": "Frequenza operativa",
+  "configuration.addh.label": "Indirizzo alto",
+  "configuration.addl.label": "Indirizzo basso",
 
   "configuration.uart_baud_rate.label": "Baud Rate",
   "configuration.uart_baud_rate.helper_text": "Uart BaudRate",
 
-  "configuration.uart_parity.label": "Parity Bit",
-  "configuration.uart_parity.helper_text": "Note Parity",
+  "configuration.uart_parity.label": "Bit di parità",
+  "configuration.uart_parity.helper_text": "Modalità gestione integrità dei dati",
 
   "configuration.air_data_rate.label": "Air Data Rate",
-  "configuration.air_data_rate.helper_text": "Data rate in the air",
+  "configuration.air_data_rate.helper_text": "Portata trasmissione aerea",
 
-  "configuration.transmission_power.label": "Transmission Power",
-  "configuration.transmission_power.helper_text": "RF output power",
+  "configuration.transmission_power.label": "Potenza trasmissione",
+  "configuration.transmission_power.helper_text": "Potenza di uscita RF",
 
   "configuration.fec.label": "FEC",
-  "configuration.fec.helper_text": "Forward error correction",
+  "configuration.fec.helper_text": "Rilevazione e correzione errori",
 
-  "configuration.fixed_transmission.label": "Fixed Mode",
-  "configuration.fixed_transmission.helper_text": "Open fixed mode or not",
+  "configuration.fixed_transmission.label": "Trasmissione fissa",
+  "configuration.fixed_transmission.helper_text": "Trasmissione fissa o aperta",
 
   "configuration.wireless_wakeup_time.label": "Wireless WakeUp",
-  "configuration.wireless_wakeup_time.helper_text": "Work on radio timing",
+  "configuration.wireless_wakeup_time.helper_text": "Gestione dei tempi di wake up",
 
   "configuration.io_drive_mode.label": "IO Mode",
   "configuration.io_drive_mode.helper_text": "PushPull, PullUp",
 
-  "configuration.save": "Salva configurazione",
+  "configuration.button.save": "Salva configurazione",
+  "configuration.button.default": "Carica dati default",
+
+  "module_info.label.frequency": "Frequenza",
+  "module_info.label.version": "Versione",
+  "module_info.label.power": "Potenza",
+
 
   "home.fab.tooltip": "Salva localmente i layouts di questa pagina",
 

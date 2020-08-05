@@ -1,33 +1,23 @@
 import {connect} from "react-redux";
 import {RootState} from "../../../redux/reducers";
-import {configurationSelectors} from "../../../redux/reducers/configuration";
-import {
-    configurationFetch,
-    configurationFieldUpdated,
-    configurationAdd,
-    addElementToHome,
-    moduleInfoFetch
-} from "../../../redux/actions";
-import ConfigurationFormBox from "../../../layouts/box/ConfigurationFormBox";
+import {moduleInfoSelectors} from "../../../redux/reducers/moduleInfo";
+import {moduleInfoFetch, addElementToHome} from "../../../redux/actions";
 import {homeSelectors} from "../../../redux/reducers/home";
 import {ILayoutConfigured, ILayoutElement} from "../../../redux/types/home";
-import {moduleInfoSelectors} from "../../../redux/reducers/moduleInfo";
+import ModuleInfoBox from "../../../layouts/box/ModuleInfoBox";
 
 const isElementInHome = (element: string, homeElements: ILayoutElement[]) => homeElements.some((elem: ILayoutElement) => elem.additionalInfo.boxType === element);
 
 const mapStateToProps = (state: RootState, ownProps: {boxType: string}) => ({
-    configuration: configurationSelectors.configuration(state),
     moduleInfo: moduleInfoSelectors.moduleInfo(state),
     isInHome: isElementInHome(ownProps.boxType, homeSelectors.elements(state)),
-    isFetching: state.configuration.isFetching,
+    isFetching: state.moduleInfo.isFetching,
 });
 
 
 const mapDispatchToProps = {
-    configurationFetch,
-    configurationFieldUpdated,
-    configurationAdd,
+    moduleInfoFetch,
     addElementToHome
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConfigurationFormBox);
+export default connect(mapStateToProps, mapDispatchToProps)(ModuleInfoBox);

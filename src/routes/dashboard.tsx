@@ -15,9 +15,11 @@ import {
 import {OverridableComponent} from "@material-ui/core/OverridableComponent";
 import {SvgIconTypeMap} from "@material-ui/core";
 import {RouteComponentProps, StaticContext} from "react-router";
-import {Settings} from "@material-ui/icons";
+import Settings from "@material-ui/icons/Settings";
+import Satellite from "@material-ui/icons/Message";
 import Configuration from "../views/Configuration";
-// import Configuration from '../views/Configuration';
+import SendReceiveData from "../views/SendReceiveData";
+// import SendReceiveData from '../views/SendReceiveData';
 
 export interface IDashboardRoute {
     path: string,
@@ -47,11 +49,18 @@ const dashboardRoutes: Array<IDashboardRouteRedirect | IDashboardRoute> = [
     component: Home
   },
   {
-    path: '/conf',
+    path: '/configuration',
     sidebarName: <FormattedMessage id="menu.sidebar.configuration" />,
     navbarName: <FormattedMessage id="menu.navbar.configuration" />,
     icon: Settings, // "content_paste",
     component: Configuration
+  },
+  {
+    path: '/sendreceive',
+    sidebarName: <FormattedMessage id="menu.sidebar.sendreceive" />,
+    navbarName: <FormattedMessage id="menu.navbar.sendreceive" />,
+    icon: Satellite, // "content_paste",
+    component: SendReceiveData
   },
   // {
   //   path: '/montly',
@@ -72,7 +81,7 @@ const dashboardRoutes: Array<IDashboardRouteRedirect | IDashboardRoute> = [
   //   sidebarName: <FormattedMessage id="menu.sidebar.configuration" />,
   //   navbarName: <FormattedMessage id="menu.navbar.configuration" />,
   //   icon: Settings,
-  //   component: Configuration
+  //   component: SendReceiveData
   // },
   // {
   //   path: '/intro',

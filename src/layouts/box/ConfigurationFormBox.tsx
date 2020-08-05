@@ -27,6 +27,7 @@ import {colorMod} from './../../component/style/material-dashboard-react';
 
 import isEqual from 'lodash.isequal';
 import SaveIcon from '@material-ui/icons/Save';
+import RedoIcon from '@material-ui/icons/Redo';
 
 // import Status from './../../component/status/Status';
 import {
@@ -41,6 +42,8 @@ import {ThemeColors} from "../GenericTypes";
 import GridContainer from "../../component/grid/GridContainer";
 import GridItem from "../../component/grid/GridItem";
 import CardFooter from "../../component/card/CardFooter";
+import {configurationInitialState} from "../../redux/reducers/configuration";
+import {frequencyFromModuleInfo, IModuleInfo, powerFromModuleInfo} from "../../redux/types/moduleInfo";
 
 interface OwnProps {
     configurationFetch: () => void,
@@ -48,6 +51,7 @@ interface OwnProps {
     configurationAdd: (configuration: IConfiguration, lastUpdate: Date) => void,
     classes: any;
     configuration?: IConfiguration | null,
+    moduleInfo?: IModuleInfo,
     lastUpdate: Date | null,
     isFetching: boolean
 }
@@ -163,25 +167,28 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
         const { configurationAdd } = this.props;
         configuration && configurationAdd(configuration, new Date());
     }
-    gridContainer = (configuration: IConfiguration) => {
-    // OPERATING_FREQUENCY 410
-    // defined(FREQUENCY_170)
-    // OPERATING_FREQUENCY 130
-    // defined(FREQUENCY_470)
-    // OPERATING_FREQUENCY 370
-    // defined(FREQUENCY_868)
-    // OPERATING_FREQUENCY 862
-    // defined(FREQUENCY_915)
-    // OPERATING_FREQUENCY 900
 
-        const operatingFrequency = 410;
+    setDefaultValue = () => {
+        this.setState({configuration: configurationInitialState})
+    }
 
+    gridContainer = (configuration: IConfiguration, moduleInfo?: IModuleInfo) => {
+
+        let operatingFrequency = 410;
+
+        if (moduleInfo && moduleInfo.frequency) {
+            operatingFrequency = frequencyFromModuleInfo[moduleInfo.frequency].initial;
+        }
         const { classes } = this.props;
         const mapBps:any = enummap(UART_BPS_TYPE);
         const mapParity:any = enummap(UART_PARITY);
         const mapAirDataRate: any = enummap(AIR_DATA_RATE);
 
-        const mapTransmissionPower: any = enummap(TRANSMISSION_POWER_100);
+        let mapTransmissionPower: any = enummap(TRANSMISSION_POWER_100);
+        if (moduleInfo && moduleInfo.features) {
+            mapTransmissionPower = enummap(powerFromModuleInfo[moduleInfo.features].powerData)
+        }
+
         const mapFEC: any = enummap(FORWARD_ERROR_CORRECTION_SWITCH);
         const mapFT: any = enummap(FIDEX_TRANSMISSION);
         const mapWakeUpTime: any = enummap(WIRELESS_WAKE_UP_TIME);
@@ -384,6 +391,8 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
     const { classes, id } = this.props;
     const { isFetching, isInHome } = this.props;
 
+    const { moduleInfo } = this.props;
+
     const { color } = this.props;
 
     const { configuration } = this.state;
@@ -414,7 +423,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
           {(!isFetching)
             ? (configuration)
               ? (
-                      this.gridContainer(configuration)
+                     this.gridContainer(configuration, moduleInfo)
               )
               : <div className={classes.progress}><FormattedMessage id="chart.no_data" /></div>
             : <div className={classes.progress}><CircularProgress style={{ color: colorMod[`${color}Color`], height: '100%' }} size={50} /></div>
@@ -424,10 +433,20 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
           <Button color={color}
                   type="button"
                   disabled={isFetching}
+                  onClick={this.setDefaultValue}
+                  startIcon={<RedoIcon />} >
+              <FormattedMessage
+                  id="configuration.button.default"
+              />
+          </Button>
+
+          <Button color={color}
+                  type="button"
+                  disabled={isFetching}
                   onClick={this.postConfiguration}
                   startIcon={<SaveIcon />} >
               <FormattedMessage
-                  id="configuration.save"
+                  id="configuration.button.save"
               />
           </Button>
       </CardFooter>

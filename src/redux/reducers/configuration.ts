@@ -27,7 +27,7 @@ export const configurationSelectors = {
   fetchStatus: (state: RootState): string | undefined => state[key].fetchStatus
 };
 
-const configurationInitialState: IConfiguration = {
+export const configurationInitialState: IConfiguration = {
     ADDH: 0,
     ADDL: 0,
     CHAN: 23,
@@ -83,7 +83,7 @@ export default function configurationReducer(state = initialState, action: Confi
         ...state,
         isFetching: false,
         fetchStatus: `errored: ${action.err.message}`,
-          errors: [action.err.message]
+        errors: [action.err.message]
       };
     case CONFIGURATION_FETCH_CANCEL:
       return {

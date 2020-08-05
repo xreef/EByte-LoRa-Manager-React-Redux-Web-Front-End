@@ -4,6 +4,10 @@ import { configurationFetch, configurationFetchCancel, configurationFetchFulfill
     configurationFetchRejected, configurationFieldUpdated, configurationFieldInvalid,
     configurationAdd, configurationAddSuccess, configurationAddFailed } from "./configuration";
 
+import { moduleInfoFetch, moduleInfoFetchCancel, moduleInfoFetchFulfilled,
+    moduleInfoFetchRejected } from "./moduleInfo";
+
+
 import { addNotification, shiftNotification, getCurrentNotification } from "./notifications";
 
 import { setServiceWorkerSubscription, setUserSubscribedToPushNotification,
@@ -23,6 +27,9 @@ export {
     configurationFetch, configurationFetchCancel, configurationFetchFulfilled,
     configurationFetchRejected, configurationFieldUpdated, configurationFieldInvalid,
     configurationAdd, configurationAddSuccess, configurationAddFailed,
+
+    moduleInfoFetch, moduleInfoFetchCancel, moduleInfoFetchFulfilled,
+    moduleInfoFetchRejected,
 
     addNotification, shiftNotification, getCurrentNotification,
 

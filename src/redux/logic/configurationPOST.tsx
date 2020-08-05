@@ -43,7 +43,6 @@ export function validateFields(configuration: IConfiguration) {
 export const configurationUpdateValidationLogic = createLogic({
   type: CONFIGURATION_FIELD_UPDATED,
   validate({  httpClient, getState, action }, allow, reject) {
-    debugger
     // const state = getState();
     // const dataToUpdate = configurationSel.configuration(state); // use selector to find dataToUpdate
     //
@@ -83,7 +82,6 @@ export const configurationUpdateValidationLogic = createLogic({
 export const configurationAddLogic = createLogic({
   type: CONFIGURATION_ADD,
   validate({ httpClient, action }, allow, reject) {
-    debugger
     // const state: any = getState();
     // const dataToUpdate = state.configuration.configuration; //configurationSel.configuration(state);
       const dataToUpdate = action.configuration;
@@ -110,7 +108,6 @@ export const configurationAddLogic = createLogic({
       })
       .catch(err => {
         console.error(err); // might be a render err
-          debugger
         dispatch(configurationAddFailed(err));
         // dispatch(addNotification({ message: <FormattedMessage id="configuration.save.failed" values={{ err: err.toLocaleString(), br: <br /> }} />, variant: 'error', autoHide: false }));
       })

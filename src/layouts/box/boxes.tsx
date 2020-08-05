@@ -1,28 +1,28 @@
 import React from 'react';
 import {ILayoutElement} from "../../redux/types/home";
-import ConfigurationBox from "./ConfigurationBox";
 
 import ConfigurationFormBoxContainer from "./../../containers/layouts/box/ConfigurationFormBoxContainer"
+import ModuleInfoBoxContainer from "./../../containers/layouts/box/ModuleInfoBoxContainer"
 
 interface IBoxes {
     [propName: string]: ILayoutElement;
 }
 
 const boxes: IBoxes = {
-    configurationBoxContainer: {
+    moduleInfoBoxContainer: {
       additionalInfo: {
-        classObj: (id: string, props: any) => (<ConfigurationBox key={id} id={id} {...props} />),
+        classObj: (id: string, props: any) => (<ModuleInfoBoxContainer key={id} id={id} {...props} />),
         defaultProps: {
           color: 'danger',
         },
-        boxType: 'configurationBoxContainer',
+        boxType: 'moduleInfoBoxContainer',
       },
-      resize: true,
+      resize: false,
       close: true,
-      minW: 2,
-      maxW: 4,
-      minH: 3,
-      maxH: 3,
+      minW: 1,
+      maxW: 1,
+      minH: 2,
+      maxH: 2,
       w: 1,
       h: 2,
     },
