@@ -20,6 +20,19 @@ import { webSocketOpen, webSocketClose, webSocketError, webSocketMessage, webSoc
         webSocketConnect, webSocketDisconnect } from "./webSocket";
 
 import { setHomeLayout,removeElementFromHome, addElementToHome } from "./home";
+import {
+    deviceMessagesSendTransparent,
+    deviceMessagesSendTransparentFailed,
+    deviceMessagesSendTransparentSuccess,
+    deviceMessagesFieldInvalid,
+    deviceMessagesFieldUpdated,
+    deviceMessagesSendBroadcast,
+    deviceMessagesSendBroadcastSuccess,
+    deviceMessagesSendBroadcastFailed,
+    deviceMessagesSendFixed,
+    deviceMessagesSendFixedSuccess,
+    deviceMessagesSendFixedFailed
+} from "./deviceMessages";
 
 export {
     setVersion,
@@ -30,6 +43,20 @@ export {
 
     moduleInfoFetch, moduleInfoFetchCancel, moduleInfoFetchFulfilled,
     moduleInfoFetchRejected,
+
+    deviceMessagesFieldUpdated,
+    deviceMessagesFieldInvalid,
+    deviceMessagesSendTransparent,
+    deviceMessagesSendTransparentSuccess,
+    deviceMessagesSendTransparentFailed,
+    deviceMessagesSendBroadcast,
+    deviceMessagesSendBroadcastSuccess,
+    deviceMessagesSendBroadcastFailed,
+    deviceMessagesSendFixed,
+    deviceMessagesSendFixedSuccess,
+    deviceMessagesSendFixedFailed,
+
+
 
     addNotification, shiftNotification, getCurrentNotification,
 

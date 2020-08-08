@@ -28,6 +28,7 @@ interface Props {
     buttonRef?: any,
     onClick?: (evt: any) => void,
     startIcon?: React.ReactNode,
+    endIcon?: React.ReactNode,
     type?: "button" | "reset" | "submit" | undefined
 }
 

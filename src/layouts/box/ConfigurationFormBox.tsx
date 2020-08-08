@@ -44,6 +44,7 @@ import GridItem from "../../component/grid/GridItem";
 import CardFooter from "../../component/card/CardFooter";
 import {configurationInitialState} from "../../redux/reducers/configuration";
 import {frequencyFromModuleInfo, IModuleInfo, powerFromModuleInfo} from "../../redux/types/moduleInfo";
+import {getADD, getFrequences} from "./utils/configuration";
 
 interface OwnProps {
     configurationFetch: () => void,
@@ -142,26 +143,6 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
         }
     }
 
-    getFrequences = (operatingFrequency: number): JSX.Element[] => {
-        let freq: JSX.Element[] = [];
-        for (var key=0; key<31; key++){
-            freq.push(<MenuItem key={key} value={key+""}>{(key+operatingFrequency)+"MHz"}</MenuItem>);
-        }
-        // return (Array.from({length: 31}) .forEach((key) => {
-        //     freq.push(<MenuItem value={key}>{(key+operatingFrequency)+"MHz"}</MenuItem>);
-        // }))
-        return freq;
-    }
-    getADD = (): JSX.Element[] => {
-        let freq: JSX.Element[] = [];
-        for (var key=0; key<255; key++){
-            freq.push(<MenuItem key={key} value={key}>{key}</MenuItem>);
-        }
-        // return (Array.from({length: 31}) .forEach((key) => {
-        //     freq.push(<MenuItem value={key}>{(key+operatingFrequency)+"MHz"}</MenuItem>);
-        // }))
-        return freq;
-    }
     postConfiguration = () => {
         const { configuration } = this.state;
         const { configurationAdd } = this.props;
@@ -207,7 +188,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
                     required
                     helperText={<FormattedMessage id="configuration.chan.label"/>}
                 >
-                    {this.getFrequences(operatingFrequency)}
+                    {getFrequences(operatingFrequency)}
                 </TextField>
             </GridItem>
             <GridItem item xs={12} sm={4} md={3}>
@@ -222,7 +203,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
                     required
                     helperText={<FormattedMessage id="configuration.addh.label"/>}
                 >
-                    {this.getADD()}
+                    {getADD()}
                 </TextField>
             </GridItem>
             <GridItem item xs={12} sm={4} md={3}>
@@ -237,7 +218,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
                     required
                     helperText={<FormattedMessage id="configuration.addl.label"/>}
                 >
-                    {this.getADD()}
+                    {getADD()}
                 </TextField>
 
             </GridItem>

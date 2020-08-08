@@ -9,6 +9,7 @@ import {
 import {HOME_ADD_ELEMENT, HOME_REMOVE_ELEMENT, HOME_SET_LAYOUTS, HomeActions} from "../types/home";
 import {CONFIGURATION_ADD_FAILED, CONFIGURATION_FETCH_REJECTED, ConfigurationActions} from "../types/configuration";
 import {MODULE_INFO_FETCH_REJECTED, ModuleInfoActions} from "../types/moduleInfo";
+import {DEVICE_MESSAGES_FIELD_INVALID, DeviceMessagesActions} from "../types/deviceMessages";
 // import { DAILY_SET_LAYOUTS } from '../actions/daily';
 // import { HISTORICAL_SET_LAYOUTS } from '../actions/historical';
 // import { INVERTER_INFO_STATE_SET_LAYOUTS } from '../actions/inverterInfoState';
@@ -19,7 +20,7 @@ const initialState: INotificationsState = {
     queue: []
 }
 
-export default function notificationsReducer(state = initialState, action: NotificationsActions | HomeActions | ConfigurationActions | ModuleInfoActions): INotificationsState {
+export default function notificationsReducer(state = initialState, action: NotificationsActions | HomeActions | ConfigurationActions | ModuleInfoActions | DeviceMessagesActions): INotificationsState {
     let notification = null;
     switch (action.type) {
         case HOME_SET_LAYOUTS:
@@ -76,6 +77,20 @@ export default function notificationsReducer(state = initialState, action: Notif
             return {
                 ...state,
                 current: notificaHome
+            };
+        case DEVICE_MESSAGES_FIELD_INVALID:
+            let msgDMFI: JSX.Element[] = [];
+            action.errors.forEach(elem => {msgDMFI.push(<li><span>{elem}<br/></span></li>)});
+            const notificaDMFI = {...{autoHide: 0}, message: msgDMFI,  variant: 'error'};
+            if (state.current) {
+                return {
+                    ...state,
+                    queue: [...state.queue, notificaDMFI]
+                };
+            }
+            return {
+                ...state,
+                current: notificaDMFI
             };
         case CONFIGURATION_FETCH_REJECTED:
         case MODULE_INFO_FETCH_REJECTED:

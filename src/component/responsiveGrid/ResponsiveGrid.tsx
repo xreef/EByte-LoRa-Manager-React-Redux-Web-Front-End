@@ -17,6 +17,7 @@ import responsiveGridLayoutStyle from './style/responsiveGridLayoutStyle';
 import {ILayoutConfigured, ILayoutElement} from "../../redux/types/home";
 // import {AppActions} from "../../redux/types";
 import {Function} from "@babel/types";
+import Fab from '@material-ui/core/Fab';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -224,7 +225,9 @@ class ResponsiveGrid extends React.PureComponent<ResponsiveGridProps,IResponsive
               color="secondary"
               onClick={() => saveLayouts(tmpLayouts || layouts)}
             >
-              <SaveIcon />
+                <Fab className={classes.fab} color="secondary">
+                    <SaveIcon />
+                </Fab>
             </Button>
           </Tooltip>
         );

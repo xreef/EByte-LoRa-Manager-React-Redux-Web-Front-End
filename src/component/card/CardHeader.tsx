@@ -19,7 +19,6 @@ interface Props {
     plain?: boolean,
     stats?: boolean,
     icon?: boolean
-
 }
 
 function CardHeader({ ...props }: Props) {

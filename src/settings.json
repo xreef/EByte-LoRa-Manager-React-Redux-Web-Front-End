@@ -1,1 +1,1 @@
-var settings = {"localIP":"192.168.1.127", "localRestPort":8080, "localWSPort":8081};
+var settings = {"localIP":"192.168.1.155", "localRestPort":8080, "localWSPort":8081};

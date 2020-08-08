@@ -90,7 +90,7 @@ export interface IModuleInfo {
 }
 
 export interface IModuleInfoState {
-    moduleInfo: IModuleInfo,
+    moduleInfo?: IModuleInfo,
     lastUpdate?: Date | undefined;
 
     isFetching: boolean,

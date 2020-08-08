@@ -15,14 +15,14 @@ export const moduleInfoSelectors = {
   fetchStatus: (state: RootState): string | undefined => state[key].fetchStatus
 };
 
-export const moduleInfoInitialState: IModuleInfo = {
-    frequency: undefined,
-    version: undefined,
-    features: undefined
-}
+// export const moduleInfoInitialState: IModuleInfo = {
+//     frequency: undefined,
+//     version: undefined,
+//     features: undefined
+// }
 
 const initialState: IModuleInfoState = {
-    moduleInfo: moduleInfoInitialState,
+    // moduleInfo?: undefined,
     lastUpdate: undefined,
 
     isFetching: true,
@@ -39,7 +39,7 @@ export default function moduleInfoReducer(state = initialState, action: ModuleIn
         ...state,
         isFetching: true,
         fetchStatus: `fetching... ${(new Date()).toLocaleString()}`,
-        moduleInfo: moduleInfoInitialState,
+        moduleInfo: undefined,
         lastUpdate: undefined
       };
     case MODULE_INFO_FETCH_FULFILLED:
@@ -52,7 +52,7 @@ export default function moduleInfoReducer(state = initialState, action: ModuleIn
         valid: true
       };
     case MODULE_INFO_FETCH_REJECTED:
-        debugger
+        // debugger
       return {
         ...state,
         isFetching: false,

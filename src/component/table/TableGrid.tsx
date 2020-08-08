@@ -16,9 +16,9 @@ interface Props {
     classes: any,
     tableHeaderColor: ThemeColors,// "warning" | "primary" | "danger" | "success" | "info" | "rose" | "gray",
     tableHead: string[],
-    tableData: (JSX.Element | string)[][][],
+    tableData: (JSX.Element | string)[][],
 
-    height: string
+    height?: string
 }
 
 class CustomTable extends React.Component<Props> {

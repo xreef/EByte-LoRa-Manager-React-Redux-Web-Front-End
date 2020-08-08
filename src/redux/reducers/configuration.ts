@@ -78,7 +78,7 @@ export default function configurationReducer(state = initialState, action: Confi
         valid: true
       };
     case CONFIGURATION_FETCH_REJECTED:
-        debugger
+        // debugger
       return {
         ...state,
         isFetching: false,

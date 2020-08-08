@@ -3,28 +3,48 @@ import {ILayoutElement} from "../../redux/types/home";
 
 import ConfigurationFormBoxContainer from "./../../containers/layouts/box/ConfigurationFormBoxContainer"
 import ModuleInfoBoxContainer from "./../../containers/layouts/box/ModuleInfoBoxContainer"
+import SendTabBoxContainer from "./../../containers/layouts/box/SendTabBoxContainer"
 
 interface IBoxes {
     [propName: string]: ILayoutElement;
 }
 
 const boxes: IBoxes = {
-    moduleInfoBoxContainer: {
-      additionalInfo: {
-        classObj: (id: string, props: any) => (<ModuleInfoBoxContainer key={id} id={id} {...props} />),
-        defaultProps: {
-          color: 'danger',
+    sendTabBoxContainer: {
+        additionalInfo: {
+            classObj: (id: string, props: any) => (<SendTabBoxContainer key={id} id={id} {...props} />),
+            defaultProps: {
+                color: 'danger',
+            },
+            boxType: 'sendTabBoxContainer',
         },
-        boxType: 'moduleInfoBoxContainer',
-      },
-      resize: false,
-      close: true,
-      minW: 1,
-      maxW: 1,
-      minH: 2,
-      maxH: 2,
-      w: 1,
-      h: 2,
+        isBounded: undefined,
+        isDraggable: undefined,
+        isResizable: false,
+        minW: 2,
+        maxW: 2,
+        minH: 2,
+        maxH: 2,
+        w: 2,
+        h: 2,
+    },
+    moduleInfoBoxContainer: {
+        additionalInfo: {
+            classObj: (id: string, props: any) => (<ModuleInfoBoxContainer key={id} id={id} {...props} />),
+            defaultProps: {
+                color: 'danger',
+            },
+            boxType: 'moduleInfoBoxContainer',
+        },
+        isBounded: false,
+        isDraggable: false,
+        isResizable: false,
+        minW: 1,
+        maxW: 1,
+        minH: 2,
+        maxH: 2,
+        w: 1,
+        h: 2,
     },
     configurationFormBoxContainer: {
       additionalInfo: {
@@ -34,8 +54,9 @@ const boxes: IBoxes = {
         },
         boxType: 'configurationFormBoxContainer',
       },
-      resize: true,
-      close: true,
+        isBounded: undefined,
+        isDraggable: undefined,
+        isResizable: false,
       minW: 2,
       maxW: 4,
       minH: 4,

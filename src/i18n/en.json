@@ -88,6 +88,9 @@
   "module_info.label.version": "Version",
   "module_info.label.power": "Power",
 
+  "send_box.label.message.label": "Message",
+  "send_box.label.message.helper_text": "Write here the message to send",
+  "send_box.transparent.chan.helper_text": "Receiving message channel ({remainCharaters})",
 
   "home.fab.tooltip": "Locally save current layouts of this page",
 

@@ -13,7 +13,7 @@ import snackbarContentStyle from './style/snackbarContentStyle';
 
 interface Props {
     classes: any,
-    message: JSX.Element | string,
+    message: JSX.Element | JSX.Element[] | string,
     color: string,//PropTypes.oneOf(['info', 'success', 'warning', 'danger', 'error', 'primary']),
     close: boolean,
     // icon: Function,

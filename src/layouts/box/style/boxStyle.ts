@@ -52,7 +52,7 @@ const boxStyle = (theme: Theme) => createStyles({
     },
   },
     cartFooterButton:{
-        'text-align': 'right',
+        'textAlign': 'right',
         'display': 'block'
     },
   tableSize: {

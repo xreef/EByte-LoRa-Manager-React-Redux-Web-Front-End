@@ -9,6 +9,7 @@ import subscriptionsServiceWorkerReducer from "./subscriptionsServiceWorker";
 import homeReducer from "./home";
 import serverStateReducer from "./serverState";
 import webSocketReducer from "./webSocket";
+import deviceMessagesReducer from "./deviceMessages";
 
 const rootReducer = combineReducers({
   version: versionReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   subscriptionServiceWorker: subscriptionsServiceWorkerReducer,
   home: homeReducer,
   serverState: serverStateReducer,
-  webSocket: webSocketReducer
+  webSocket: webSocketReducer,
+  deviceMessages: deviceMessagesReducer
 });
 
 export default rootReducer;
