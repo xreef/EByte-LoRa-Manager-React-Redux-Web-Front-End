@@ -25,7 +25,7 @@
   "configuration.preferences.title": "Configurazione",
   "configuration.preferences.subtitle": "Configurazione dispositivo",
 
-  "configuration.save.success": "Configurazione salvata con successo",
+  "configuration.save.success": "Configurazione salvata con successo, se abilitato il dispositivo si riavvierà.",
   "configuration.save.failed": "Errore salvataggio configurazione",
   "configuration.load.failed": "La configurazione ha riportato dei parametri non corretti, riavviare il microcontrollore o resettare il dispositivo",
 
@@ -50,7 +50,7 @@
   "configuration.fec.fec_0_off": "Disabilitato",
   "configuration.fec.fec_1_on": "Abilitato",
 
-  "configuration.fixed_transmission.ft_transparent_transmission": "transparente",
+  "configuration.fixed_transmission.ft_transparent_transmission": "Transparente",
   "configuration.fixed_transmission.ft_fixed_transmission": "Fissa",
 
   "configuration.io_drive_mode.io_d_mode_open_collector": "Open",
@@ -91,11 +91,26 @@
   "module_info.label.version": "Versione",
   "module_info.label.power": "Potenza",
 
+  "moduleInfo.load.failed": "Le informazioni sul modulo risultano non coerenti, resettare il dispositivo.",
+
   "send_box.message.label": "Messaggio",
   "send_box.message.helper_text": "Scrivi qui il messaggio da inviare ({remainCharaters})",
 
   "send_box.button.send.label": "Invia il messaggio",
   "send_box.transparent.chan.helper_text": "Canale a cui sarà inviato il messaggio",
+
+  "receive.message.title": "Message received",
+  "receive.message.subtitle": "Qui potrai vedere i messaggi ricevuti",
+
+  "receive.message.label": "Messaggio",
+  "receive.message.helper_text": "Ultimo messaggio ricevuto",
+
+  "receive.message.switch_single_message": "Seleziona se vuoi ricevere solo un singolo messaggio piuttosto che l'intero buffer",
+
+  "receive.message.error": "Si è verificato un problema: {errorMessage}",
+
+  "web_socket.connect.message": "Avvia ricezione messaggi",
+  "web_socket.disconnect.message": "Ferma ricezione messaggi",
 
   "deviceMessages.transparent.send.success": "Hai inviato a tutti i dispositivi con il tuo stesso canale{creturn} il messaggio {message}",
   "deviceMessages.fixed.send.success": "Hai inviato a CHAN {CHAN} ADDH {ADDH} ADDL {ADDL} {creturn} il messaggio  {message}",

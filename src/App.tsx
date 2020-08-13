@@ -18,6 +18,8 @@ import '@formatjs/intl-pluralrules/locale-data/it';
 //     export const en: string;
 //     export const it: string;
 // }
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
 
 // Our translated strings
@@ -53,6 +55,37 @@ if (!Intl.DateTimeFormat) {
     require('@formatjs/intl-relativetimeformat/locale-data/it'); // Add locale data for de
 }
 
+const theme = createMuiTheme({
+    palette: {
+        success: {
+            main : "#bac778",
+        },
+    },
+
+});
+
+declare module '@material-ui/core/styles/createMuiTheme' {
+    interface Theme {
+        status: {
+            success: React.CSSProperties['color'],
+        }
+    }
+//     interface ThemeOptions {
+//         status: {
+//             success: React.CSSProperties['color']
+//         }
+//     }
+}
+
+declare module "@material-ui/core/styles/createPalette" {
+    interface Palette {
+        success: Palette['primary'];
+    }
+    // interface PaletteOptions {
+    //     success: PaletteOptions['primary'];
+    // }
+}
+
 class App extends React.Component {
   store: Store;
 
@@ -85,13 +118,15 @@ class App extends React.Component {
       return (
       <Provider store={this.store}>
           <IntlProvider locale={language} messages={messages}>
+              <ThemeProvider  theme={theme}>
+
               <HashRouter>
                   {/* <ResponsiveContainer/> */}
                   <Switch>
                       {indexRoutes.map((prop, key) => <Route path={prop.path} component={prop.component} key={key.toString()} />)}
                   </Switch>
               </HashRouter >
-
+              </ThemeProvider >
             {/*<Test backgroundColor="red" />*/}
           </IntlProvider>
       </Provider>

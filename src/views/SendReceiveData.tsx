@@ -27,6 +27,7 @@ class SendReceiveData extends React.Component<Props, ComponentState> {
       elements: [
         // {i: guid(), ...{...boxes['configurationBoxContainer']}},
         {i: "sendTabBoxContainer", ...{...boxes['sendTabBoxContainer']}},
+        {i: "receiveMessagesBoxContainer", ...{...boxes['receiveMessagesBoxContainer']}},
         // {i: "configurationFormBoxContainer", ...{...boxes['configurationFormBoxContainer']}},
         // {i: guid(), ...{...boxes['tableBoxInverterInformationContainer']}},
         // { i: 'chartBoxMonthlyId', ...{ ...boxes.chartBoxMonthly } },

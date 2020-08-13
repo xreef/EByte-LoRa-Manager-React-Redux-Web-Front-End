@@ -10,7 +10,7 @@ import {
     DEVICE_MESSAGES_SEND_BROADCAST_FAILED,
     DEVICE_MESSAGES_SEND_FIXED,
     DEVICE_MESSAGES_SEND_FIXED_SUCCESS,
-    DEVICE_MESSAGES_SEND_FIXED_FAILED
+    DEVICE_MESSAGES_SEND_FIXED_FAILED, DEVICE_MESSAGES_RECEIVED
 } from "../types/deviceMessages";
 
 
@@ -94,6 +94,13 @@ export const deviceMessagesSendFixedFailed = (err: Error): DeviceMessagesActions
     isFetching: false,
     fetchStatus: `errored: ${err.message}`
 });
+
+export const deviceMessagesReceived = (messageReceived: string): DeviceMessagesActions => ({
+    type: DEVICE_MESSAGES_RECEIVED,
+    messageReceived
+});
+
+
 export const actions = {
     deviceMessagesFieldUpdated,
     deviceMessagesFieldInvalid,
@@ -108,4 +115,5 @@ export const actions = {
     deviceMessagesSendFixedSuccess,
     deviceMessagesSendFixedFailed,
 
+    deviceMessagesReceived
 };

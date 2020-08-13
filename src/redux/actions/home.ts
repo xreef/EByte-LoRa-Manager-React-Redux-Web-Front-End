@@ -20,9 +20,9 @@ export const addElementToHome = (element: any): HomeActions => ({
   element
 });
 
-export const removeElementFromHome = (elementSetPushNotificationSupported: ILayoutElement): HomeActions => ({
+export const removeElementFromHome = (element: string): HomeActions => ({
   type: HOME_REMOVE_ELEMENT,
-  elementSetPushNotificationSupported: elementSetPushNotificationSupported
+    element: element
 });
 
 export const actions = {

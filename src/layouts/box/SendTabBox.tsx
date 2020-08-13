@@ -21,16 +21,20 @@ import {getADD, getFrequences} from "./utils/configuration";
 import Button from "../../component/customButtons/Button";
 import Send from "@material-ui/icons/Send"
 import {DeviceMessagesActions, MESSAGE_SIZE} from "../../redux/types/deviceMessages";
-import {configurationFetch, moduleInfoFetch} from "../../redux/actions";
+import {addElementToHome, configurationFetch, moduleInfoFetch} from "../../redux/actions";
 import {validateFields as validateFieldsTransparent} from "../../redux/logic/messageTransparentPOST";
 import {validateFields as validateFieldsFixed} from "../../redux/logic/messageFixedPOST";
 import {validateFields as validateFieldsBroadcast} from "../../redux/logic/messageBroadcastPOST";
+import FavoriteIconSelected from '@material-ui/icons/Favorite';
+import FavoriteIcon from '@material-ui/icons/FavoriteBorder';
+import {ILayoutElement} from "../../redux/types/home";
+import {IBox} from "./Types";
 
 
-interface Props {
+interface OwnProps {
     classes: any;
     isFetching: boolean,
-    color: ThemeColors,
+    // color: ThemeColors,
 
     configuration?: IConfiguration,
     moduleInfo?: IModuleInfo,
@@ -45,8 +49,15 @@ interface Props {
     deviceMessagesSendBroadcast: (CHAN:number, deviceMessage: string, lastUpdate: Date) => void
     deviceMessagesSendFixed: (CHAN:number, ADDH: number, ADDL: number, deviceMessage: string, lastUpdate: Date) => void,
 
-    deviceMessagesFieldInvalid: (errors: string[]) => void
+    deviceMessagesFieldInvalid: (errors: string[]) => void,
+
+    // isInHome: boolean,
+    // addElementToHome: (boxType: string) => void,
+    // removeElementFromHome: (element: string) => void,
+    // boxType: string
 }
+
+type Props = OwnProps & IBox;
 
 interface OwnState {
     message: string,
@@ -79,7 +90,7 @@ class SendTabBox extends React.Component<Props,OwnState> {
         super(props);
 
         const { configuration, moduleInfo } = props;
-        const { configurationFetch, moduleInfoFetch } = props;
+        const {tabToShow, configurationFetch, moduleInfoFetch } = props;
 
         this.state = {
             message: '',
@@ -88,6 +99,7 @@ class SendTabBox extends React.Component<Props,OwnState> {
 
         if (configuration) {
             this.state = {
+                tab: tabToShow[0],
                 message: '',
                 messageCharactersNumber: 0,
                 ADDH: configuration.ADDH,
@@ -116,11 +128,16 @@ class SendTabBox extends React.Component<Props,OwnState> {
 
     componentDidUpdate(prevProps: Props) {
         // Utilizzo tipico (non dimenticarti di comparare le props):
+        if (this.props.configuration && this.state.tab && this.props.tabToShow.indexOf(this.state.tab)<0){
+            this.setState( {tab: this.props.tabToShow[0]});
+        }
+
         if (prevProps.configuration === undefined && this.props.configuration) {
             this.setState({
                 ADDH: this.props.configuration.ADDH,
                 ADDL: this.props.configuration.ADDL,
-                CHAN: this.props.configuration.CHAN
+                CHAN: this.props.configuration.CHAN,
+                tab: this.props.tabToShow[0]
             });
         }
     }
@@ -172,6 +189,19 @@ class SendTabBox extends React.Component<Props,OwnState> {
         }
 
     };
+
+    handleHome = () => {
+        debugger
+        const {
+            isInHome, removeElementFromHome, addElementToHome, boxType
+        } = this.props;
+        if (isInHome) {
+            removeElementFromHome(boxType);
+        } else {
+            addElementToHome(boxType);
+        }
+    };
+
     sendBroadcastMessage = () => {
         debugger
         const {message, CHAN} = this.state;
@@ -187,7 +217,7 @@ class SendTabBox extends React.Component<Props,OwnState> {
     };
 
     render() {
-        const {classes, color} = this.props;
+        const {classes, color,isInHome} = this.props;
 
         const { configuration, moduleInfo, isFetching } = this.props;
 
@@ -208,6 +238,12 @@ class SendTabBox extends React.Component<Props,OwnState> {
                     handleChange={this.handleTabChange}
 
                     selectedTab={tab}
+
+                    headerButtons={
+                        <Button justIcon round color={color} className={classes.buttonHeader} onClick={this.handleHome}>
+                            {isInHome ? <FavoriteIconSelected /> : <FavoriteIcon />}
+                        </Button>
+                    }
 
                     tabs = {
                         this.getTabs(tabToShow, operatingFrequency, message, messageCharactersNumber, classes, color, isFetching, configuration)

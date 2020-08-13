@@ -4,12 +4,31 @@ import {ILayoutElement} from "../../redux/types/home";
 import ConfigurationFormBoxContainer from "./../../containers/layouts/box/ConfigurationFormBoxContainer"
 import ModuleInfoBoxContainer from "./../../containers/layouts/box/ModuleInfoBoxContainer"
 import SendTabBoxContainer from "./../../containers/layouts/box/SendTabBoxContainer"
+import ReceiveMessagesBoxContainer from "./../../containers/layouts/box/ReceiveMessagesBoxContainer"
 
 interface IBoxes {
     [propName: string]: ILayoutElement;
 }
 
 const boxes: IBoxes = {
+    receiveMessagesBoxContainer: {
+        additionalInfo: {
+            classObj: (id: string, props: any) => (<ReceiveMessagesBoxContainer key={id} id={id} {...props} />),
+            defaultProps: {
+                color: 'primary',
+            },
+            boxType: 'receiveMessagesBoxContainer',
+        },
+        isBounded: undefined,
+        isDraggable: undefined,
+        isResizable: false,
+        minW: 2,
+        maxW: 2,
+        minH: 2,
+        maxH: 2,
+        w: 2,
+        h: 2,
+    },
     sendTabBoxContainer: {
         additionalInfo: {
             classObj: (id: string, props: any) => (<SendTabBoxContainer key={id} id={id} {...props} />),

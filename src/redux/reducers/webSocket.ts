@@ -3,11 +3,20 @@ import {
     // WEB_SOCKET_CLOSE,
     WEB_SOCKET_ERROR,
     WEB_SOCKET_MESSAGE,
-    WEB_SOCKET_SEND_MESSAGE, WEB_SOCKET_CONNECT, WEB_SOCKET_DISCONNECT, WebSocketActions, IWebSocketState
+    WEB_SOCKET_SEND_MESSAGE,
+    WEB_SOCKET_CONNECT,
+    WEB_SOCKET_DISCONNECT,
+    WebSocketActions,
+    IWebSocketState,
+    key,
+    WEB_SOCKET_CLOSE
 } from "../types/webSocket";
+import {RootState} from "./index";
+import {IConfiguration} from "../types/configuration";
 
-export const selectors = {
-
+export const webSocketSelectors = {
+    isConnected: (state: RootState | any): boolean => state[key].isConnected,
+    singleMessage: (state: RootState | any): boolean => state[key].singleMessage,
 };
 
 const initialState = {
@@ -28,6 +37,11 @@ export default function webSocketReducer(state = initialState, action: WebSocket
         ...state,
         isConnected: false
       };
+    case WEB_SOCKET_CLOSE:
+      debugger
+      return {
+        ...state
+      };
     case WEB_SOCKET_ERROR:
       return {
         ...state,
@@ -39,6 +53,7 @@ export default function webSocketReducer(state = initialState, action: WebSocket
         message: action.message
       };
     case WEB_SOCKET_SEND_MESSAGE:
+      debugger
       return {
         ...state,
         messageToSend: action.message

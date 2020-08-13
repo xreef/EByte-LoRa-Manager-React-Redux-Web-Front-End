@@ -13,7 +13,7 @@ import {
 import {
   WEB_SOCKET_CLOSE, WEB_SOCKET_OPEN, WEB_SOCKET_DISCONNECT, WEB_SOCKET_SEND_MESSAGE, WEB_SOCKET_ERROR, WEB_SOCKET_CONNECT
 } from "../types/webSocket";
-import { webSocketError, webSocketMessage } from "../actions";
+import {webSocketError, webSocketMessage, webSocketSendMessage} from "../actions";
 
 import {
   serverStateBatteryFetchFulfilled,
@@ -27,6 +27,9 @@ import {
 
 import { MICROCONTROLLER_WS_ADRESS } from '../config';
 import { addNotification/*, inverterAlarmsFetchFulfilled */} from '../actions';
+import {webSocketSelectors} from "../reducers/webSocket";
+import {deviceMessagesReceived} from "../actions/deviceMessages";
+import {MESSAGE_SIZE} from "../types/deviceMessages";
 // import {number} from "prop-types";
 
 // const wsListenLogic = createLogic({
@@ -73,7 +76,7 @@ import { addNotification/*, inverterAlarmsFetchFulfilled */} from '../actions';
 
 const wsListenLogic = createLogic({
   type: WEB_SOCKET_OPEN,
-  cancelType: WEB_SOCKET_CLOSE,
+  // cancelType: WEB_SOCKET_CLOSE,
   latest: true, // take latest only
   warnTimeout: 0, // long running logic
 
@@ -82,7 +85,7 @@ const wsListenLogic = createLogic({
   },
 
   process({
-    httpClient, getState, action$, cancelled$
+    httpClient, getState, action, action$, cancelled$
   }, dispatch, done) {
     const wsSubject$ = webSocket({
       url: MICROCONTROLLER_WS_ADRESS,
@@ -90,6 +93,7 @@ const wsListenLogic = createLogic({
         next: () => {
           dispatch({ type: WEB_SOCKET_CONNECT });
           dispatch(addNotification({ message: <FormattedMessage id="websocket.open" />, variant: 'info' }));
+          dispatch(webSocketSendMessage({ singleMessage: action.singleMessage}))
         }
       },
       closeObserver: {
@@ -104,12 +108,19 @@ const wsListenLogic = createLogic({
     action$
       .pipe(
         filter(action => action.type === WEB_SOCKET_SEND_MESSAGE),
-        tap(action => wsSubject$.next(getState().messageToSend)),
+        tap(action => wsSubject$.next(action.message)),
         takeUntil(cancelled$)
-      );
+      ).subscribe();
+
+      action$
+      .pipe(
+          filter(action => action.type === WEB_SOCKET_CLOSE),
+          tap(action => webSocketSelectors.isConnected(getState()) ? wsSubject$.complete() : undefined),
+          takeUntil(cancelled$)
+      ).subscribe();
 
 
-    // dispatch msgReceived with payload from server
+      // dispatch msgReceived with payload from server
     // on any incoming messages
     // returning obs subscribes to it
     return wsSubject$.pipe(
@@ -160,7 +171,13 @@ const wsListenLogic = createLogic({
         //
         //   dispatch(setPowerRealTime(resp));
         // } else
-        if (msg.type === 'bat_rt') {
+          if (msg.type === 'message') {
+              if (msg.code!=1){
+                  dispatch(addNotification({ message: <FormattedMessage id="receive.message.error" values={{errorMessage: msg.description}}/>, variant: 'error', autoHide: undefined }));
+              }else{
+                  dispatch(deviceMessagesReceived(msg.message));
+              }
+          }else if (msg.type === 'bat_rt') {
           interface IResp {
                 voltage: number, lastUpdate: Date | null
             };

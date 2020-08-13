@@ -11,7 +11,7 @@ import {
     DEVICE_MESSAGES_SEND_BROADCAST_FAILED,
     DEVICE_MESSAGES_SEND_FIXED,
     DEVICE_MESSAGES_SEND_FIXED_SUCCESS,
-    DEVICE_MESSAGES_SEND_FIXED_FAILED
+    DEVICE_MESSAGES_SEND_FIXED_FAILED, DEVICE_MESSAGES_RECEIVED
 } from "../types/deviceMessages";
 import {DeviceMessagesActions} from "../types/deviceMessages";
 import {RootState} from "./index";
@@ -23,11 +23,13 @@ export const deviceMessagesSelectors = {
 };
 
 const initialState: IDeviceMessagesState = {
-    CHAN: 0,
-    deviceMessage: '',
+    // CHAN: 0,
+    // deviceMessage: '',
     lastUpdate: undefined,
 
     deviceMessages: [],
+
+    messagesReceived: [],
 
     isFetching: true,
     fetchStatus: `fetching... ${(new Date()).toLocaleString()}`,
@@ -153,6 +155,13 @@ export default function deviceMessagesReducer(state = initialState, action: Devi
             isFetching: action.isFetching,
             fetchStatus: `errored: ${action.err.description}`,
             errors: [action.err.description]
+        };
+    }
+    case DEVICE_MESSAGES_RECEIVED:
+    { // failed to add to server, display error
+        return {
+            ...state,
+            messageReceived: {message: action.messageReceived, date: new Date()},
         };
     }
 

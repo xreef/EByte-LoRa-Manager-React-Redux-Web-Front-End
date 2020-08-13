@@ -3,6 +3,7 @@ import {RootState} from "../../../redux/reducers";
 import {moduleInfoSelectors} from "../../../redux/reducers/moduleInfo";
 import {    moduleInfoFetch,
             addElementToHome,
+            removeElementFromHome,
             configurationFetch,
             deviceMessagesSendTransparent,
             deviceMessagesSendBroadcast,
@@ -39,7 +40,8 @@ const mapDispatchToProps = {
 
     deviceMessagesFieldInvalid,
 
-    addElementToHome
+    addElementToHome,
+    removeElementFromHome
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SendTabBox);

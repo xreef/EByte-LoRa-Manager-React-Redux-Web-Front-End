@@ -5,6 +5,7 @@
 // Also action types will prefix with the capitalized version
 
 import {Action} from "redux";
+import {IConfiguration} from "./configuration";
 
 export const key = 'webSocket';
 
@@ -33,6 +34,7 @@ export interface IWebSocketState {
 
     messageToSend?: string,
     isConnected: boolean,
+    singleMessage?: boolean,
     lastUpdate: null
 }
 
@@ -40,6 +42,8 @@ class WebSocketOpen implements Action {
     readonly type = WEB_SOCKET_OPEN;
     isConnected: boolean = false;
     lastUpdate: Date = new Date()
+    constructor(public singleMessage: boolean) {}
+
 }
 // action creators
 class WebSocketConnect implements Action {
@@ -55,7 +59,7 @@ class WebSocketDisconnect implements Action {
 }
 class WebSocketClose implements Action {
     readonly type = WEB_SOCKET_CLOSE;
-    isConnected: boolean = false;
+    // isConnected: boolean = false;
     lastUpdate: Date = new Date()
 }
 class WebSocketError implements Action {
@@ -76,3 +80,10 @@ class WebSocketSendMessage implements Action {
 
 export type WebSocketActions =  WebSocketOpen | WebSocketConnect | WebSocketDisconnect | WebSocketClose |
                                 WebSocketError | WebSocketMessage | WebSocketSendMessage;
+
+class MessageReceived {
+    readonly type = "message";
+    constructor(public code: number, public description: string, public error: boolean, public message?: string) {}
+}
+
+export type WebSocketMessages = MessageReceived;

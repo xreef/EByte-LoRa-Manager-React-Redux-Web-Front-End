@@ -8,9 +8,10 @@ import {
     WEB_SOCKET_OPEN, WEB_SOCKET_SEND_MESSAGE, WebSocketActions
 } from "../types/webSocket";
 
-export const webSocketOpen = (): WebSocketActions => ({
+export const webSocketOpen = (singleMessage: boolean): WebSocketActions => ({
     type: WEB_SOCKET_OPEN,
     isConnected: false,
+    singleMessage,
     lastUpdate: new Date()
 });
 // action creators
@@ -27,7 +28,7 @@ export const webSocketDisconnect = (): WebSocketActions => ({
 });
 export const webSocketClose = (): WebSocketActions => ({
   type: WEB_SOCKET_CLOSE,
-    isConnected: false,
+    // isConnected: false,
     lastUpdate: new Date()
 });
 export const webSocketError = (event: Event): WebSocketActions => ({

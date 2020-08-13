@@ -8,7 +8,7 @@ import { MICROCONTROLLER_ADRESS, MODULE_INFO_ENDPOINT } from '../config';
 
 import {
     MODULE_INFO_FETCH, MODULE_INFO_FETCH_CANCEL,
-    MODULE_INFO_FETCH_REJECTED, IModuleInfo //, MODULE_INFO_FETCH_FULFILLED
+    MODULE_INFO_FETCH_REJECTED, IModuleInfo, frequencyFromModuleInfo //, MODULE_INFO_FETCH_FULFILLED
 } from "../types/moduleInfo";
 import {addNotification, moduleInfoFetchFulfilled, moduleInfoFetchRejected} from "../actions";
 import {FormattedMessage} from "react-intl";
@@ -37,7 +37,8 @@ const moduleInfoFetchLogic = createLogic({
         return { moduleInfo: conf, lastUpdate: new Date() };
       })
         .then((payload: any) =>{
-            if (payload.moduleInfo.frequency){
+            if (Object.keys(frequencyFromModuleInfo).indexOf(payload.moduleInfo.frequency)>-1){
+            // if (payload.moduleInfo.frequency){
                 dispatch(moduleInfoFetchFulfilled(payload.moduleInfo, payload.lastUpdate));
             }else{
                 dispatch(addNotification({ message: <FormattedMessage id="moduleInfo.load.failed" />, variant: 'warning', autoHide: 0 }));

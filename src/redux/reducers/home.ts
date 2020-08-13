@@ -41,7 +41,7 @@ export default function homeReducer(state = initialState, action: HomeActions): 
         elements: [...state.elements, elemToAdd]
       };
     case HOME_REMOVE_ELEMENT:
-      const elem = [...state.elements].filter(elemToSel => elemToSel.additionalInfo.boxType === action.elementSetPushNotificationSupported)[0];
+      const elem = [...state.elements].filter(elemToSel => elemToSel.additionalInfo.boxType === action.element)[0];
 
       const layouts = { ...state.layouts };
       Object.keys(layouts).forEach((keyLayout) => {

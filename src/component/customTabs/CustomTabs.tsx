@@ -27,6 +27,7 @@ interface Props {
     headerColor: ThemeColors,
     title: string,
     tabs: Tab[],
+    headerButtons?: JSX.Element,
     tabIcon?: any,
     tabContent?: JSX.Element[],
     plainTabs?: boolean,
@@ -53,6 +54,18 @@ class CustomTabs extends React.Component<Props,OwnState> {
             value: props.selectedTab || props.tabs[0].tabKey || 0
         };
     }
+
+    componentDidUpdate(prevProps: Props){
+        if (this.props.selectedTab && prevProps.selectedTab != this.props.selectedTab){
+            this.setState({value: this.props.selectedTab});
+        }
+        // if ( this.props.selectedTab && this.props.tabs.filter(elem => elem.tabKey == this.state.value).length===0){
+        //     this.setState({
+        //         value: this.props.tabs[0].tabKey || 0
+        //     })
+        // }
+    }
+
   handleChange = (event: any, value: string) => {
     this.setState({ value });
     this.props.handleChange && this.props.handleChange(value);
@@ -65,8 +78,15 @@ class CustomTabs extends React.Component<Props,OwnState> {
       plainTabs,
       tabs,
       title,
-      rtlActive
+      rtlActive,
+        headerButtons
     } = this.props;
+
+    let {value} = this.state;
+    if (this.props.tabs.filter(elem => elem.tabKey == this.state.value).length===0){
+        value = this.props.tabs[0].tabKey;
+    }
+
     const cardTitle = classNames({
       [classes.cardTitle]: true,
       [classes.cardTitleRTL]: rtlActive
@@ -77,8 +97,9 @@ class CustomTabs extends React.Component<Props,OwnState> {
           {title !== undefined ? (
             <div className={cardTitle}>{title}</div>
           ) : <div></div>}
+            {headerButtons!==undefined ? (headerButtons) : <div></div>}
           <Tabs
-            value={this.state.value}
+            value={value}
             onChange={this.handleChange}
             classes={{
               root: classes.tabsRoot,
@@ -116,7 +137,7 @@ class CustomTabs extends React.Component<Props,OwnState> {
         </CardHeader>
         <CardBody>
           {tabs.map((prop, key) => {
-            if ((prop.tabKey || key) === this.state.value) {
+            if ((prop.tabKey || key) === value) {
               return <div key={prop.tabKey || key}>{prop.tabContent}</div>;
             }
             return null;

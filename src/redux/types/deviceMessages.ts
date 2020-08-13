@@ -10,13 +10,20 @@ export interface IDeviceMessage {
     message: string,
     date: Date
 }
+export interface IDeviceMessageReceived {
+    message: string,
+    date: Date
+}
 
 export interface IDeviceMessagesState {
-    CHAN: number;
-    deviceMessage: string;
+    // CHAN: number;
+    deviceMessage?: IDeviceMessage;
     lastUpdate?: Date | undefined;
 
     deviceMessages: IDeviceMessage[],
+
+    messageReceived?: IDeviceMessageReceived,
+    messagesReceived: IDeviceMessageReceived[],
 
     isFetching: boolean,
     fetchStatus?: string,
@@ -47,6 +54,8 @@ export const DEVICE_MESSAGES_SEND_FIXED = 'DEVICE_MESSAGES_SEND_FIXED';
 export const DEVICE_MESSAGES_SEND_FIXED_SUCCESS = 'DEVICE_MESSAGES_SEND_FIXED_SUCCESS';
 export const DEVICE_MESSAGES_SEND_FIXED_FAILED = 'DEVICE_MESSAGES_SEND_FIXED_FAILED';
 
+export const DEVICE_MESSAGES_RECEIVED = 'DEVICE_MESSAGES_RECEIVED';
+
 export const actionTypes = {
     DEVICE_MESSAGES_FIELD_UPDATED,
     DEVICE_MESSAGES_FIELD_INVALID,
@@ -58,7 +67,8 @@ export const actionTypes = {
     DEVICE_MESSAGES_SEND_BROADCAST_FAILED,
     DEVICE_MESSAGES_SEND_FIXED,
     DEVICE_MESSAGES_SEND_FIXED_SUCCESS,
-    DEVICE_MESSAGES_SEND_FIXED_FAILED
+    DEVICE_MESSAGES_SEND_FIXED_FAILED,
+    DEVICE_MESSAGES_RECEIVED
 };
 
 class DeviceMessagesFieldUpdated implements Action {
@@ -136,9 +146,14 @@ class DeviceMessagesSendFixedFailed implements Action {
     // err: any = {};
     constructor(public err: any) {}
 }
+class DeviceMessagesReceived implements Action {
+    readonly type = DEVICE_MESSAGES_RECEIVED;
+    constructor(public messageReceived: string) {}
+}
 
 
 export type DeviceMessagesActions = DeviceMessagesFieldUpdated | DeviceMessagesFieldInvalid | DeviceMessagesSendTransparent |
     DeviceMessagesSendTransparentSuccess | DeviceMessagesSendTransparentFailed | DeviceMessagesSendBroadcast |
     DeviceMessagesSendBroadcastSuccess | DeviceMessagesSendBroadcastFailed | DeviceMessagesSendFixed |
-    DeviceMessagesSendFixedSuccess | DeviceMessagesSendFixedFailed;
+    DeviceMessagesSendFixedSuccess | DeviceMessagesSendFixedFailed | DeviceMessagesReceived;
+

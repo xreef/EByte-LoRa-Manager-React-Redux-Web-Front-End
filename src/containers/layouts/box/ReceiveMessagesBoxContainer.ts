@@ -2,33 +2,31 @@ import {connect} from "react-redux";
 import {RootState} from "../../../redux/reducers";
 import {configurationSelectors} from "../../../redux/reducers/configuration";
 import {
-    configurationFetch,
-    configurationFieldUpdated,
-    configurationAdd,
+    webSocketOpen,
+    webSocketClose,
     addElementToHome,
-    moduleInfoFetch, removeElementFromHome
+    removeElementFromHome
 } from "../../../redux/actions";
-import ConfigurationFormBox from "../../../layouts/box/ConfigurationFormBox";
 import {homeSelectors} from "../../../redux/reducers/home";
 import {ILayoutConfigured, ILayoutElement} from "../../../redux/types/home";
 import {moduleInfoSelectors} from "../../../redux/reducers/moduleInfo";
+import ReceiveMessagesBox from "../../../layouts/box/ReceiveMessagesBox";
+import {webSocketSelectors} from "../../../redux/reducers/webSocket";
 
 const isElementInHome = (element: string, homeElements: ILayoutElement[]) => homeElements.some((elem: ILayoutElement) => elem.additionalInfo.boxType === element);
 
 const mapStateToProps = (state: RootState, ownProps: {boxType: string}) => ({
-    configuration: configurationSelectors.configuration(state),
-    moduleInfo: moduleInfoSelectors.moduleInfo(state),
     isInHome: isElementInHome(ownProps.boxType, homeSelectors.elements(state)),
-    isFetching: state.configuration.isFetching,
+    isConnected: webSocketSelectors.isConnected(state),
+    singleMessage: webSocketSelectors.singleMessage(state),
 });
 
 
 const mapDispatchToProps = {
-    configurationFetch,
-    configurationFieldUpdated,
-    configurationAdd,
+    webSocketOpen,
+    webSocketClose,
     addElementToHome,
     removeElementFromHome
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConfigurationFormBox);
+export default connect(mapStateToProps, mapDispatchToProps)(ReceiveMessagesBox);

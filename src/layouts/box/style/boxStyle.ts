@@ -100,6 +100,7 @@ const boxStyle = (theme: Theme) => createStyles({
     top: '10px'
   },
   buttonHeader2: {
+    zIndex: 2,
     position: 'absolute',
     right: '60px',
     top: '10px'

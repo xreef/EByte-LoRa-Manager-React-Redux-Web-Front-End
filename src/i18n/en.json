@@ -22,7 +22,7 @@
   "configuration.preferences.title": "Configuration",
   "configuration.preferences.subtitle": "Device configuration",
 
-  "configuration.save.success": "Configuration saved",
+  "configuration.save.success": "Configuration saved, if enabled the device is rebooting now!",
   "configuration.save.failed": "Configuration saving error",
   "configuration.load.failed": "Configuration params are not correc, please restart microcontroller or reset device",
 
@@ -87,6 +87,8 @@
   "module_info.label.frequency": "Frequency",
   "module_info.label.version": "Version",
   "module_info.label.power": "Power",
+
+  "moduleInfo.load.failed": "The module info is not correct, reset the device.",
 
   "send_box.label.message.label": "Message",
   "send_box.label.message.helper_text": "Write here the message to send",

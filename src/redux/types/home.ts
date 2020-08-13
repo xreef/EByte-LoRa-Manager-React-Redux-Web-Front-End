@@ -65,7 +65,7 @@ class AddElementToHome implements Action {
 
 class RemoveElementFromHome implements Action {
     readonly type = HOME_REMOVE_ELEMENT;
-    constructor(public elementSetPushNotificationSupported: ILayoutElement) {}
+    constructor(public element: string) {}
 }
 
 export type HomeActions = SetHomeLayout | AddElementToHome | RemoveElementFromHome;
