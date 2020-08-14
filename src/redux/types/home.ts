@@ -54,7 +54,6 @@ export interface ILayout {
 
 class SetHomeLayout implements Action {
     readonly type = HOME_SET_LAYOUTS;
-    notification?: INotification;
     constructor(public layouts: ILayoutConfigured) {}
 }
 

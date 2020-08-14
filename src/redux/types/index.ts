@@ -5,6 +5,7 @@ import { WebSocketActions } from "./webSocket";
 import { NotificationsActions } from "./notifications";
 import {HomeActions} from "./home";
 import {DeviceMessagesActions} from "./deviceMessages";
+import {ConfigurationPageActions} from "./configurationPage";
 
 export type AppActions = VersionActions | ConfigurationActions | ServerStateActions | WebSocketActions |
-    NotificationsActions | HomeActions | DeviceMessagesActions
+    NotificationsActions | HomeActions | DeviceMessagesActions | ConfigurationPageActions

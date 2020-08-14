@@ -51,9 +51,9 @@ interface OwnProps {
     configurationFieldUpdated: (configuration: IConfiguration, lastUpdate: Date) => void,
     configurationAdd: (configuration: IConfiguration, lastUpdate: Date) => void,
     classes: any;
-    configuration?: IConfiguration | null,
+    configuration?: IConfiguration,
     moduleInfo?: IModuleInfo,
-    lastUpdate: Date | null,
+    lastUpdate?: Date,
     isFetching: boolean
 }
 
@@ -67,8 +67,8 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
   static defaultProps = {
       color: 'warning' as ThemeColors,
       isFetching: false,
-      configuration: null,
-      lastUpdate: null,
+      // configuration: null,
+      // lastUpdate: null,
 
       configurationFetch: () => console.log("CONFIG FETCH"),
       configurationFieldUpdated: (configuration: IConfiguration, lastUpdate: Date) => console.log("CONFIGURATION UPDATE"),

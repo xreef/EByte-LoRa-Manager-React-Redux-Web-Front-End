@@ -93,7 +93,7 @@ class CustomTabs extends React.Component<Props,OwnState> {
     });
     return (
       <Card plain={plainTabs}>
-        <CardHeader color={headerColor} plain={plainTabs}>
+        <CardHeader color={headerColor} plain={plainTabs}  className="dragHeader">
           {title !== undefined ? (
             <div className={cardTitle}>{title}</div>
           ) : <div></div>}

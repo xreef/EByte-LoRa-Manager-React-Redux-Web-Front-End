@@ -56,7 +56,7 @@ const boxes: IBoxes = {
             boxType: 'moduleInfoBoxContainer',
         },
         isBounded: false,
-        isDraggable: false,
+        isDraggable: true,
         isResizable: false,
         minW: 1,
         maxW: 1,

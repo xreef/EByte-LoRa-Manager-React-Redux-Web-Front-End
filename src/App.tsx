@@ -104,7 +104,7 @@ class App extends React.Component {
         },
 
       },
-      false);
+        true);
   }
 
   render() {

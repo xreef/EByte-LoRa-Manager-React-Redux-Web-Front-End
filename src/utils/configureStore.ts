@@ -33,49 +33,37 @@ const configureStoreFunction = (id: string, initialConfig: any, autoSaveToLocalS
     if (autoSaveToLocalStorage) {
     const loadedState = { ...initialConfig, ...loadState(`currState${id}`) };
     console.log('LOAD STATE ', `currState${id}`, loadedState);
-    // configureStore({
-    //     reducer: rootReducer,
-    //     middleware: new MiddlewareArray().concat(additionalMiddleware, logger)
-    // })
-    //
-    // configureStore({
-    //     reducer: rootReducer,
-    //     middleware: [additionalMiddleware, logger] as const
-    // })
 
     store = configureStore({
       preloadedState: loadedState,
       reducer: rootReducer,
         middleware: middlewares
-      // middleware: (getDefaultMiddleware) => getDefaultMiddleware()
-      //   // .prepend(
-      //   //     // correctly typed middlewares can just be used
-      //   //     additionalMiddleware,
-      //   //     // you can also type middlewares manually
-      //   //     untypedMiddleware as Middleware<
-      //   //         (action: Action<'specialAction'>) => number,
-      //   //         RootState
-      //   //         >
-      //   // )
-      //   // prepend and concat calls can be chained
-      //   .concat(logger),
     });
 
     store.subscribe(throttle(() => {
       saveState(`currState${id}`,
-        {
-          ...store.getState(),
-        },
-        // home: {
-        //         ...{
-        //             layouts: {
-        //                 lg: [], md: [], sm: [], xs: [], xxs: [],
-        //             },
-        //             elements: []
-        //         },
-        //         // ...store.getState().home
-        //     }
-
+          {
+              //   ...store.getState(),
+              // },
+              home: {
+                  ...{
+                      layouts: {
+                          lg: [], md: [], sm: [], xs: [], xxs: [],
+                      },
+                      elements: []
+                  },
+                  ...store.getState().home
+              },
+              configurationPage: {
+                  ...{
+                      layouts: {
+                          lg: [], md: [], sm: [], xs: [], xxs: [],
+                      },
+                      elements: []
+                  },
+                  ...store.getState().configurationPage
+              }
+          }
       );
     }, 1000));
   } else {
@@ -85,18 +73,6 @@ const configureStoreFunction = (id: string, initialConfig: any, autoSaveToLocalS
         reducer: rootReducer,
           middleware: middlewares,
 
-        // middleware: (getDefaultMiddleware) => getDefaultMiddleware()
-        //   // .prepend(
-        //   //     // correctly typed middlewares can just be used
-        //   //     additionalMiddleware,
-        //   //     // you can also type middlewares manually
-        //   //     untypedMiddleware as Middleware<
-        //   //         (action: Action<'specialAction'>) => number,
-        //   //         RootState
-        //   //         >
-        //   // )
-        //   // prepend and concat calls can be chained
-        //   .concat(logger),
         preloadedState: loadedState,
       });
 

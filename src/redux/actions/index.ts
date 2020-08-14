@@ -34,6 +34,8 @@ import {
     deviceMessagesSendFixedFailed
 } from "./deviceMessages";
 
+import { setConfigurationPageLayout } from "./configurationPage";
+
 export {
     setVersion,
 
@@ -68,5 +70,7 @@ export {
     webSocketOpen, webSocketClose, webSocketError, webSocketMessage, webSocketSendMessage,
     webSocketConnect, webSocketDisconnect,
 
-    setHomeLayout,removeElementFromHome, addElementToHome
+    setHomeLayout,removeElementFromHome, addElementToHome,
+
+    setConfigurationPageLayout
 };

@@ -5,10 +5,33 @@ import ResponsiveGrid from '../component/responsiveGrid/ResponsiveGrid';
 
 import {ILayoutConfigured, ILayoutElement} from "../redux/types/home";
 import boxes from "../layouts/box/boxes";
+import {RootState} from "../redux/reducers";
+import {setConfigurationPageLayout} from "../redux/actions";
+import {configurationPageSelectors} from "../redux/reducers/configurationPage";
+import {connect} from "react-redux";
 
-interface Props {
-    layouts: ILayoutConfigured,
+interface OwnProps {
+
 }
+
+const mapStateToProps = (state: RootState/*, ownProps*/) => ({
+    layouts: configurationPageSelectors.layouts(state),
+});
+
+const mapDispatchToProps = {
+    saveLayouts: setConfigurationPageLayout
+};
+
+type StateProps = ReturnType<typeof mapStateToProps>
+type DispatchProps = typeof mapDispatchToProps
+
+type Props = StateProps & DispatchProps & OwnProps;
+
+
+// interface Props {
+//     layouts: ILayoutConfigured,
+//     saveLayouts: () => void
+// }
 
 interface ComponentState {
   elements: ILayoutElement[]
@@ -19,6 +42,7 @@ class Configuration extends React.Component<Props, ComponentState> {
       layouts: {
           lg: [], md: [], sm: [], xs: [], xxs: [],
       },
+      saveLayouts: (layouts: any): any => console.log('Save layout', layouts)
   };
 
   constructor(props: Props) {
@@ -52,7 +76,7 @@ class Configuration extends React.Component<Props, ComponentState> {
   }
 
   render() {
-    const { layouts } = this.props;
+    const { layouts,saveLayouts } = this.props;
 
 
     return (
@@ -60,34 +84,11 @@ class Configuration extends React.Component<Props, ComponentState> {
         elements={[...this.state.elements]}
         layouts={layouts}
         showSaveLayoutsButton
-        // saveLayouts={saveLayouts}
+        saveLayouts={saveLayouts}
       />
     );
   }
 }
+export default connect(mapStateToProps, mapDispatchToProps)(Configuration);
 
-// Historical.propTypes = {
-//   layouts: PropTypes.object,
-//
-//   saveLayouts: PropTypes.func
-// };
-
-// SendReceiveData.defaultProps = {
-//   layouts: {
-//     lg: [], md: [], sm: [], xs: [], xxs: [],
-//   },
-//   saveLayouts: () => console.log('Save layout')
-// };
-
-// const mapStateToProps = (state: RootState/*, ownProps*/) => ({
-//   // layouts: historicalSelector.layouts(state),
-// });
-//
-// const mapDispatchToProps = {
-//   // saveLayouts: setHistoricalLayout
-//   //   configurationFetch
-// };
-//
-// export default connect(mapStateToProps, mapDispatchToProps)(SendReceiveData);
-
-export default Configuration;
+// export default Configuration;
