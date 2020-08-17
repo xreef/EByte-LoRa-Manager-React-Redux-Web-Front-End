@@ -84,8 +84,8 @@
   "configuration.io_drive_mode.label": "IO Mode",
   "configuration.io_drive_mode.helper_text": "PushPull, PullUp",
 
-  "configuration.button.save": "Salva configurazione",
-  "configuration.button.default": "Carica dati default",
+  "configuration.button.save": "Salva",
+  "configuration.button.default": "Dati default",
 
   "module_info.label.frequency": "Frequenza",
   "module_info.label.version": "Versione",
@@ -99,13 +99,11 @@
   "send_box.button.send.label": "Invia il messaggio",
   "send_box.transparent.chan.helper_text": "Canale a cui sarà inviato il messaggio",
 
-  "receive.message.title": "Message received",
+  "receive.message.title": "Messaggio ricevuto",
   "receive.message.subtitle": "Qui potrai vedere i messaggi ricevuti",
 
   "receive.message.label": "Messaggio",
   "receive.message.helper_text": "Ultimo messaggio ricevuto",
-
-  "receive.message.switch_single_message": "Seleziona se vuoi ricevere solo un singolo messaggio piuttosto che l'intero buffer",
 
   "receive.message.error": "Si è verificato un problema: {errorMessage}",
 
@@ -116,7 +114,12 @@
   "deviceMessages.fixed.send.success": "Hai inviato a CHAN {CHAN} ADDH {ADDH} ADDL {ADDL} {creturn} il messaggio  {message}",
   "deviceMessages.broadcast.send.success": "Hai inviato a tutti i dispositivi del CHAN {CHAN}{creturn} il messaggio  {message}",
 
+  "widget.no_data": "Non è stato possibile recuperare dati",
+
   "home.fab.tooltip": "Salva localmente i layouts di questa pagina",
+
+  "receive.all_buffer.label": "Tutto il buffer",
+  "receive.single_message.label": "Singolo messaggio",
 
   "page.intro": "<div><h2>Introduzione</h2><div>Per installare questa WebApp è necessario abilitare questa features di Chrome <b> Desktop PWAs</b></div><div>Copia incolla questo link sul browser </div><div>chrome://flags/#enable-desktop-pwas</div></div>",
 

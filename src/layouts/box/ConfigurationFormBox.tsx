@@ -406,7 +406,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
               ? (
                      this.gridContainer(configuration, moduleInfo)
               )
-              : <div className={classes.progress}><FormattedMessage id="chart.no_data" /></div>
+              : <div className={classes.progress}><FormattedMessage id="widget.no_data" /></div>
             : <div className={classes.progress}><CircularProgress style={{ color: colorMod[`${color}Color`], height: '100%' }} size={50} /></div>
                 }
         </CardBody>

@@ -147,7 +147,7 @@ class ReceiveMessagesBox extends React.Component<Props, CFBState> {
                         value="false"
                         name="checkSingleMessage"
                     />}
-                    label="All buffer"
+                    label={<FormattedMessage id="receive.all_buffer.label" />}
                     labelPlacement="end"
                 />
                 <FormControlLabel
@@ -158,7 +158,7 @@ class ReceiveMessagesBox extends React.Component<Props, CFBState> {
                         value="true"
                         name="checkSingleMessage"
                     />}
-                    label="Single message"
+                    label={<FormattedMessage id="receive.single_message.label" />}
                     labelPlacement="end"
                 />
 

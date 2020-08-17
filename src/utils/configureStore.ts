@@ -62,6 +62,15 @@ const configureStoreFunction = (id: string, initialConfig: any, autoSaveToLocalS
                       elements: []
                   },
                   ...store.getState().configurationPage
+              },
+              sendReceiveDataPage: {
+                  ...{
+                      layouts: {
+                          lg: [], md: [], sm: [], xs: [], xxs: [],
+                      },
+                      elements: []
+                  },
+                  ...store.getState().sendReceiveDataPage
               }
           }
       );

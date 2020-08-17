@@ -35,7 +35,7 @@
   "configuration.uart_bps_type.uart_bps_57600": "57600bps",
   "configuration.uart_bps_type.uart_bps_115200": "115200bps",
 
-  "configuration.air_data_rate.air_data_rate_000_03": "0300Kbps",
+  "configuration.air_data_rate.air_data_rate_000_03": "300Kbps",
   "configuration.air_data_rate.air_data_rate_001_12": "1200Kbps",
   "configuration.air_data_rate.air_data_rate_010_24": "2400Kbps",
   "configuration.air_data_rate.air_data_rate_011_48": "4800Kbps",
@@ -81,8 +81,8 @@
   "configuration.io_drive_mode.label": "IO Mode",
   "configuration.io_drive_mode.helper_text": "PushPull, PullUp",
 
-  "configuration.button.save": "Save configuration",
-  "configuration.button.default": "Load default values",
+  "configuration.button.save": "Save",
+  "configuration.button.default": "Default values",
 
   "module_info.label.frequency": "Frequency",
   "module_info.label.version": "Version",
@@ -92,9 +92,31 @@
 
   "send_box.label.message.label": "Message",
   "send_box.label.message.helper_text": "Write here the message to send",
-  "send_box.transparent.chan.helper_text": "Receiving message channel ({remainCharaters})",
+
+  "send_box.button.send.label": "Send message",
+  "send_box.transparent.chan.helper_text": "Channel to send message",
+
+  "receive.message.title": "Message received",
+  "receive.message.subtitle": "Here you can see the received message",
+
+  "receive.message.label": "Message",
+  "receive.message.helper_text": "Last received message",
+
+  "receive.message.error": "There is a problem: {errorMessage}",
+
+  "web_socket.connect.message": "Start receiving message",
+  "web_socket.disconnect.message": "Stop receiving message",
+
+  "deviceMessages.transparent.send.success": "You have sent to all devices with the same channel {creturn} as you, the message {message}",
+  "deviceMessages.fixed.send.success": "You have sent to CHAN {CHAN} ADDH {ADDH} ADDL {ADDL} {creturn} the message {message}",
+  "deviceMessages.broadcast.send.success": "You have sent to all device with CHAN {CHAN}{creturn} the message {message}",
+
+  "widget.no_data": "No data retrieved",
 
   "home.fab.tooltip": "Locally save current layouts of this page",
+
+  "receive.all_buffer.label": "All the buffer",
+  "receive.single_message.label": "Single message",
 
   "page.intro": "<div><h2>Introduction</h2><div>To install this Web App activate the chrome features <b> Desktop PWAs</b></div><div>Copy this link and paste in your browser</div><div>chrome://flags/#enable-desktop-pwas</div></div>",
 

@@ -5,10 +5,28 @@ import ResponsiveGrid from '../component/responsiveGrid/ResponsiveGrid';
 
 import {ILayoutConfigured, ILayoutElement} from "../redux/types/home";
 import boxes from "../layouts/box/boxes";
+import {RootState} from "../redux/reducers";
+import {configurationPageSelectors} from "../redux/reducers/configurationPage";
+import {setConfigurationPageLayout, setSendReceiveDataPageLayout} from "../redux/actions";
+import {sendReceiveDataPageSelectors} from "../redux/reducers/sendReceiveDataPage";
+import {connect} from "react-redux";
 
-interface Props {
-    layouts: ILayoutConfigured,
+interface OwnProps {
+
 }
+
+const mapStateToProps = (state: RootState/*, ownProps*/) => ({
+    layouts: sendReceiveDataPageSelectors.layouts(state),
+});
+
+const mapDispatchToProps = {
+    saveLayouts: setSendReceiveDataPageLayout
+};
+
+type StateProps = ReturnType<typeof mapStateToProps>
+type DispatchProps = typeof mapDispatchToProps
+
+type Props = StateProps & DispatchProps & OwnProps;
 
 interface ComponentState {
   elements: ILayoutElement[]
@@ -53,7 +71,7 @@ class SendReceiveData extends React.Component<Props, ComponentState> {
   }
 
   render() {
-    const { layouts } = this.props;
+    const { layouts, saveLayouts } = this.props;
 
 
     return (
@@ -61,7 +79,7 @@ class SendReceiveData extends React.Component<Props, ComponentState> {
         elements={[...this.state.elements]}
         layouts={layouts}
         showSaveLayoutsButton
-        // saveLayouts={saveLayouts}
+        saveLayouts={saveLayouts}
       />
     );
   }
@@ -89,6 +107,6 @@ class SendReceiveData extends React.Component<Props, ComponentState> {
 //   //   configurationFetch
 // };
 //
-// export default connect(mapStateToProps, mapDispatchToProps)(SendReceiveData);
+export default connect(mapStateToProps, mapDispatchToProps)(SendReceiveData);
 
-export default SendReceiveData;
+// export default SendReceiveData;

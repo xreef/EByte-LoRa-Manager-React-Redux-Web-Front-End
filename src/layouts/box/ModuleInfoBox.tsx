@@ -113,7 +113,7 @@ class ModuleInfoBox extends React.Component<Props> {
                                     </GridContainer>
                                 </React.Fragment>
                             )
-                            : <div className={classes.progress}><FormattedMessage id="chart.no_data" /></div>
+                            : <div className={classes.progress}><FormattedMessage id="widget.no_data" /></div>
                         : <div className={classes.progress}><CircularProgress style={{ color: colorMod[`${color}Color`], height: '100%' }} size={50} /></div>
                     }
                 </CardBody>

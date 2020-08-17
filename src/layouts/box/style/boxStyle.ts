@@ -53,7 +53,8 @@ const boxStyle = (theme: Theme) => createStyles({
   },
     cartFooterButton:{
         'textAlign': 'right',
-        'display': 'block'
+        'display': 'block',
+        'white-space': 'nowrap'
     },
   tableSize: {
     // maxHeight: "224px",

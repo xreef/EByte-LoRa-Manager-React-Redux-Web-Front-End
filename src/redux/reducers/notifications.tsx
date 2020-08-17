@@ -10,6 +10,8 @@ import {HOME_ADD_ELEMENT, HOME_REMOVE_ELEMENT, HOME_SET_LAYOUTS, HomeActions} fr
 import {CONFIGURATION_ADD_FAILED, CONFIGURATION_FETCH_REJECTED, ConfigurationActions} from "../types/configuration";
 import {MODULE_INFO_FETCH_REJECTED, ModuleInfoActions} from "../types/moduleInfo";
 import {DEVICE_MESSAGES_FIELD_INVALID, DeviceMessagesActions} from "../types/deviceMessages";
+import {SEND_RECEIVE_DATA_PAGE_SET_LAYOUTS, SendReceiveDataPageActions} from "../types/sendReceiveDataPage";
+import {CONFIGURATION_PAGE_SET_LAYOUTS, ConfigurationPageActions} from "../types/configurationPage";
 // import { DAILY_SET_LAYOUTS } from '../actions/daily';
 // import { HISTORICAL_SET_LAYOUTS } from '../actions/historical';
 // import { INVERTER_INFO_STATE_SET_LAYOUTS } from '../actions/inverterInfoState';
@@ -20,10 +22,19 @@ const initialState: INotificationsState = {
     queue: []
 }
 
-export default function notificationsReducer(state = initialState, action: NotificationsActions | HomeActions | ConfigurationActions | ModuleInfoActions | DeviceMessagesActions): INotificationsState {
+export default function notificationsReducer(state = initialState, action: NotificationsActions |
+                                                                            HomeActions |
+                                                                            ConfigurationActions |
+                                                                            ModuleInfoActions |
+                                                                            DeviceMessagesActions |
+                                                                            SendReceiveDataPageActions |
+                                                                            ConfigurationPageActions
+): INotificationsState {
     let notification = null;
     switch (action.type) {
         case HOME_SET_LAYOUTS:
+        case SEND_RECEIVE_DATA_PAGE_SET_LAYOUTS:
+        case CONFIGURATION_PAGE_SET_LAYOUTS:
             // case DAILY_SET_LAYOUTS:
             // case HISTORICAL_SET_LAYOUTS:
             // case INVERTER_INFO_STATE_SET_LAYOUTS:

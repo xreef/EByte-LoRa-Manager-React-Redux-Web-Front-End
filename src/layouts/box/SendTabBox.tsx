@@ -309,7 +309,7 @@ class SendTabBox extends React.Component<Props,OwnState> {
                                     </Button>
                                 </GridItem>
                             </GridContainer>
-                        ): <div className={classes.progress}><FormattedMessage id="chart.no_data" /></div>
+                        ): <div className={classes.progress}><FormattedMessage id="widget.no_data" /></div>
                         : <div className={classes.progress}><CircularProgress style={{ color: colorMod[`${color}Color`], height: '100%' }} size={50} /></div>
                 )
             },
@@ -396,7 +396,7 @@ class SendTabBox extends React.Component<Props,OwnState> {
                                     </Button>
                                 </GridItem>
                             </GridContainer>
-                        ): <div className={classes.progress}><FormattedMessage id="chart.no_data" /></div>
+                        ): <div className={classes.progress}><FormattedMessage id="widget.no_data" /></div>
                         : <div className={classes.progress}><CircularProgress style={{ color: colorMod[`${color}Color`], height: '100%' }} size={50} /></div>
                 )
             },
@@ -453,7 +453,7 @@ class SendTabBox extends React.Component<Props,OwnState> {
                                         </Button>
                                     </GridItem>
                                 </GridContainer>
-                            ): <div className={classes.progress}><FormattedMessage id="chart.no_data" /></div>
+                            ): <div className={classes.progress}><FormattedMessage id="widget.no_data" /></div>
                             : <div className={classes.progress}><CircularProgress style={{ color: colorMod[`${color}Color`], height: '100%' }} size={50} /></div>
                     )
             }

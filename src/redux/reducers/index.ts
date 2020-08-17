@@ -12,6 +12,7 @@ import webSocketReducer from "./webSocket";
 import deviceMessagesReducer from "./deviceMessages";
 
 import configurationPageReducer from "./configurationPage"
+import sendReceiveDataPageReducer from "./sendReceiveDataPage"
 
 const rootReducer = combineReducers({
   version: versionReducer,
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
   serverState: serverStateReducer,
   webSocket: webSocketReducer,
   deviceMessages: deviceMessagesReducer,
-  configurationPage: configurationPageReducer
+  configurationPage: configurationPageReducer,
+  sendReceiveDataPage: sendReceiveDataPageReducer
 });
 
 export default rootReducer;

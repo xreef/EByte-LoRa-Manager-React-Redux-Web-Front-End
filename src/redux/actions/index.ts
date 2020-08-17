@@ -35,6 +35,7 @@ import {
 } from "./deviceMessages";
 
 import { setConfigurationPageLayout } from "./configurationPage";
+import { setSendReceiveDataPageLayout } from "./sendReceiveDataPage";
 
 export {
     setVersion,
@@ -72,5 +73,7 @@ export {
 
     setHomeLayout,removeElementFromHome, addElementToHome,
 
-    setConfigurationPageLayout
+    setConfigurationPageLayout,
+
+    setSendReceiveDataPageLayout
 };
