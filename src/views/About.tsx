@@ -1,16 +1,23 @@
-import React from 'react';
+import React, {FunctionComponent} from "react";
+import AboutBox from "../layouts/box/AboutBox";
+import GridContainer from "../component/grid/GridContainer";
+import GridItem from "../component/grid/GridItem";
+import AboutProgramBox from "../layouts/box/AboutProgramBox";
+import AboutLibraryBox from "../layouts/box/AboutLibraryBox";
 
-const About = () => (
-  <div>
-    <h2>About Page</h2>
-    <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-      laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-      voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    </p>
-  </div>
-);
+const About: FunctionComponent = () => (
+    <GridContainer>
+        <GridItem xs={12} sm={6} md={4}>
+            <AboutBox/>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={4}>
+            <AboutLibraryBox/>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={4}>
+            <AboutProgramBox/>
+        </GridItem>
+    </GridContainer>
+    );
 
+// export default About;
 export default About;

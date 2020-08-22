@@ -1,8 +1,9 @@
 import { container, title } from './material-dashboard-react';
 import customCheckboxRadioSwitch from './customCheckboxRadioSwitch';
 import modalStyle from './modalStyle';
+import {createStyles, Theme} from "@material-ui/core";
 
-const basicsStyle = {
+const basicsStyle  = (theme: Theme) => createStyles({
   sections: {
     padding: '70px 0'
   },
@@ -34,6 +35,6 @@ const basicsStyle = {
 
   ...customCheckboxRadioSwitch,
   ...modalStyle
-};
+});
 
 export default basicsStyle;

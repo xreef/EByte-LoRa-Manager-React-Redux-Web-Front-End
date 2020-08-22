@@ -17,7 +17,7 @@ const modalStyle = {
   modalCloseButton: {
     color: '#999999',
     marginTop: '-12px',
-    WebkitAppearance: 'none',
+    WebkitAppearance: 'none' as any,
     padding: '0',
     cursor: 'pointer',
     background: '0 0',
@@ -25,9 +25,9 @@ const modalStyle = {
     fontSize: 'inherit',
     opacity: '.9',
     textShadow: 'none',
-    fontWeight: '700',
+    fontWeight: 700,
     lineHeight: '1',
-    float: 'right'
+    float: 'right' as any
   },
   modalClose: {
     width: '16px',
@@ -38,11 +38,11 @@ const modalStyle = {
     paddingRight: '24px',
     paddingBottom: '16px',
     paddingLeft: '24px',
-    position: 'relative'
+    position: 'relative' as any
   },
   modalFooter: {
     padding: '15px',
-    textAlign: 'right',
+    textAlign: 'right' as any,
     paddingTop: '0',
     margin: '0'
   },

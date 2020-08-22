@@ -13,13 +13,13 @@ const customCheckboxRadioSwitch = {
     padding: '16px'
   },
   checkboxAndRadio: {
-    position: 'relative',
+    position: 'relative' as any,
     display: 'block',
     marginTop: '10px',
     marginBottom: '10px'
   },
   checkboxAndRadioHorizontal: {
-    position: 'relative',
+    position: 'relative' as any,
     display: 'block',
     '&:first-child': {
       marginTop: '10px'
@@ -55,7 +55,7 @@ const customCheckboxRadioSwitch = {
     color: 'rgba(0, 0, 0, 0.26)',
     fontSize: '14px',
     lineHeight: '1.428571429',
-    fontWeight: '400',
+    fontWeight: 400,
     display: 'inline-flex',
     transition: '0.3s ease all'
   },
@@ -65,7 +65,7 @@ const customCheckboxRadioSwitch = {
     display: 'inline-flex',
     fontSize: '14px',
     lineHeight: '1.428571429',
-    fontWeight: '400',
+    fontWeight: 400,
     paddingTop: '39px',
     marginRight: '0',
     '@media (min-width: 992px)': {
@@ -81,7 +81,7 @@ const customCheckboxRadioSwitch = {
     display: 'inline-flex',
     fontSize: '14px',
     lineHeight: '1.428571429',
-    fontWeight: '400',
+    fontWeight: 400,
     paddingTop: '22px',
     marginRight: '0'
   },

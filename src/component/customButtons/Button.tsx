@@ -18,7 +18,7 @@ interface Props {
     round?: boolean,
     disabled?: boolean,
     block?: boolean,
-    link?: boolean,
+    link?: string,
     justIcon?: boolean,
     className?: string,
     // use this to pass the classes props from Material-UI

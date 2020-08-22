@@ -1,4 +1,4 @@
-import React, {ReactChildren} from 'react';
+import React, {ReactChildren, RefObject} from 'react';
 // import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -46,6 +46,8 @@ import {configurationInitialState} from "../../redux/reducers/configuration";
 import {frequencyFromModuleInfo, IModuleInfo, powerFromModuleInfo} from "../../redux/types/moduleInfo";
 import {getADD, getFrequences} from "./utils/configuration";
 
+import PerfectScrollbar from "perfect-scrollbar";
+
 interface OwnProps {
     configurationFetch: () => void,
     configurationFieldUpdated: (configuration: IConfiguration, lastUpdate: Date) => void,
@@ -64,7 +66,9 @@ interface CFBState {
 type Props = IBox & OwnProps;
 
 class ConfigurationFormBox extends React.Component<Props, CFBState> {
-  static defaultProps = {
+    currentPanel = React.createRef<HTMLDivElement>()
+
+    static defaultProps = {
       color: 'warning' as ThemeColors,
       isFetching: false,
       // configuration: null,
@@ -98,6 +102,13 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
   refreshData = () => {
     this.props.configurationFetch();
   };
+
+
+    componentDidMount() {
+        if (navigator.platform.indexOf("Win") > -1 && this.currentPanel && this.currentPanel.current) {
+            const ps = new PerfectScrollbar(this.currentPanel.current);
+        }
+    }
 
   handleHome = () => {
     const {
@@ -175,7 +186,8 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
         const mapWakeUpTime: any = enummap(WIRELESS_WAKE_UP_TIME);
         const mapIODriveMode: any = enummap(IO_DRIVE_MODE);
 
-        return [<GridContainer key={0} spacing={1 as GridSpacing}>
+        return <div>
+            <GridContainer key={0} spacing={1 as GridSpacing}>
             <GridItem item  xs={12} sm={4} md={3}>
                 <TextField
                     name='CHAN'
@@ -223,8 +235,8 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
 
             </GridItem>
 
-        </GridContainer>,
-            <Divider className={classes.divider} />,
+        </GridContainer>
+            <Divider className={classes.divider} />
 
             <GridContainer  key={1} spacing={1 as GridSpacing}>
                 <GridItem xs={12} sm={4} md={3}>
@@ -277,8 +289,8 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
                         }
                     </TextField>
                 </GridItem>
-            </GridContainer>,
-            <Divider key="D" className={classes.divider} />,
+            </GridContainer>
+            <Divider key="D" className={classes.divider} />
             <GridContainer  key={3}  spacing={1 as GridSpacing}>
                 <GridItem item xs={12} sm={4} md={3}>
                     <TextField
@@ -364,7 +376,8 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
                         }
                         </TextField>
                 </GridItem>
-            </GridContainer>]
+            </GridContainer>
+        </div>
         ;
     }
 
@@ -399,7 +412,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
           </p>
         </CardHeader>
           <form  className={classes.formBox}>
-
+              <div ref={this.currentPanel} className={classes.scrollableContent}>
           <CardBody className={classes.cardBody}>
           {(!isFetching)
             ? (configuration)
@@ -431,7 +444,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
               />
           </Button>
       </CardFooter>
-
+              </div>
           </form>
 
       </Card>

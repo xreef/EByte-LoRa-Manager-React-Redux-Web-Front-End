@@ -36,10 +36,11 @@ build:
 	sed -i -e 's/22222222/'$(TIMS)'/g'  $(DIST)/index.html
 	sed -i -e 's/no-cache/public/g'  $(DIST)/index.html
 
-#	gzip $(DIST)/*.png
-#	gzip $(DIST)/*.jpg
-#	gzip $(DIST)/manifest.json
-#	gzip $(DIST)/service-worker.js
+	gzip $(DIST)/*.js
+	gzip $(DIST)/*.png
+	gzip $(DIST)/*.jpg
+	gzip $(DIST)/manifest.json
+	gzip $(DIST)/service-worker.js
 	cp ./src/favicon.ico $(DIST)
-#	gzip $(DIST)/favicon.ico
-#	sed -i 's/define\&\&define\.amd/define\&\&define\.amd\&\&\!window\.dojo\&\&\!window\.requirejs/' $(PACKAGE_MIN)
+	gzip $(DIST)/favicon.ico
+	sed -i 's/define\&\&define\.amd/define\&\&define\.amd\&\&\!window\.dojo\&\&\!window\.requirejs/' $(PACKAGE_MIN)

@@ -10,7 +10,8 @@ const cardAvatarStyle  = (theme: Theme) => createStyles({
   cardAvatarProfile: {
     maxWidth: "130px",
     maxHeight: "130px",
-    margin: "-50px auto 0",
+    margin: "-65px auto 0",
+    "line-height": "68px",
     borderRadius: "50%",
     overflow: "hidden",
     padding: "0",

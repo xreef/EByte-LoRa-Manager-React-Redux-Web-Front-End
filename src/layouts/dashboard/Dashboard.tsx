@@ -17,7 +17,7 @@ import dashboardRoutes from "../../routes/dashboard";
 import dashboardStyle from "./style/dashboardStyle";
 
 import image from "../../resources/images/sidebar-solar.jpg";
-import logo from "../../resources/images/favicon/launcher-icon-trasp.png";
+import logo from "../../resources/images/favicon/favicon-96x96.png";
 import Snackbar from "../../component/snackbars/Snackbar";
 
 import {subscribeServiceWorker} from "../../utils/serviceWorker/subscribeServiceWorker"

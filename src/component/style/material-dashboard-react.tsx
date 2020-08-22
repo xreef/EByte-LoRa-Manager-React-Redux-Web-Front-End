@@ -200,15 +200,15 @@ const defaultBoxShadow = {
 const title = {
   color: '#3C4858',
   textDecoration: 'none',
-  fontWeight: '300',
+  fontWeight: 300,
   marginTop: '30px',
   marginBottom: '25px',
   minHeight: '32px',
   fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
   '& small': {
     color: '#777',
-    fontWeight: '400',
-    lineHeight: '1',
+    fontWeight: 400,
+    lineHeight: 1,
   },
 };
 

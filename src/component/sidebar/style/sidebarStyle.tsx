@@ -70,7 +70,7 @@ const sidebarStyle  = (theme: Theme) => createStyles({
     fontSize: '18px',
     textAlign: 'left',
     fontWeight: 400,
-    lineHeight: '30px',
+    lineHeight: '52px',
     textDecoration: 'none',
     backgroundColor: 'transparent',
     '&,&:hover': {

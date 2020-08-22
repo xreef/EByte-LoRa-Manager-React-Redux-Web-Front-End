@@ -1,5 +1,6 @@
 // import headerLinksStyle from '../../../component/header/style/headerLinksStyle';
 import {createStyles, Theme} from "@material-ui/core";
+import {transition} from "../../../component/style/material-dashboard-react";
 
 const boxStyle = (theme: Theme) => createStyles({
 
@@ -98,7 +99,8 @@ const boxStyle = (theme: Theme) => createStyles({
   buttonHeader: {
     position: 'absolute',
     right: '10px',
-    top: '10px'
+    top: '10px',
+    zIndex: 2
   },
   buttonHeader2: {
     zIndex: 2,
@@ -114,6 +116,16 @@ const boxStyle = (theme: Theme) => createStyles({
   },
     cardBody: {
         height: 'calc(100% - 110px)'
+    },
+    scrollableContent: {
+        overflow: "auto",
+        position: "relative",
+        float: "right",
+        ...transition,
+        maxHeight: "100%",
+        width: "100%",
+        overflowScrolling: "touch"
+
     }
 });
 

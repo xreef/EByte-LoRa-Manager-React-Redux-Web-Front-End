@@ -43,7 +43,7 @@ function Footer({ ...props }: Props) {
         </div>
         <p className={classes.right}>
           <span>
-            &copy; {1900 + new Date().getFullYear()}{" "}
+            &copy; {new Date().getFullYear()}{" "}
             <a href="https://www.linkedin.com/in/renzo-mischianti/" className={classes.a}>
               Renzo Mischianti
             </a>, made with love

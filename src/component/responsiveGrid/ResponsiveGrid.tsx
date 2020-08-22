@@ -250,7 +250,6 @@ class ResponsiveGrid extends React.PureComponent<ResponsiveGridProps,IResponsive
             // WidthProvider option
         measureBeforeMount={false}
 
-
         {...gridConfig}
       >
         {this.getAllDivs()}
