@@ -17,8 +17,10 @@ import {DeviceMessagesActions} from "../types/deviceMessages";
 import {RootState} from "./index";
 
 export const deviceMessagesSelectors = {
-  deviceMessage: (state: RootState | any): string => state[key].deviceMessages,
-  lastUpdate: (state: RootState): Date | undefined => state.deviceMessages.lastUpdate,
+  deviceMessage: (state: RootState | any): string => state[key].deviceMessage,
+  messageReceived: (state: RootState | any): string => state[key].messageReceived?state[key].messageReceived.message:'',
+
+    lastUpdate: (state: RootState): Date | undefined => state.deviceMessages.lastUpdate,
   fetchStatus: (state: RootState): string | undefined => state[key].fetchStatus
 };
 
@@ -162,6 +164,7 @@ export default function deviceMessagesReducer(state = initialState, action: Devi
         return {
             ...state,
             messageReceived: {message: action.messageReceived, date: new Date()},
+            messagesReceived: [...state.messagesReceived, {message: action.messageReceived, date: new Date()}]
         };
     }
 

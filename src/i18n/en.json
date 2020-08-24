@@ -103,6 +103,7 @@
   "receive.message.helper_text": "Last received message",
 
   "receive.message.error": "There is a problem: {errorMessage}",
+  "receive.message.notification": "Received message: {messaggio}{returnTag}Time: {ora}",
 
   "web_socket.connect.message": "Start",
   "web_socket.disconnect.message": "Stop",
@@ -122,8 +123,6 @@
 
   "websocket.open": "Realtime push notification active",
   "websocket.close": "Realtime push notification stopped",
-  "websocket.error": "Error on realtime push notification <br>Not connected!",
+  "websocket.error": "Error on realtime push notification <br>Not connected!"
 
-  "websocket.inverter.message.error": "Inverter change starteS <br>Data: {hStr} <br>Alarm: {alarm} - Channel 1: {ch1state} - Channel 2: {ch2state} - Stato: {state}. ",
-  "websocket.centraline.message.error": "Centraline error <br>Data: {hStr} <br>Time settings: {fixedTime} - SD: {sdStarted}</br>WIFI: {wifiConnected} - File saved: {isFileSaveOK} </br>SD wrong read/write number: {sdWrongReadNumber}. "
 }

@@ -227,7 +227,7 @@ class App extends React.Component<Props, IDashboardState> {
     const {notifications, serverState} = this.props;
 
     let ss = -100;
-    debugger
+    // debugger
     if (serverState && serverState.data && serverState.data.network && serverState.data.network.signalStrengh){
       ss = serverState.data.network.signalStrengh;
     }

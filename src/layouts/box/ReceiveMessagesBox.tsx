@@ -218,7 +218,7 @@ class ReceiveMessagesBox extends React.Component<Props, CFBState> {
         </CardHeader>
           <form  className={classes.formBox}>
 
-          <CardBody className={classes.cardBody}>
+          <CardBody className={classes.cardBodyOverflow}>
               {this.gridContainer()}
         </CardBody>
       <CardFooter className={classes.cartFooterButton}>

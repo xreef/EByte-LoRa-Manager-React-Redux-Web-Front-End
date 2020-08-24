@@ -99,6 +99,7 @@ const wsListenLogic = createLogic({
       closeObserver: {
         next: () => {
           dispatch({ type: WEB_SOCKET_DISCONNECT });
+          dispatch(webSocketReceivingDeviceMessages(false));
           dispatch(addNotification({ message: <FormattedMessage  id="websocket.close" />, variant: 'error' }));
         },
       },
@@ -125,6 +126,7 @@ const wsListenLogic = createLogic({
     // returning obs subscribes to it
     return wsSubject$.pipe(
       map((msg: any) => {
+          debugger
         dispatch(webSocketMessage(msg));
         // if (msg.type === 'cumulated') {
         //   const resp = { ...msg.value };
@@ -176,6 +178,7 @@ const wsListenLogic = createLogic({
                   dispatch(addNotification({ message: <FormattedMessage id="receive.message.error" values={{errorMessage: msg.description}}/>, variant: 'error', autoHide: undefined }));
               }else{
                   dispatch(deviceMessagesReceived(msg.message));
+                  dispatch(addNotification({ message: <FormattedMessage id="receive.message.notification" values={{messaggio: msg.message, returnTag: <br/>, ora: new Date().toISOString()}}/>, variant: 'success', autoHide: undefined }));
               }
           }else if (msg.type === 'bat_rt') {
           interface IResp {
@@ -194,7 +197,7 @@ const wsListenLogic = createLogic({
             const resp: IResp = {signalStrengh: 0, lastUpdate: null};
           resp.signalStrengh = parseInt(msg.value);
           resp.lastUpdate = new Date(msg.date);
-debugger
+// debugger
           dispatch(serverStateWIFIStrenghtFetchFulfilled(resp));
         } else if (msg.type === 'connection') {
           dispatch(webSocketSingleMessage(msg.simpleMessage===true));

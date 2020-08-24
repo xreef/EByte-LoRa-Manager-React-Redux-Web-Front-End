@@ -105,6 +105,8 @@
   "receive.message.label": "Messaggio",
   "receive.message.helper_text": "Ultimo messaggio ricevuto",
 
+  "receive.message.notification": "Messaggio ricevuto: {messaggio}{returnTag}Ora: {ora}",
+
   "receive.message.error": "Si è verificato un problema: {errorMessage}",
 
   "web_socket.connect.message": "Avvia",
@@ -125,7 +127,5 @@
 
   "websocket.open": "Notifiche push attive",
   "websocket.close": "Notifiche push disattivate",
-  "websocket.error": "Errore sulle notifiche push <br>Impossibile stabilire una connessione",
-  "websocket.centraline.message.error": "Errore di centralina <br>Data: {hStr} <br>Ora settata: {fixedTime} - SD: {sdStarted}</br> WIFI: {wifiConnected} - File salvati: {isFileSaveOK} </br>Letture/scritture errate sulla SD: {sdWrongReadNumber}. ",
-  "websocket.inverter.message.error": "Cambio stato inverter <br>Data: {hStr} <br>Alarm: {alarm} - Channel 1: {ch1state} - Channel 2: {ch2state} - Stato: {state}."
+  "websocket.error": "Errore sulle notifiche push <br>Impossibile stabilire una connessione"
 }

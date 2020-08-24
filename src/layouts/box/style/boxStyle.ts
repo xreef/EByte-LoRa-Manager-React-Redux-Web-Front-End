@@ -57,6 +57,13 @@ const boxStyle = (theme: Theme) => createStyles({
         'display': 'block',
         'white-space': 'nowrap'
     },
+    cartFooterButtonOverflow:{
+        'textAlign': 'right',
+        'display': 'block',
+        'white-space': 'nowrap',
+        'height': 'calc(100% - 110px)'
+    },
+
   tableSize: {
     // maxHeight: "224px",
     overflowY: 'auto',
@@ -116,6 +123,9 @@ const boxStyle = (theme: Theme) => createStyles({
   },
     cardBody: {
         height: '100%' // 'calc(100% - 110px)'
+    },
+    cardBodyOverflow: {
+        height: 'calc(100% - 110px)'
     },
     scrollableContent: {
         maxHeight: '100%', // 'calc(100% - 110px)',

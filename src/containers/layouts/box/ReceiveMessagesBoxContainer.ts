@@ -13,6 +13,7 @@ import {ILayoutConfigured, ILayoutElement} from "../../../redux/types/home";
 import {moduleInfoSelectors} from "../../../redux/reducers/moduleInfo";
 import ReceiveMessagesBox from "../../../layouts/box/ReceiveMessagesBox";
 import {webSocketSelectors} from "../../../redux/reducers/webSocket";
+import {deviceMessagesSelectors} from "../../../redux/reducers/deviceMessages";
 
 const isElementInHome = (element: string, homeElements: ILayoutElement[]) => homeElements.some((elem: ILayoutElement) => elem.additionalInfo.boxType === element);
 
@@ -21,6 +22,7 @@ const mapStateToProps = (state: RootState, ownProps: {boxType: string}) => ({
     isConnected: webSocketSelectors.isConnected(state),
     singleMessage: webSocketSelectors.singleMessage(state),
     receivingDeviceMessages: webSocketSelectors.receivingDeviceMessages(state),
+    lastMessage: deviceMessagesSelectors.messageReceived(state),
 });
 
 
