@@ -5,6 +5,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
+// import "/node_modules/react-grid-layout/css/styles.css";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // core components
@@ -98,7 +99,7 @@ class App extends React.Component<Props, IDashboardState> {
     };
     // props.serverStateFetch();
 
-    // props.webSocketOpen();
+    props.webSocketOpen();
     this.resizeFunction = this.resizeFunction.bind(this);
   }
 
@@ -226,6 +227,7 @@ class App extends React.Component<Props, IDashboardState> {
     const {notifications, serverState} = this.props;
 
     let ss = -100;
+    debugger
     if (serverState && serverState.data && serverState.data.network && serverState.data.network.signalStrengh){
       ss = serverState.data.network.signalStrengh;
     }

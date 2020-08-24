@@ -5,7 +5,8 @@ import {
     webSocketOpen,
     webSocketClose,
     addElementToHome,
-    removeElementFromHome
+    removeElementFromHome,
+    webSocketSendMessage
 } from "../../../redux/actions";
 import {homeSelectors} from "../../../redux/reducers/home";
 import {ILayoutConfigured, ILayoutElement} from "../../../redux/types/home";
@@ -19,10 +20,12 @@ const mapStateToProps = (state: RootState, ownProps: {boxType: string}) => ({
     isInHome: isElementInHome(ownProps.boxType, homeSelectors.elements(state)),
     isConnected: webSocketSelectors.isConnected(state),
     singleMessage: webSocketSelectors.singleMessage(state),
+    receivingDeviceMessages: webSocketSelectors.receivingDeviceMessages(state),
 });
 
 
 const mapDispatchToProps = {
+    webSocketSendMessage,
     webSocketOpen,
     webSocketClose,
     addElementToHome,

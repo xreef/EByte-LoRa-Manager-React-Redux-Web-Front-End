@@ -106,10 +106,17 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
 
     componentDidMount() {
         if (navigator.platform.indexOf("Win") > -1 && this.currentPanel && this.currentPanel.current) {
-            const ps = new PerfectScrollbar(this.currentPanel.current);
+            const ps = new PerfectScrollbar(this.currentPanel.current, {
+                wheelPropagation: false,
+                // suppressScrollY: true
+            });
+            this.currentPanel.current.addEventListener('touchmove', (e) => {e.stopPropagation()}, {passive: false});
         }
     }
 
+    componentWillUnmount() {
+        this.currentPanel && this.currentPanel.current && this.currentPanel.current.removeEventListener('touchmove', (e) => {e.stopPropagation()});
+    }
   handleHome = () => {
     const {
       isInHome, removeElementFromHome, addElementToHome, boxType
@@ -411,7 +418,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
             />
           </p>
         </CardHeader>
-          <form  className={classes.formBox}>
+          <form  className={classes.formBox} >
               <div ref={this.currentPanel} className={classes.scrollableContent}>
           <CardBody className={classes.cardBody}>
           {(!isFetching)

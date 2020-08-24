@@ -94,7 +94,7 @@ class App extends React.Component {
 
     // let data = dataFile;
 
-    this.store = configureStoreFunction('aurora',
+    this.store = configureStoreFunction('ebyte_manager',
       {
         home: {
           layouts: {

@@ -4,15 +4,27 @@ import {
     WEB_SOCKET_CLOSE,
     WEB_SOCKET_CONNECT,
     WEB_SOCKET_DISCONNECT,
-    WEB_SOCKET_ERROR, WEB_SOCKET_MESSAGE,
-    WEB_SOCKET_OPEN, WEB_SOCKET_SEND_MESSAGE, WebSocketActions
+    WEB_SOCKET_ERROR,
+    WEB_SOCKET_MESSAGE,
+    WEB_SOCKET_OPEN,
+    WEB_SOCKET_RECEIVING_DEVICE_MESSAGE,
+    WEB_SOCKET_SEND_MESSAGE,
+    WEB_SOCKET_SINGLE_MESSAGE,
+    WebSocketActions
 } from "../types/webSocket";
 
-export const webSocketOpen = (singleMessage: boolean): WebSocketActions => ({
+export const webSocketOpen = (): WebSocketActions => ({
     type: WEB_SOCKET_OPEN,
     isConnected: false,
-    singleMessage,
     lastUpdate: new Date()
+});
+export const webSocketSingleMessage = (singleMessage: boolean): WebSocketActions => ({
+    type: WEB_SOCKET_SINGLE_MESSAGE,
+    singleMessage
+});
+export const webSocketReceivingDeviceMessages = (receivingDeviceMessages: boolean): WebSocketActions => ({
+    type: WEB_SOCKET_RECEIVING_DEVICE_MESSAGE,
+    receivingDeviceMessages
 });
 // action creators
 export const webSocketConnect = (): WebSocketActions => ({
@@ -53,5 +65,7 @@ export const actions = {
   webSocketClose,
   webSocketError,
   webSocketMessage,
-  webSocketSendMessage
+  webSocketSendMessage,
+    webSocketSingleMessage,
+    webSocketReceivingDeviceMessages
 };

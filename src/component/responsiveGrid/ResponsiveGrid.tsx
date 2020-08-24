@@ -247,6 +247,9 @@ class ResponsiveGrid extends React.PureComponent<ResponsiveGridProps,IResponsive
         onDragStart={this.onDragStart}
         onDrag={this.onDrag}
 
+
+        draggableCancel=".MuiButtonBase-root"
+
             // WidthProvider option
         measureBeforeMount={false}
 

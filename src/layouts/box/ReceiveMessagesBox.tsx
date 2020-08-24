@@ -37,6 +37,7 @@ import GridItem from "../../component/grid/GridItem";
 import CardFooter from "../../component/card/CardFooter";
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import {webSocketSendMessage} from "../../redux/actions";
 
 
 interface OwnProps {
@@ -44,9 +45,11 @@ interface OwnProps {
     lastMessage: string,
     lastUpdate: Date | null,
     isConnected: boolean,
+    receivingDeviceMessages: boolean,
     singleMessage: boolean,
     webSocketOpen: (singleMessage: boolean) => void
-    webSocketClose: () => void
+    webSocketClose: () => void,
+    webSocketSendMessage: (message: any) => void
 }
 
 interface CFBState {
@@ -60,11 +63,13 @@ class ReceiveMessagesBox extends React.Component<Props, CFBState> {
   static defaultProps = {
       color: 'primary' as ThemeColors,
       isConnected: false,
+      receivingDeviceMessages: false,
       configuration: null,
       lastUpdate: null,
       lastMessage: '',
 
       webSocketOpen: () => console.log("WEB SOCKET FETCH"),
+      webSocketSendMessage: (message: any) => console.log("WEB SOCKET MESSAGE ", message),
   };
   constructor(props: Props) {
     super(props);
@@ -95,12 +100,13 @@ class ReceiveMessagesBox extends React.Component<Props, CFBState> {
   };
 
   openConnection = () => {
-      this.props.webSocketOpen(this.state.singleMessage);
+      // this.props.webSocketOpen(this.state.singleMessage);
+      this.props.webSocketSendMessage({ startReceiveDevMsg: true, singleMessage: this.state.singleMessage});
   };
   closeConnection = () => {
-      debugger
-      this.props.webSocketClose();
-
+      // debugger
+      // this.props.webSocketClose();
+      this.props.webSocketSendMessage({ startReceiveDevMsg: false});
   }
 
   handleHome = () => {
@@ -189,7 +195,7 @@ class ReceiveMessagesBox extends React.Component<Props, CFBState> {
 
     render() {
     const { classes, id } = this.props;
-    const { isConnected, isInHome } = this.props;
+    const { isConnected, isInHome, receivingDeviceMessages } = this.props;
 
     const { color } = this.props;
 
@@ -218,7 +224,7 @@ class ReceiveMessagesBox extends React.Component<Props, CFBState> {
       <CardFooter className={classes.cartFooterButton}>
           <Button color={color}
                   type="button"
-                  disabled={isConnected}
+                  disabled={receivingDeviceMessages}
                   onClick={this.openConnection}
                   startIcon={<PlayArrow />} >
               <FormattedMessage
@@ -228,7 +234,7 @@ class ReceiveMessagesBox extends React.Component<Props, CFBState> {
 
           <Button color={color}
                   type="button"
-                  disabled={!isConnected}
+                  disabled={!receivingDeviceMessages}
                   onClick={this.closeConnection}
                   startIcon={<Stop />} >
               <FormattedMessage

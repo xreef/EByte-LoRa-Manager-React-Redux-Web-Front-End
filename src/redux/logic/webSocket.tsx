@@ -30,6 +30,7 @@ import { addNotification/*, inverterAlarmsFetchFulfilled */} from '../actions';
 import {webSocketSelectors} from "../reducers/webSocket";
 import {deviceMessagesReceived} from "../actions/deviceMessages";
 import {MESSAGE_SIZE} from "../types/deviceMessages";
+import {webSocketReceivingDeviceMessages, webSocketSingleMessage} from "../actions/webSocket";
 // import {number} from "prop-types";
 
 // const wsListenLogic = createLogic({
@@ -93,7 +94,6 @@ const wsListenLogic = createLogic({
         next: () => {
           dispatch({ type: WEB_SOCKET_CONNECT });
           dispatch(addNotification({ message: <FormattedMessage id="websocket.open" />, variant: 'info' }));
-          dispatch(webSocketSendMessage({ singleMessage: action.singleMessage}))
         }
       },
       closeObserver: {
@@ -194,8 +194,12 @@ const wsListenLogic = createLogic({
             const resp: IResp = {signalStrengh: 0, lastUpdate: null};
           resp.signalStrengh = parseInt(msg.value);
           resp.lastUpdate = new Date(msg.date);
-
+debugger
           dispatch(serverStateWIFIStrenghtFetchFulfilled(resp));
+        } else if (msg.type === 'connection') {
+          dispatch(webSocketSingleMessage(msg.simpleMessage===true));
+        } else if (msg.type === 'device_msg') {
+          dispatch(webSocketReceivingDeviceMessages(msg.receiving===true));
         }
       }),
       retryWhen(errors => errors.pipe(

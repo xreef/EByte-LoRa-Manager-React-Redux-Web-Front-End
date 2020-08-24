@@ -17,6 +17,8 @@ export const WEB_SOCKET_CLOSE = 'WEB_SOCKET_CLOSE';
 export const WEB_SOCKET_ERROR = 'WEB_SOCKET_ERROR';
 export const WEB_SOCKET_MESSAGE = 'WEB_SOCKET_MESSAGE';
 export const WEB_SOCKET_SEND_MESSAGE = 'WEB_SOCKET_SEND_MESSAGE';
+export const WEB_SOCKET_SINGLE_MESSAGE = 'WEB_SOCKET_SINGLE_MESSAGE';
+export const WEB_SOCKET_RECEIVING_DEVICE_MESSAGE = 'WEB_SOCKET_RECEIVING_DEVICE_MESSAGE';
 
 export const actionTypes = {
     open: WEB_SOCKET_OPEN,
@@ -35,14 +37,27 @@ export interface IWebSocketState {
     messageToSend?: string,
     isConnected: boolean,
     singleMessage?: boolean,
+    receivingDeviceMessages?: boolean,
+
     lastUpdate: null
 }
+
+class WebSocketSingleMessage implements Action {
+    readonly type = WEB_SOCKET_SINGLE_MESSAGE;
+    constructor(public singleMessage: boolean) {}
+}
+
+class WebSocketReceivingDeviceMessages implements Action {
+    readonly type = WEB_SOCKET_RECEIVING_DEVICE_MESSAGE;
+    constructor(public receivingDeviceMessages: boolean) {}
+}
+
 
 class WebSocketOpen implements Action {
     readonly type = WEB_SOCKET_OPEN;
     isConnected: boolean = false;
     lastUpdate: Date = new Date()
-    constructor(public singleMessage: boolean) {}
+    // constructor(public singleMessage: boolean) {}
 
 }
 // action creators
@@ -79,7 +94,8 @@ class WebSocketSendMessage implements Action {
 }
 
 export type WebSocketActions =  WebSocketOpen | WebSocketConnect | WebSocketDisconnect | WebSocketClose |
-                                WebSocketError | WebSocketMessage | WebSocketSendMessage;
+                                WebSocketError | WebSocketMessage | WebSocketSendMessage | WebSocketSingleMessage |
+                                WebSocketReceivingDeviceMessages;
 
 class MessageReceived {
     readonly type = "message";

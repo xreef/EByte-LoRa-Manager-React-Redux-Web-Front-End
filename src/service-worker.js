@@ -2,7 +2,7 @@
 const doCache = false;
 
 // Name our cache
-const CACHE_NAME = 'aurora-cache-v1';
+const CACHE_NAME = 'ebyte-manager-cache-v1';
 
 // Delete old caches that are not our current one!
 self.addEventListener('activate', (event) => {
@@ -36,7 +36,7 @@ self.addEventListener('install', (event) => {
               // We could also cache any static assets like CSS or images
               const urlsToCache = [
                 '/',
-                // assets["../aurora-web.js"]
+                // assets["../ebyte-manager-web.js"]
                 // ,assets["main.js"]
               ];
               cache.addAll(urlsToCache);

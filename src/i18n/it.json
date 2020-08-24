@@ -99,16 +99,16 @@
   "send_box.button.send.label": "Invia il messaggio",
   "send_box.transparent.chan.helper_text": "Canale a cui sarà inviato il messaggio",
 
-  "receive.message.title": "Messaggio ricevuto",
-  "receive.message.subtitle": "Qui potrai vedere i messaggi ricevuti",
+  "receive.message.title": "Ricezione messaggi",
+  "receive.message.subtitle": "Qui i messaggi ricevuti",
 
   "receive.message.label": "Messaggio",
   "receive.message.helper_text": "Ultimo messaggio ricevuto",
 
   "receive.message.error": "Si è verificato un problema: {errorMessage}",
 
-  "web_socket.connect.message": "Avvia ricezione messaggi",
-  "web_socket.disconnect.message": "Ferma ricezione messaggi",
+  "web_socket.connect.message": "Avvia",
+  "web_socket.disconnect.message": "Ferma",
 
   "deviceMessages.transparent.send.success": "Hai inviato a tutti i dispositivi con il tuo stesso canale{creturn} il messaggio {message}",
   "deviceMessages.fixed.send.success": "Hai inviato a CHAN {CHAN} ADDH {ADDH} ADDL {ADDL} {creturn} il messaggio  {message}",

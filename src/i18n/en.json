@@ -96,16 +96,16 @@
   "send_box.button.send.label": "Send message",
   "send_box.transparent.chan.helper_text": "Channel to send message",
 
-  "receive.message.title": "Message received",
-  "receive.message.subtitle": "Here you can see the received message",
+  "receive.message.title": "Message receiver",
+  "receive.message.subtitle": "Here the received message",
 
   "receive.message.label": "Message",
   "receive.message.helper_text": "Last received message",
 
   "receive.message.error": "There is a problem: {errorMessage}",
 
-  "web_socket.connect.message": "Start receiving message",
-  "web_socket.disconnect.message": "Stop receiving message",
+  "web_socket.connect.message": "Start",
+  "web_socket.disconnect.message": "Stop",
 
   "deviceMessages.transparent.send.success": "You have sent to all devices with the same channel {creturn} as you, the message {message}",
   "deviceMessages.fixed.send.success": "You have sent to CHAN {CHAN} ADDH {ADDH} ADDL {ADDL} {creturn} the message {message}",

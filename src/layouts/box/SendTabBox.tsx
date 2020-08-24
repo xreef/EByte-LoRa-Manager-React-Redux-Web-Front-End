@@ -146,6 +146,7 @@ class SendTabBox extends React.Component<Props,OwnState> {
         const keyToAdd: "message" | "ADDH" | "CHAN" | "ADDL" = event.target.name;
 
         if (event.target.name==="message"){
+            // debugger
             this.setState({
                 messageCharactersNumber: event.target.value.length
             });
@@ -160,6 +161,7 @@ class SendTabBox extends React.Component<Props,OwnState> {
     };
 
     handleTabChange = ( key: string ) => {
+        // debugger
         this.setState({
             tab: key
         })
@@ -177,7 +179,7 @@ class SendTabBox extends React.Component<Props,OwnState> {
         }
     };
     sendFixedMessage = () => {
-        debugger
+        // debugger
         const {message, CHAN, ADDH, ADDL} = this.state;
         const {configuration, deviceMessagesSendFixed, deviceMessagesFieldInvalid} = this.props;
 
@@ -191,7 +193,7 @@ class SendTabBox extends React.Component<Props,OwnState> {
     };
 
     handleHome = () => {
-        debugger
+        // debugger
         const {
             isInHome, removeElementFromHome, addElementToHome, boxType
         } = this.props;
@@ -203,7 +205,7 @@ class SendTabBox extends React.Component<Props,OwnState> {
     };
 
     sendBroadcastMessage = () => {
-        debugger
+        // debugger
         const {message, CHAN} = this.state;
         const {configuration, deviceMessagesSendBroadcast, deviceMessagesFieldInvalid} = this.props;
 
@@ -263,7 +265,7 @@ class SendTabBox extends React.Component<Props,OwnState> {
                         ? (configuration)
                         ? (
                             <GridContainer key={0} spacing={1 as GridSpacing}>
-                                <GridItem item  xs={6} sm={6} md={6}>
+                                <GridItem item  xs={12} sm={6} md={6}>
                                     <TextField
                                         name='CHAN'
                                         label='CHAN'
@@ -322,7 +324,7 @@ class SendTabBox extends React.Component<Props,OwnState> {
                         ? (configuration)
                         ? (
                             <GridContainer key={1} spacing={1 as GridSpacing}>
-                                <GridItem item  xs={6} sm={6} md={6}>
+                                <GridItem item  xs={12} sm={6} md={6}>
                                     <TextField
                                         name='CHAN'
                                         label='CHAN'
@@ -337,7 +339,9 @@ class SendTabBox extends React.Component<Props,OwnState> {
                                         {getFrequences(operatingFrequency)}
                                     </TextField>
                                 </GridItem>
-                                <GridItem item xs={12} sm={4} md={3}>
+                                <GridItem item  xs={12} sm={6} md={6}>
+                                </GridItem>
+                                <GridItem item xs={12} sm={6} md={6}>
                                     <TextField
                                         name='ADDH'
                                         label='ADDH'
@@ -353,7 +357,7 @@ class SendTabBox extends React.Component<Props,OwnState> {
                                         {getADD()}
                                     </TextField>
                                 </GridItem>
-                                <GridItem item xs={12} sm={4} md={3}>
+                                <GridItem item xs={12} sm={6} md={6}>
                                     <TextField
                                         name='ADDL'
                                         label='ADDL'
@@ -377,7 +381,7 @@ class SendTabBox extends React.Component<Props,OwnState> {
                                         fullWidth={true}
                                         margin='normal'
                                         required
-                                        helperText={<FormattedMessage id="send_box.message.helper_text"/>}
+                                        helperText={<FormattedMessage id="send_box.message.helper_text" values={{remainCharaters: (MESSAGE_SIZE-messageCharactersNumber)}} />}
                                         rows={3}
 
                                     >
@@ -410,7 +414,7 @@ class SendTabBox extends React.Component<Props,OwnState> {
                             ? (configuration)
                             ? (
                                 <GridContainer key={1} spacing={1 as GridSpacing}>
-                                    <GridItem item  xs={6} sm={6} md={6}>
+                                    <GridItem item  xs={12} sm={6} md={6}>
                                         <TextField
                                             name='CHAN'
                                             label='CHAN'
@@ -434,7 +438,7 @@ class SendTabBox extends React.Component<Props,OwnState> {
                                             fullWidth={true}
                                             margin='normal'
                                             required
-                                            helperText={<FormattedMessage id="send_box.message.helper_text"/>}
+                                            helperText={<FormattedMessage id="send_box.message.helper_text" values={{remainCharaters: (MESSAGE_SIZE-messageCharactersNumber)}} />}
                                             rows={3}
 
                                         >

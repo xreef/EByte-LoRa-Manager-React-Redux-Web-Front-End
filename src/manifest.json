@@ -1,14 +1,14 @@
 {
-  "name": "AuroraInverter",
-  "short_name": "AuroraInv",
+  "name": "EByteManager",
+  "short_name": "EByteManager",
   "start_url": "./",
   "display": "standalone",
   "theme_color": "#ffff00",
   "background_color": "#ffff00",
-  "description": "Aurora inverter web app.",
+  "description": "EByte Manager WebApp.",
   "orientation": "portrait",
 
-  "gcm_sender_id": "123456789",
+  "gcm_sender_id": "123456788",
   "gcm_user_visible_only": true,
   "permissions": [
     "gcm"

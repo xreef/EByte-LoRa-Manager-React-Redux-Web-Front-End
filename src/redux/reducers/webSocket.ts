@@ -9,7 +9,7 @@ import {
     WebSocketActions,
     IWebSocketState,
     key,
-    WEB_SOCKET_CLOSE
+    WEB_SOCKET_CLOSE, WEB_SOCKET_SINGLE_MESSAGE, WEB_SOCKET_RECEIVING_DEVICE_MESSAGE
 } from "../types/webSocket";
 import {RootState} from "./index";
 import {IConfiguration} from "../types/configuration";
@@ -17,6 +17,7 @@ import {IConfiguration} from "../types/configuration";
 export const webSocketSelectors = {
     isConnected: (state: RootState | any): boolean => state[key].isConnected,
     singleMessage: (state: RootState | any): boolean => state[key].singleMessage,
+    receivingDeviceMessages: (state: RootState | any): boolean => state[key].receivingDeviceMessages,
 };
 
 const initialState = {
@@ -38,7 +39,7 @@ export default function webSocketReducer(state = initialState, action: WebSocket
         isConnected: false
       };
     case WEB_SOCKET_CLOSE:
-      debugger
+      // debugger
       return {
         ...state
       };
@@ -53,10 +54,22 @@ export default function webSocketReducer(state = initialState, action: WebSocket
         message: action.message
       };
     case WEB_SOCKET_SEND_MESSAGE:
-      debugger
+      // debugger
       return {
         ...state,
         messageToSend: action.message
+      };
+    case WEB_SOCKET_SINGLE_MESSAGE:
+      // debugger
+      return {
+        ...state,
+          singleMessage: action.singleMessage
+      };
+    case WEB_SOCKET_RECEIVING_DEVICE_MESSAGE:
+      // debugger
+      return {
+        ...state,
+          receivingDeviceMessages: action.receivingDeviceMessages
       };
     default:
       return state;

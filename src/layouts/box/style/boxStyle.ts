@@ -118,11 +118,12 @@ const boxStyle = (theme: Theme) => createStyles({
         height: 'calc(100% - 110px)'
     },
     scrollableContent: {
+        maxHeight: 'calc(100% - 110px)',
         overflow: "auto",
         position: "relative",
         float: "right",
         ...transition,
-        maxHeight: "100%",
+        // maxHeight: "100%",
         width: "100%",
         overflowScrolling: "touch"
 

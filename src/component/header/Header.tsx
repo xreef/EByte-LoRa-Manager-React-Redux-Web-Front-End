@@ -103,7 +103,7 @@ function Header({ ...props }: Props) {
           </Button>
         </div>
         {getSignalStrenght(signalStrenght)}
-        {getBattery(batteryVoltage)}
+        {/*{getBattery(batteryVoltage)}*/}
         <Hidden smDown implementation="css">
           <HeaderLinks notifications={notifications} />
         </Hidden>

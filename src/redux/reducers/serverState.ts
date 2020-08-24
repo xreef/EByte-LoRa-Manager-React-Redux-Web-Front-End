@@ -17,7 +17,10 @@ export const selectors = {
 };
 
 const initialState: IServerState = {
-  data: null,
+  data: {
+      chip: '',
+      network: {signalStrengh: -100},
+  },
   fetchStatus: '',
   isFetching: false,
     voltage: 0,

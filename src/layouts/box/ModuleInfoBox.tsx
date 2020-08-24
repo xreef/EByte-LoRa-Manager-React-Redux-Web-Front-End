@@ -92,19 +92,19 @@ class ModuleInfoBox extends React.Component<Props> {
                             ? (
                                 <React.Fragment>
                                     <GridContainer  key={1} spacing={1 as GridSpacing}>
-                                        <GridItem xs={12} sm={6} md={6}>
+                                        <GridItem xs={6} sm={6} md={6}>
                                             <p className={classes.cardCategory}><FormattedMessage id="module_info.label.frequency" /></p>
                                             <h3 className={classes.cardTitle}>
                                                 {(moduleInfo!==undefined && moduleInfo.frequency)?frequencyFromModuleInfo[moduleInfo.frequency].standard:' - '} <small>MHz</small>
                                             </h3>
                                         </GridItem>
-                                        <GridItem xs={12} sm={6} md={6}>
+                                        <GridItem xs={6} sm={6} md={6}>
                                             <p className={classes.cardCategory}><FormattedMessage id="module_info.label.power" /></p>
                                             <h3 className={classes.cardTitle}>
                                                 {(moduleInfo!==undefined && moduleInfo.features)?powerFromModuleInfo[moduleInfo.features].maxPower:' - '} <small>dBm</small>
                                             </h3>
                                         </GridItem>
-                                        <GridItem xs={12} sm={6} md={6}>
+                                        <GridItem xs={6} sm={6} md={6}>
                                             <p className={classes.cardCategory}><FormattedMessage id="module_info.label.version" /></p>
                                             <h3 className={classes.cardTitle}>
                                                 {moduleInfo!==undefined && moduleInfo.version}

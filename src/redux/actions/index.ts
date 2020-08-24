@@ -17,7 +17,9 @@ import {    serverStateFetch, serverStateWIFIStrenghtFetchFulfilled, serverState
             serverStateFetchCancel, serverStateFetchFulfilled, serverStateFetchRejected } from "./serverState";
 
 import { webSocketOpen, webSocketClose, webSocketError, webSocketMessage, webSocketSendMessage,
-        webSocketConnect, webSocketDisconnect } from "./webSocket";
+        webSocketConnect, webSocketDisconnect, webSocketSingleMessage,
+    webSocketReceivingDeviceMessages
+} from "./webSocket";
 
 import { setHomeLayout,removeElementFromHome, addElementToHome } from "./home";
 import {
@@ -69,7 +71,8 @@ export {
     serverStateFetchCancel, serverStateFetchFulfilled, serverStateFetchRejected,
 
     webSocketOpen, webSocketClose, webSocketError, webSocketMessage, webSocketSendMessage,
-    webSocketConnect, webSocketDisconnect,
+    webSocketConnect, webSocketDisconnect, webSocketSingleMessage,
+    webSocketReceivingDeviceMessages,
 
     setHomeLayout,removeElementFromHome, addElementToHome,
 
