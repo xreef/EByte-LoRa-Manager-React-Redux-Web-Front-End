@@ -22,7 +22,7 @@
   "configuration.preferences.title": "Configuration",
   "configuration.preferences.subtitle": "Device configuration",
 
-  "configuration.save.success": "Configuration saved, if enabled the device is rebooting now!",
+  "configuration.save.success": "Configuration saved, if enabled the device is rebooting now, else reboot manually",
   "configuration.save.failed": "Configuration saving error",
   "configuration.load.failed": "Configuration params are not correc, please restart microcontroller or reset device",
 

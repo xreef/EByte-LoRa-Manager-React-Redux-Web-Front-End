@@ -25,7 +25,7 @@
   "configuration.preferences.title": "Configurazione",
   "configuration.preferences.subtitle": "Configurazione dispositivo",
 
-  "configuration.save.success": "Configurazione salvata con successo, se abilitato il dispositivo si riavvierà.",
+  "configuration.save.success": "Configurazione salvata con successo, se abilitato il dispositivo si riavvierà, altrimenti riavvia manualmente.",
   "configuration.save.failed": "Errore salvataggio configurazione",
   "configuration.load.failed": "La configurazione ha riportato dei parametri non corretti, riavviare il microcontrollore o resettare il dispositivo",
 

@@ -117,7 +117,7 @@ class App extends React.Component {
 
       return (
       <Provider store={this.store}>
-          <IntlProvider locale={language} messages={messages}>
+          <IntlProvider locale={language} defaultLocale={'en'} messages={messages}>
               <ThemeProvider  theme={theme}>
 
               <HashRouter>
