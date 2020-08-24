@@ -32,7 +32,10 @@ build:
 
 	sed -i -e 's/resources\/images\/favicon\///g'  $(DIST)/manifest.json
 	cp ./src/index.html $(DIST)
-	sed -i -e 's/\.\.\/ebyte-manager-web\.js/ebyte-manager-web\.min\.js/g'  $(DIST)/index.html
+	sed -i -e 's/\.\/ebyte-manager-web\.js/ebyte-manager-web\.min\.js/g'  $(DIST)/index.html
+	sed -i -e 's/<!--START-->/<!--/g' dist/index.html
+	sed -i -e 's/<!--STOP-->/-->/g' dist/index.html
+
 	sed -i -e 's/22222222/'$(TIMS)'/g'  $(DIST)/index.html
 	sed -i -e 's/no-cache/public/g'  $(DIST)/index.html
 
@@ -44,3 +47,9 @@ build:
 	cp ./src/favicon.ico $(DIST)
 	gzip $(DIST)/favicon.ico
 	sed -i 's/define\&\&define\.amd/define\&\&define\.amd\&\&\!window\.dojo\&\&\!window\.requirejs/' $(PACKAGE_MIN)
+
+	mkdir $(DIST)/release
+	cp ./src/settings-prod.json $(DIST)/release/settings.json
+	cp $(DIST)/*.gz $(DIST)/release
+	rm -rf $(DIST)/release/ebyte-manager-web.js*
+	cp $(DIST)/index.html $(DIST)/release
