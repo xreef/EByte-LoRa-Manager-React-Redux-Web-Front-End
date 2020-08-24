@@ -7,7 +7,7 @@ import {createStyles, Theme} from "@material-ui/core";
 const style =(theme: Theme) => createStyles({
   grid: {
     margin: '0 -15px !important',
-    width: 'unset'
+    width: 'unset',
   }
 });
 
@@ -20,7 +20,7 @@ interface Props {
 function GridContainer(props: Props) {
   const { classes, children, ...rest } = props;
   return (
-    <Grid container {...rest} className={classes.grid}>
+    <Grid  container {...rest} className={classes.grid}>
       {children}
     </Grid>
   );

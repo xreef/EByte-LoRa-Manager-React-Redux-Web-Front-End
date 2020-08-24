@@ -115,10 +115,10 @@ const boxStyle = (theme: Theme) => createStyles({
       height: '100%'
   },
     cardBody: {
-        height: 'calc(100% - 110px)'
+        height: '100%' // 'calc(100% - 110px)'
     },
     scrollableContent: {
-        maxHeight: 'calc(100% - 110px)',
+        maxHeight: '100%', // 'calc(100% - 110px)',
         overflow: "auto",
         position: "relative",
         float: "right",

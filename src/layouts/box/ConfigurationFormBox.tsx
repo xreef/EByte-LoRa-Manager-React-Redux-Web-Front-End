@@ -106,6 +106,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
 
     componentDidMount() {
         if (navigator.platform.indexOf("Win") > -1 && this.currentPanel && this.currentPanel.current) {
+            let elem = this.currentPanel.current;
             const ps = new PerfectScrollbar(this.currentPanel.current, {
                 wheelPropagation: false,
                 // suppressScrollY: true
@@ -195,7 +196,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
 
         return <div>
             <GridContainer key={0} spacing={1 as GridSpacing}>
-            <GridItem item  xs={12} sm={4} md={3}>
+            <GridItem item  xs={12} sm={4} md={4}>
                 <TextField
                     name='CHAN'
                     label='CHAN'
@@ -210,7 +211,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
                     {getFrequences(operatingFrequency)}
                 </TextField>
             </GridItem>
-            <GridItem item xs={12} sm={4} md={3}>
+            <GridItem item xs={12} sm={4} md={4}>
                 <TextField
                     name='ADDH'
                     label='ADDH'
@@ -225,7 +226,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
                     {getADD()}
                 </TextField>
             </GridItem>
-            <GridItem item xs={12} sm={4} md={3}>
+            <GridItem item xs={12} sm={4} md={4}>
                 <TextField
                     name='ADDL'
                     label='ADDL'
@@ -246,7 +247,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
             <Divider className={classes.divider} />
 
             <GridContainer  key={1} spacing={1 as GridSpacing}>
-                <GridItem xs={12} sm={4} md={3}>
+                <GridItem xs={12} sm={4} md={4}>
                     <TextField
                         name='uartBaudRate'
                         select
@@ -263,7 +264,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
                     </TextField>
                 </GridItem>
 
-                <GridItem item xs={12} sm={4} md={3}>
+                <GridItem item xs={12} sm={4} md={4}>
                     <TextField
                         name='uartParity'
                         select
@@ -280,7 +281,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
                     </TextField>
                 </GridItem>
 
-                <GridItem item xs={12} sm={4} md={3}>
+                <GridItem item xs={12} sm={4} md={4}>
                     <TextField
                         name='airDataRate'
                         select
@@ -299,7 +300,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
             </GridContainer>
             <Divider key="D" className={classes.divider} />
             <GridContainer  key={3}  spacing={1 as GridSpacing}>
-                <GridItem item xs={12} sm={4} md={3}>
+                <GridItem item xs={12} sm={4} md={4}>
                     <TextField
                         name='transmissionPower'
                         select
@@ -316,7 +317,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
                     </TextField>
                 </GridItem>
 
-                <GridItem item xs={12} sm={4} md={3}>
+                <GridItem item xs={12} sm={4} md={4}>
                     <TextField
                         name='fec'
                         select
@@ -333,7 +334,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
                     </TextField>
                 </GridItem>
 
-                <GridItem item xs={12} sm={4} md={3}>
+                <GridItem item xs={12} sm={4} md={4}>
                     <TextField
                         name='fixedTransmission'
                         select
@@ -350,7 +351,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
                     </TextField>
                 </GridItem>
 
-                <GridItem item xs={12} sm={4} md={3}>
+                <GridItem item xs={12} sm={4} md={4}>
                     <TextField
                         name='wirelessWakeupTime'
                         select
@@ -367,7 +368,7 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
                     </TextField>
                 </GridItem>
 
-                <GridItem item xs={12} sm={4} md={3}>
+                <GridItem item xs={12} sm={4} md={4}>
                     <TextField
                         name='ioDriveMode'
                         select
