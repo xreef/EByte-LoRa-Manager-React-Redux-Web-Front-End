@@ -55,7 +55,9 @@ const boxStyle = (theme: Theme) => createStyles({
     cartFooterButton:{
         'textAlign': 'right',
         'display': 'block',
-        'white-space': 'nowrap'
+        'white-space': 'nowrap',
+        // 'margin-bottom': '110px'
+
     },
     cartFooterButtonOverflow:{
         'textAlign': 'right',
@@ -77,7 +79,7 @@ const boxStyle = (theme: Theme) => createStyles({
     position: 'absolute',
     top: '50%',
     left: '50%',
-    transform: 'translate(-50%, -50%)',
+    transform: 'translate(-50%, -50%)'
   },
   icons: {
     width: '17px',
@@ -136,6 +138,20 @@ const boxStyle = (theme: Theme) => createStyles({
         // maxHeight: "100%",
         width: "100%",
         overflowScrolling: "touch"
+
+    },
+    scrollableContentOverflow: {
+        maxHeight: 'calc(100% - 110px)',
+        overflow: "auto",
+        position: "relative",
+        float: "right",
+        ...transition,
+        // maxHeight: "100%",
+        width: "100%",
+        overflowScrolling: "touch",
+        '@media (min-width: 600px)': {
+            maxHeight: "100%"
+        }
 
     }
 });

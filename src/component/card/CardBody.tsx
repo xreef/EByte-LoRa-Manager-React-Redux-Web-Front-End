@@ -1,4 +1,4 @@
-import React, {ReactChildren} from "react";
+import React, {CSSProperties, ReactChildren} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // nodejs library to set properties for components
@@ -15,8 +15,8 @@ interface Props {
     className?: string,
     plain?: boolean,
     profile?: boolean,
-    children: React.ReactNode[] | React.ReactNode
-
+    children: React.ReactNode[] | React.ReactNode,
+    style?: CSSProperties
 }
 
 function CardBody({ ...props }: Props) {

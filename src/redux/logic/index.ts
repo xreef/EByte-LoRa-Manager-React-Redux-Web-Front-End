@@ -7,6 +7,7 @@ import webSocket from './webSocket';
 import messageTransparentPOST from "./messageTransparentPOST";
 import messageBroadcastPOST from "./messageBroadcastPOST";
 import messageFixedPOST from "./messageFixedPOST";
+import resetDeviceGET from "./resetDeviceGET";
 
 export default [
     ...configurationGET,
@@ -15,5 +16,6 @@ export default [
     ...messageTransparentPOST,
     ...messageBroadcastPOST,
     ...messageFixedPOST,
-    ...webSocket
+    ...webSocket,
+    ...resetDeviceGET
 ];

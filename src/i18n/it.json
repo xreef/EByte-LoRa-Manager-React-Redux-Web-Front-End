@@ -12,8 +12,8 @@
   "menu.sidebar.configuration": "Configurazione",
   "menu.navbar.configuration": "Configurazione",
 
-  "menu.sidebar.sendreceive": "Send/Receive",
-  "menu.navbar.sendreceive": "Send/Receive",
+  "menu.sidebar.sendreceive": "Invia/Ricevi",
+  "menu.navbar.sendreceive": "Invia/Ricevi",
 
   "menu.sidebar.introduction": "Introduzione",
   "menu.navbar.introduction": "Introduzione",
@@ -85,7 +85,7 @@
   "configuration.io_drive_mode.helper_text": "PushPull, PullUp",
 
   "configuration.button.save": "Salva",
-  "configuration.button.default": "Dati default",
+  "configuration.button.default": "Default",
 
   "module_info.label.frequency": "Frequenza",
   "module_info.label.version": "Versione",
@@ -108,6 +108,8 @@
   "receive.message.notification": "Messaggio ricevuto: {messaggio}{returnTag}Ora: {ora}",
 
   "receive.message.error": "Si è verificato un problema: {errorMessage}",
+
+  "resetdevice.message.success": "Reset del dispositivo andato a buon fine, riavviare il microcontrollore",
 
   "web_socket.connect.message": "Avvia",
   "web_socket.disconnect.message": "Ferma",

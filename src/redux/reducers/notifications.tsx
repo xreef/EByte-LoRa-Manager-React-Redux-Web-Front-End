@@ -12,6 +12,7 @@ import {MODULE_INFO_FETCH_REJECTED, ModuleInfoActions} from "../types/moduleInfo
 import {DEVICE_MESSAGES_FIELD_INVALID, DeviceMessagesActions} from "../types/deviceMessages";
 import {SEND_RECEIVE_DATA_PAGE_SET_LAYOUTS, SendReceiveDataPageActions} from "../types/sendReceiveDataPage";
 import {CONFIGURATION_PAGE_SET_LAYOUTS, ConfigurationPageActions} from "../types/configurationPage";
+import {RESET_DEVICE_FETCH_REJECTED, ResetDeviceActions} from "../types/resetDevice";
 // import { DAILY_SET_LAYOUTS } from '../actions/daily';
 // import { HISTORICAL_SET_LAYOUTS } from '../actions/historical';
 // import { INVERTER_INFO_STATE_SET_LAYOUTS } from '../actions/inverterInfoState';
@@ -28,7 +29,8 @@ export default function notificationsReducer(state = initialState, action: Notif
                                                                             ModuleInfoActions |
                                                                             DeviceMessagesActions |
                                                                             SendReceiveDataPageActions |
-                                                                            ConfigurationPageActions
+                                                                            ConfigurationPageActions |
+                                                                            ResetDeviceActions
 ): INotificationsState {
     let notification = null;
     switch (action.type) {
@@ -106,6 +108,7 @@ export default function notificationsReducer(state = initialState, action: Notif
         case CONFIGURATION_FETCH_REJECTED:
         case MODULE_INFO_FETCH_REJECTED:
         case CONFIGURATION_ADD_FAILED:
+        case RESET_DEVICE_FETCH_REJECTED:
             const msg: string = action.err.message;
             const notificaCFR = {...{autoHide: 0}, message: msg,  variant: 'error'};
             if (state.current) {

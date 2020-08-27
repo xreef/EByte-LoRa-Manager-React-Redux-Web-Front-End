@@ -28,6 +28,7 @@ import {colorMod} from './../../component/style/material-dashboard-react';
 import isEqual from 'lodash.isequal';
 import SaveIcon from '@material-ui/icons/Save';
 import RedoIcon from '@material-ui/icons/Redo';
+import Reset from '@material-ui/icons/PhonelinkErase';
 
 // import Status from './../../component/status/Status';
 import {
@@ -52,6 +53,7 @@ interface OwnProps {
     configurationFetch: () => void,
     configurationFieldUpdated: (configuration: IConfiguration, lastUpdate: Date) => void,
     configurationAdd: (configuration: IConfiguration, lastUpdate: Date) => void,
+    resetDeviceFetch: () => void,
     classes: any;
     configuration?: IConfiguration,
     moduleInfo?: IModuleInfo,
@@ -170,6 +172,10 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
 
     setDefaultValue = () => {
         this.setState({configuration: configurationInitialState})
+    }
+
+    setResetModule = () => {
+        this.props.resetDeviceFetch();
     }
 
     gridContainer = (configuration: IConfiguration, moduleInfo?: IModuleInfo) => {
@@ -420,8 +426,8 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
           </p>
         </CardHeader>
           <form  className={classes.formBox} >
-              <div ref={this.currentPanel} className={classes.scrollableContent}>
-          <CardBody className={classes.cardBody}>
+              <div ref={this.currentPanel} className={classes.scrollableContentOverflow}>
+          <CardBody className={classes.cardBody} style={{minHeight: '500px'}}>
           {(!isFetching)
             ? (configuration)
               ? (
@@ -432,6 +438,14 @@ class ConfigurationFormBox extends React.Component<Props, CFBState> {
                 }
         </CardBody>
       <CardFooter className={classes.cartFooterButton}>
+          <Button color="danger"
+                  type="button"
+                  disabled={isFetching}
+                  onClick={this.setResetModule}
+                  startIcon={<Reset />} >
+              Reset
+          </Button>
+
           <Button color={color}
                   type="button"
                   disabled={isFetching}

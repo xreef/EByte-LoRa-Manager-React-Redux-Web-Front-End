@@ -38,6 +38,10 @@ import {
 
 import { setConfigurationPageLayout } from "./configurationPage";
 import { setSendReceiveDataPageLayout } from "./sendReceiveDataPage";
+import { resetDeviceFetch,
+        resetDeviceFetchCancel,
+        resetDeviceFetchFulfilled,
+        resetDeviceFetchRejected } from "./resetDevice";
 
 export {
     setVersion,
@@ -78,5 +82,10 @@ export {
 
     setConfigurationPageLayout,
 
-    setSendReceiveDataPageLayout
+    setSendReceiveDataPageLayout,
+
+    resetDeviceFetch,
+    resetDeviceFetchCancel,
+    resetDeviceFetchFulfilled,
+    resetDeviceFetchRejected
 };

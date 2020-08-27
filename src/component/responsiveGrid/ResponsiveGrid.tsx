@@ -21,6 +21,8 @@ import Fab from '@material-ui/core/Fab';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
+import debounce from 'lodash.debounce';
+
 interface ResponsiveGridProps {
     gridConfig: any,
     // layouts is an object mapping breakpoints to layouts.
@@ -83,10 +85,17 @@ class ResponsiveGrid extends React.PureComponent<ResponsiveGridProps,IResponsive
         saveLayouts: (layout: any) => console.log(layout)
   }
 
+    sendResizeEventDebounced?: number
+
   constructor(props: ResponsiveGridProps) {
     super(props);
 
     this.state = this.init();
+    // this.sendResizeEventDebounced = debounce(this.sendResizeEvent)
+  }
+
+  componentDidMount() {
+      window.addEventListener('resize', this.sendResizeEvent)
   }
 
   componentDidUpdate(oldProps: ResponsiveGridProps) {
@@ -127,6 +136,35 @@ class ResponsiveGrid extends React.PureComponent<ResponsiveGridProps,IResponsive
       additionalInfo
     };
   };
+
+  resized: boolean = false;
+
+    sendResizeEvent = () => {
+        /*
+         * Trigger window resize function in javascript
+         * source path : http://codrate.com/questions/how-can-trigger-the-window-resize-event-manually-in-javascript
+         */
+        clearTimeout(this.sendResizeEventDebounced);
+            this.sendResizeEventDebounced =  window.setTimeout(() => {
+                if (!this.resized) {
+
+                    if (typeof (Event) === 'function') {
+                        // modern browsers
+                        window.dispatchEvent(new Event('resize'));
+                        console.log("FORCE RESIZE")
+                    } else {
+                        // This will be executed on old browsers and especially IE
+                        const resizeEvent = window.document.createEvent('UIEvents');
+                        resizeEvent.initEvent('resize', true, false); //, window, 0);
+                        window.dispatchEvent(resizeEvent);
+                    }
+                    this.resized = true;
+                }else{
+                    this.resized = false;
+                }
+            }, 500);
+
+    }
 
   addNewItem = (elem: ILayoutElement, layouts: ILayoutConfigured, additionalInfo: any, gridConfig: any) => {
     // console.log('adding', divUniqueId);
@@ -176,7 +214,7 @@ class ResponsiveGrid extends React.PureComponent<ResponsiveGridProps,IResponsive
     onResizeStop = (layout: ILayoutElement[], from: number, to: number) => {
       // const addI = this.state.additionalInfo[from.i];
 
-      setTimeout(() => window.dispatchEvent(new Event('resize')), 250);
+      this.sendResizeEvent();
     };
 
     onDragStop = (layout: ILayoutElement[], from: number, to: number) => {

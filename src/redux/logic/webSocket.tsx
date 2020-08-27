@@ -126,7 +126,6 @@ const wsListenLogic = createLogic({
     // returning obs subscribes to it
     return wsSubject$.pipe(
       map((msg: any) => {
-          debugger
         dispatch(webSocketMessage(msg));
         // if (msg.type === 'cumulated') {
         //   const resp = { ...msg.value };

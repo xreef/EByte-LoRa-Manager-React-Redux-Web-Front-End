@@ -6,7 +6,7 @@ import {
     configurationFieldUpdated,
     configurationAdd,
     addElementToHome,
-    moduleInfoFetch, removeElementFromHome
+    moduleInfoFetch, removeElementFromHome, resetDeviceFetch
 } from "../../../redux/actions";
 import ConfigurationFormBox from "../../../layouts/box/ConfigurationFormBox";
 import {homeSelectors} from "../../../redux/reducers/home";
@@ -19,7 +19,7 @@ const mapStateToProps = (state: RootState, ownProps: {boxType: string}) => ({
     configuration: configurationSelectors.configuration(state),
     moduleInfo: moduleInfoSelectors.moduleInfo(state),
     isInHome: isElementInHome(ownProps.boxType, homeSelectors.elements(state)),
-    isFetching: state.configuration.isFetching,
+    isFetching: state.configuration.isFetching || state.resetDevice.isFetching,
 });
 
 
@@ -28,7 +28,8 @@ const mapDispatchToProps = {
     configurationFieldUpdated,
     configurationAdd,
     addElementToHome,
-    removeElementFromHome
+    removeElementFromHome,
+    resetDeviceFetch
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConfigurationFormBox);

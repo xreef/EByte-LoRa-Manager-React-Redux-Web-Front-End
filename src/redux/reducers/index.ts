@@ -13,6 +13,7 @@ import deviceMessagesReducer from "./deviceMessages";
 
 import configurationPageReducer from "./configurationPage"
 import sendReceiveDataPageReducer from "./sendReceiveDataPage"
+import resetDeviceReducer from "./resetDevice"
 
 const rootReducer = combineReducers({
   version: versionReducer,
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   webSocket: webSocketReducer,
   deviceMessages: deviceMessagesReducer,
   configurationPage: configurationPageReducer,
-  sendReceiveDataPage: sendReceiveDataPageReducer
+  sendReceiveDataPage: sendReceiveDataPageReducer,
+  resetDevice: resetDeviceReducer
 });
 
 export default rootReducer;

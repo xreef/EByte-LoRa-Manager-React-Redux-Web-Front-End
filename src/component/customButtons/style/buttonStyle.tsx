@@ -20,7 +20,7 @@ const buttonStyle =(theme: Theme) => createStyles({
     border: 'none',
     borderRadius: '3px',
     position: 'relative',
-    padding: '12px 30px',
+    padding: '12px 20px',
     margin: '.3125rem 1px',
     fontSize: '12px',
     fontWeight: 400,

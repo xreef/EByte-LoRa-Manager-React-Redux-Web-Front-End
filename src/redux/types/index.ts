@@ -7,6 +7,8 @@ import {HomeActions} from "./home";
 import {DeviceMessagesActions} from "./deviceMessages";
 import {ConfigurationPageActions} from "./configurationPage";
 import {SendReceiveDataPageActions} from "./sendReceiveDataPage";
+import {ResetDeviceActions} from "./resetDevice";
 
 export type AppActions = VersionActions | ConfigurationActions | ServerStateActions | WebSocketActions |
-    NotificationsActions | HomeActions | DeviceMessagesActions | ConfigurationPageActions | SendReceiveDataPageActions
+    NotificationsActions | HomeActions | DeviceMessagesActions | ConfigurationPageActions | SendReceiveDataPageActions |
+    ResetDeviceActions;

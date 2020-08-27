@@ -99,11 +99,11 @@ class ReceiveMessagesBox extends React.Component<Props, CFBState> {
     // this.props.configurationFetch();
   };
 
-  openConnection = () => {
+  startReceiveMessages = () => {
       // this.props.webSocketOpen(this.state.singleMessage);
       this.props.webSocketSendMessage({ startReceiveDevMsg: true, singleMessage: this.state.singleMessage});
   };
-  closeConnection = () => {
+  stopReceiveMessages = () => {
       // debugger
       // this.props.webSocketClose();
       this.props.webSocketSendMessage({ startReceiveDevMsg: false});
@@ -122,6 +122,8 @@ class ReceiveMessagesBox extends React.Component<Props, CFBState> {
 
     handleChange = (event: any) => {
         if (event.target.name === "checkSingleMessage"){
+            this.props.webSocketSendMessage({ singleMessage: (event.target.value==="true")});
+
             this.setState({singleMessage: event.target.value==="true" });
         }
     }
@@ -225,7 +227,7 @@ class ReceiveMessagesBox extends React.Component<Props, CFBState> {
           <Button color={color}
                   type="button"
                   disabled={receivingDeviceMessages}
-                  onClick={this.openConnection}
+                  onClick={this.startReceiveMessages}
                   startIcon={<PlayArrow />} >
               <FormattedMessage
                   id="web_socket.connect.message"
@@ -235,7 +237,7 @@ class ReceiveMessagesBox extends React.Component<Props, CFBState> {
           <Button color={color}
                   type="button"
                   disabled={!receivingDeviceMessages}
-                  onClick={this.closeConnection}
+                  onClick={this.stopReceiveMessages}
                   startIcon={<Stop />} >
               <FormattedMessage
                   id="web_socket.disconnect.message"

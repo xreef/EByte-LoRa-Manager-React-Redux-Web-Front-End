@@ -12,6 +12,9 @@
   "menu.sidebar.configuration": "Configuration",
   "menu.navbar.configuration": "Configuration",
 
+  "menu.sidebar.sendreceive": "Send/Receive",
+  "menu.navbar.sendreceive": "Send/Receive",
+
   "menu.sidebar.introduction": "Introduction",
   "menu.navbar.introduction": "Introduction",
 
@@ -82,7 +85,7 @@
   "configuration.io_drive_mode.helper_text": "PushPull, PullUp",
 
   "configuration.button.save": "Save",
-  "configuration.button.default": "Default values",
+  "configuration.button.default": "Default",
 
   "module_info.label.frequency": "Frequency",
   "module_info.label.version": "Version",
@@ -90,8 +93,8 @@
 
   "moduleInfo.load.failed": "The module info is not correct, reset the device.",
 
-  "send_box.label.message.label": "Message",
-  "send_box.label.message.helper_text": "Write here the message to send",
+  "send_box.message.label": "Message",
+  "send_box.message.helper_text": "Write here the message to send ({remainCharaters})",
 
   "send_box.button.send.label": "Send message",
   "send_box.transparent.chan.helper_text": "Channel to send message",
@@ -104,6 +107,8 @@
 
   "receive.message.error": "There is a problem: {errorMessage}",
   "receive.message.notification": "Received message: {messaggio}{returnTag}Time: {ora}",
+
+  "resetdevice.message.success": "Device reset success! Please reboot the microcontroller!",
 
   "web_socket.connect.message": "Start",
   "web_socket.disconnect.message": "Stop",
